@@ -122,36 +122,90 @@ namespace wf_app.GUI.panels
         /// </summary>
         private void init_subject( )
         {
-            System.Windows.Forms.Label lbl = new Label();
-            lbl.Text = resource_panel_search_criteria._x_subject;
+            System.Windows.Forms.Label lbl = new Label( );
+            lbl.Text = resource_panel_select_criteria._x_subject;
+            this._layout_table.Controls.Add(
+                                            lbl, 
+                                            panel_select_criteria._COL_LABEL_,
+                                            panel_select_criteria._ROW_SUBJECT_
+                                           );
+            this._layout_table.Controls.Add(
+                                            this._x_subject,
+                                            panel_select_criteria._COL_TEXT_,
+                                            panel_select_criteria._ROW_SUBJECT_
+                                           );
         }
         /// <summary>
         /// init_regime( )
         /// </summary>
         private void init_regime( )
         {
-
+            System.Windows.Forms.Label lbl = new Label();
+            lbl.Text = resource_panel_select_criteria._x_regime;
+            this._layout_table.Controls.Add(
+                                            lbl,
+                                            panel_select_criteria._COL_LABEL_,
+                                            panel_select_criteria._ROW_REGIME_
+                                           );
+            this._layout_table.Controls.Add(
+                                            this._x_subject,
+                                            panel_select_criteria._COL_TEXT_,
+                                            panel_select_criteria._ROW_REGIME_
+                                           );
         }
         /// <summary>
         /// init_region( )
         /// </summary>
         private void init_region( )
         {
-
+            System.Windows.Forms.Label lbl = new Label();
+            lbl.Text = resource_panel_select_criteria._x_region;
+            this._layout_table.Controls.Add(
+                                            lbl,
+                                            panel_select_criteria._COL_LABEL_,
+                                            panel_select_criteria._ROW_REGION_
+                                           );
+            this._layout_table.Controls.Add(
+                                            this._x_subject,
+                                            panel_select_criteria._COL_TEXT_,
+                                            panel_select_criteria._ROW_REGION_
+                                           );
         }
         /// <summary>
         /// init_fish( )
         /// </summary>
         private void init_fish( )
         {
-
+            System.Windows.Forms.Label lbl = new Label();
+            lbl.Text = resource_panel_select_criteria._x_fish;
+            this._layout_table.Controls.Add(
+                                            lbl,
+                                            panel_select_criteria._COL_LABEL_,
+                                            panel_select_criteria._ROW_FISH_
+                                           );
+            this._layout_table.Controls.Add(
+                                            this._x_subject,
+                                            panel_select_criteria._COL_TEXT_,
+                                            panel_select_criteria._ROW_FISH_
+                                           );
         }
         /// <summary>
         /// init_declarant( )
         /// </summary>
         private void init_declarant( )
         {
-
+            System.Windows.Forms.Label lbl = new Label();
+            lbl.Text = resource_panel_select_criteria._x_declarant;
+            this._layout_table.Controls.Add(
+                                            lbl,
+                                            panel_select_criteria._COL_LABEL_,
+                                            panel_select_criteria._ROW_DECLARANT_
+                                           );
+            this._layout_table.Controls.Add(
+                                            this._x_subject,
+                                            panel_select_criteria._COL_TEXT_,
+                                            panel_select_criteria._ROW_DECLARANT_
+                                           );
         }
         #endregion //__INITIALIZE__
 

@@ -60,10 +60,10 @@
     </Compile>
     <Compile Include="program\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="resources\resource_panel_search_criteria.Designer.cs">
+    <Compile Include="resources\resource_panel_select_criteria.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>resource_panel_search_criteria.resx</DependentUpon>
+      <DependentUpon>resource_panel_select_criteria.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="GUI\form_test.resx">
       <DependentUpon>form_test.cs</DependentUpon>
@@ -77,9 +77,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="resources\resource_panel_search_criteria.resx">
+    <EmbeddedResource Include="resources\resource_panel_select_criteria.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>resource_panel_search_criteria.Designer.cs</LastGenOutput>
+      <LastGenOutput>resource_panel_select_criteria.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
