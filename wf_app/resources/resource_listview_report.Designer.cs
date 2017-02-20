@@ -22,14 +22,14 @@ namespace wf_app.resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class resource_panel_select_criteria {
+    internal class resource_listview_report {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal resource_panel_select_criteria() {
+        internal resource_listview_report() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace wf_app.resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("wf_app.resources.resource_panel_select_criteria", typeof(resource_panel_select_criteria).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("wf_app.resources.resource_listview_report", typeof(resource_listview_report).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,119 +61,83 @@ namespace wf_app.resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на -.
+        ///   Ищет локализованную строку, похожую на Вылов.
         /// </summary>
-        internal static string _btn_clear_text {
+        internal static string _column_catch {
             get {
-                return ResourceManager.GetString("_btn_clear_text", resourceCulture);
+                return ResourceManager.GetString("_column_catch", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Очистить фильтр.
+        ///   Ищет локализованную строку, похожую на Пользователь ВБР.
         /// </summary>
-        internal static string _btn_clear_tip {
+        internal static string _column_declarant {
             get {
-                return ResourceManager.GetString("_btn_clear_tip", resourceCulture);
+                return ResourceManager.GetString("_column_declarant", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выбрать фильтр по пользователям ВБР.
+        ///   Ищет локализованную строку, похожую на ВБР.
         /// </summary>
-        internal static string _btn_declarant_tip {
+        internal static string _column_fish {
             get {
-                return ResourceManager.GetString("_btn_declarant_tip", resourceCulture);
+                return ResourceManager.GetString("_column_fish", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выбрать фильтр по ВБР.
+        ///   Ищет локализованную строку, похожую на ИНН.
         /// </summary>
-        internal static string _btn_fish_tip {
+        internal static string _column_inn {
             get {
-                return ResourceManager.GetString("_btn_fish_tip", resourceCulture);
+                return ResourceManager.GetString("_column_inn", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выбрать фильтр по видам квоты.
+        ///   Ищет локализованную строку, похожую на Квота.
         /// </summary>
-        internal static string _btn_regime_tip {
+        internal static string _column_limit {
             get {
-                return ResourceManager.GetString("_btn_regime_tip", resourceCulture);
+                return ResourceManager.GetString("_column_limit", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выбрать фильтр по районам промысла.
+        ///   Ищет локализованную строку, похожую на %.
         /// </summary>
-        internal static string _btn_region_tip {
+        internal static string _column_percent {
             get {
-                return ResourceManager.GetString("_btn_region_tip", resourceCulture);
+                return ResourceManager.GetString("_column_percent", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на +.
+        ///   Ищет локализованную строку, похожую на Доля, %.
         /// </summary>
-        internal static string _btn_select_text {
+        internal static string _column_portion {
             get {
-                return ResourceManager.GetString("_btn_select_text", resourceCulture);
+                return ResourceManager.GetString("_column_portion", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выбрать фильтр по субъектам РФ.
+        ///   Ищет локализованную строку, похожую на Район промысла.
         /// </summary>
-        internal static string _btn_subject_tip {
+        internal static string _column_region {
             get {
-                return ResourceManager.GetString("_btn_subject_tip", resourceCulture);
+                return ResourceManager.GetString("_column_region", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Пользователь ВБР:.
+        ///   Ищет локализованную строку, похожую на Регион РФ.
         /// </summary>
-        internal static string _x_declarant {
+        internal static string _column_subject {
             get {
-                return ResourceManager.GetString("_x_declarant", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на ВБР:.
-        /// </summary>
-        internal static string _x_fish {
-            get {
-                return ResourceManager.GetString("_x_fish", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Вид квоты:.
-        /// </summary>
-        internal static string _x_regime {
-            get {
-                return ResourceManager.GetString("_x_regime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Район промысла:.
-        /// </summary>
-        internal static string _x_region {
-            get {
-                return ResourceManager.GetString("_x_region", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Субъект РФ:.
-        /// </summary>
-        internal static string _x_subject {
-            get {
-                return ResourceManager.GetString("_x_subject", resourceCulture);
+                return ResourceManager.GetString("_column_subject", resourceCulture);
             }
         }
     }

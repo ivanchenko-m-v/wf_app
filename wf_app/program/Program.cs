@@ -1,4 +1,11 @@
-﻿using System;
+﻿//=============================================================================
+// Program - класс программы с функцией Main( )
+// Автор: Иванченко М.В.
+// Дата начала разработки:  17-02-2017
+// Дата обновления:         20-02-2017
+// Релиз:                   0.0.0.0
+//=============================================================================
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +23,7 @@ namespace wf_app
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new form_main());
+            Application.Run(new form_report_catch());
         }
     }
 }

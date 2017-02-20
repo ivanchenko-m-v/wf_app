@@ -117,43 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="_btn_clear_text" xml:space="preserve">
-    <value>-</value>
+  <data name="_column_catch" xml:space="preserve">
+    <value>Вылов</value>
   </data>
-  <data name="_btn_clear_tip" xml:space="preserve">
-    <value>Очистить фильтр</value>
+  <data name="_column_declarant" xml:space="preserve">
+    <value>Пользователь ВБР</value>
   </data>
-  <data name="_btn_declarant_tip" xml:space="preserve">
-    <value>Выбрать фильтр по пользователям ВБР</value>
+  <data name="_column_fish" xml:space="preserve">
+    <value>ВБР</value>
   </data>
-  <data name="_btn_fish_tip" xml:space="preserve">
-    <value>Выбрать фильтр по ВБР</value>
+  <data name="_column_inn" xml:space="preserve">
+    <value>ИНН</value>
   </data>
-  <data name="_btn_regime_tip" xml:space="preserve">
-    <value>Выбрать фильтр по видам квоты</value>
+  <data name="_column_limit" xml:space="preserve">
+    <value>Квота</value>
   </data>
-  <data name="_btn_region_tip" xml:space="preserve">
-    <value>Выбрать фильтр по районам промысла</value>
+  <data name="_column_percent" xml:space="preserve">
+    <value>%</value>
   </data>
-  <data name="_btn_select_text" xml:space="preserve">
-    <value>+</value>
+  <data name="_column_portion" xml:space="preserve">
+    <value>Доля, %</value>
   </data>
-  <data name="_btn_subject_tip" xml:space="preserve">
-    <value>Выбрать фильтр по субъектам РФ</value>
+  <data name="_column_region" xml:space="preserve">
+    <value>Район промысла</value>
   </data>
-  <data name="_x_declarant" xml:space="preserve">
-    <value>Пользователь ВБР:</value>
-  </data>
-  <data name="_x_fish" xml:space="preserve">
-    <value>ВБР:</value>
-  </data>
-  <data name="_x_regime" xml:space="preserve">
-    <value>Вид квоты:</value>
-  </data>
-  <data name="_x_region" xml:space="preserve">
-    <value>Район промысла:</value>
-  </data>
-  <data name="_x_subject" xml:space="preserve">
-    <value>Субъект РФ:</value>
+  <data name="_column_subject" xml:space="preserve">
+    <value>Регион РФ</value>
   </data>
 </root>

@@ -1,4 +1,12 @@
-﻿using System;
+﻿//=============================================================================
+// panel_select_criteria - панель выбора условий отбора в отчёте о
+//                         пользователях ВБР, которые не выбрали квоту.
+// Автор: Иванченко М.В.
+// Дата начала разработки:  17-02-2017
+// Дата обновления:         20-02-2017
+// Релиз:                   0.0.0.0
+//=============================================================================
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -23,8 +31,16 @@ namespace wf_app.GUI.panels
 
         public panel_select_criteria()
         {
-            InitializeComponent();
+            this.calc_min_size();
+
+            this.create_form_elements();
+
+            this.init_form_elements();
+
+            this.SizeChanged += panel_select_criteria_SizeChanged;
+            this.FontChanged += panel_select_criteria_FontChanged;
         }
+
         /// <summary> 
         /// Освободить все используемые ресурсы.
         /// </summary>
@@ -42,6 +58,15 @@ namespace wf_app.GUI.panels
 
         /*
          * --------------------------------------------------------------------
+         *                          PROPERTIES
+         * --------------------------------------------------------------------
+         */
+        #region __PROPERTIES__
+        private Size min_label_size { get; set; }
+        private Size min_button_size { get; set; }
+        #endregion //__PROPERTIES__
+        /*
+         * --------------------------------------------------------------------
          *                          INITIALIZE
          * --------------------------------------------------------------------
          */
@@ -52,22 +77,32 @@ namespace wf_app.GUI.panels
         private void create_form_elements()
         {
             this._layout_table = new System.Windows.Forms.TableLayoutPanel();
-
+            //textboxes
             this._x_subject = new System.Windows.Forms.TextBox();
             this._x_regime = new System.Windows.Forms.TextBox();
             this._x_region = new System.Windows.Forms.TextBox();
             this._x_fish = new System.Windows.Forms.TextBox();
             this._x_declarant = new System.Windows.Forms.TextBox();
+            //buttons
+            this._btn_subject = new System.Windows.Forms.Button();
+            this._btn_subject_clear = new System.Windows.Forms.Button();
+            this._btn_regime = new System.Windows.Forms.Button();
+            this._btn_regime_clear = new System.Windows.Forms.Button();
+            this._btn_region = new System.Windows.Forms.Button();
+            this._btn_region_clear = new System.Windows.Forms.Button();
+            this._btn_fish = new System.Windows.Forms.Button();
+            this._btn_fish_clear = new System.Windows.Forms.Button();
+            this._btn_declarant = new System.Windows.Forms.Button();
+            this._btn_declarant_clear = new System.Windows.Forms.Button();
+            //tooltip
+            this._tooltip = new System.Windows.Forms.ToolTip();
         }
 
         /// <summary> 
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// init_form_elements( )
         /// </summary>
-        private void InitializeComponent()
+        private void init_form_elements( )
         {
-            this.create_form_elements();
-
             this._layout_table.SuspendLayout();
             this.SuspendLayout();
             //
@@ -77,23 +112,23 @@ namespace wf_app.GUI.panels
             //
             //_x_subject
             //
-            this.init_subject( );
+            this.init_layout_row_subject( );
             //
             //_x_regime
             //
-            this.init_regime( );
+            this.init_layout_row_regime( );
             //
             //_x_region
             //
-            this.init_region( );
+            this.init_layout_row_region( );
             //
             //_x_fish
             //
-            this.init_fish( );
+            this.init_layout_row_fish( );
             //
             //_x_declarant
             //
-            this.init_declarant( );
+            this.init_layout_row_declarant( );
             //--
             this._layout_table.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -107,7 +142,8 @@ namespace wf_app.GUI.panels
             this._layout_table.ColumnCount = panel_select_criteria._LAYOUT_COLS_;
             for( int i = 0; i < panel_select_criteria._LAYOUT_COLS_; ++i )
             {
-                this._layout_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+                System.Windows.Forms.ColumnStyle col_style = new ColumnStyle();
+                this._layout_table.ColumnStyles.Add(col_style);
             }
             this._layout_table.RowCount = panel_select_criteria._LAYOUT_ROWS_;
             for (int i = 0; i < panel_select_criteria._LAYOUT_ROWS_; ++i)
@@ -116,97 +152,197 @@ namespace wf_app.GUI.panels
             }
             this._layout_table.Dock = DockStyle.Fill;
             this._layout_table.TabIndex = 0;
+
+            this.calc_layout_columns_width();
+
+            this.Controls.Add(this._layout_table);
         }
         /// <summary>
-        /// init_subject( )
+        /// init_layout_row_subject( )
         /// </summary>
-        private void init_subject( )
+        private void init_layout_row_subject( )
         {
             System.Windows.Forms.Label lbl = new Label( );
             lbl.Text = resource_panel_select_criteria._x_subject;
+            lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl, 
                                             panel_select_criteria._COL_LABEL_,
                                             panel_select_criteria._ROW_SUBJECT_
                                            );
+            this._x_subject.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._x_subject,
                                             panel_select_criteria._COL_TEXT_,
                                             panel_select_criteria._ROW_SUBJECT_
                                            );
+            this._btn_subject.Text = resource_panel_select_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_subject, resource_panel_select_criteria._btn_subject_tip);
+            this._btn_subject.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._btn_subject,
+                                            panel_select_criteria._COL_SELECT_,
+                                            panel_select_criteria._ROW_SUBJECT_
+                                           );
+            this._btn_subject_clear.Text = resource_panel_select_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_subject_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_subject_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._btn_subject_clear,
+                                            panel_select_criteria._COL_CLEAR_,
+                                            panel_select_criteria._ROW_SUBJECT_
+                                           );
         }
         /// <summary>
-        /// init_regime( )
+        /// init_layout_row_regime( )
         /// </summary>
-        private void init_regime( )
+        private void init_layout_row_regime( )
         {
             System.Windows.Forms.Label lbl = new Label();
             lbl.Text = resource_panel_select_criteria._x_regime;
+            lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
                                             panel_select_criteria._COL_LABEL_,
                                             panel_select_criteria._ROW_REGIME_
                                            );
+            this._x_regime.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
-                                            this._x_subject,
+                                            this._x_regime,
                                             panel_select_criteria._COL_TEXT_,
+                                            panel_select_criteria._ROW_REGIME_
+                                           );
+            this._btn_regime.Text = resource_panel_select_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_regime, resource_panel_select_criteria._btn_regime_tip);
+            this._btn_regime.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._btn_regime,
+                                            panel_select_criteria._COL_SELECT_,
+                                            panel_select_criteria._ROW_REGIME_
+                                           );
+            this._btn_regime_clear.Text = resource_panel_select_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_regime_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_regime_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._btn_regime_clear,
+                                            panel_select_criteria._COL_CLEAR_,
                                             panel_select_criteria._ROW_REGIME_
                                            );
         }
         /// <summary>
-        /// init_region( )
+        /// init_layout_row_region( )
         /// </summary>
-        private void init_region( )
+        private void init_layout_row_region( )
         {
             System.Windows.Forms.Label lbl = new Label();
             lbl.Text = resource_panel_select_criteria._x_region;
+            lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
                                             panel_select_criteria._COL_LABEL_,
                                             panel_select_criteria._ROW_REGION_
                                            );
+            this._x_region.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
-                                            this._x_subject,
+                                            this._x_region,
                                             panel_select_criteria._COL_TEXT_,
+                                            panel_select_criteria._ROW_REGION_
+                                           );
+            this._btn_region.Text = resource_panel_select_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_region, resource_panel_select_criteria._btn_region_tip);
+            this._btn_region.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._btn_region,
+                                            panel_select_criteria._COL_SELECT_,
+                                            panel_select_criteria._ROW_REGION_
+                                           );
+            this._btn_region_clear.Text = resource_panel_select_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_region_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_region_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._btn_region_clear,
+                                            panel_select_criteria._COL_CLEAR_,
                                             panel_select_criteria._ROW_REGION_
                                            );
         }
         /// <summary>
-        /// init_fish( )
+        /// init_layout_row_fish( )
         /// </summary>
-        private void init_fish( )
+        private void init_layout_row_fish( )
         {
             System.Windows.Forms.Label lbl = new Label();
             lbl.Text = resource_panel_select_criteria._x_fish;
+            lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
                                             panel_select_criteria._COL_LABEL_,
                                             panel_select_criteria._ROW_FISH_
                                            );
+            this._x_fish.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
-                                            this._x_subject,
+                                            this._x_fish,
                                             panel_select_criteria._COL_TEXT_,
+                                            panel_select_criteria._ROW_FISH_
+                                           );
+            this._btn_fish.Text = resource_panel_select_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_fish, resource_panel_select_criteria._btn_fish_tip);
+            this._btn_fish.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._btn_fish,
+                                            panel_select_criteria._COL_SELECT_,
+                                            panel_select_criteria._ROW_FISH_
+                                           );
+            this._btn_fish_clear.Text = resource_panel_select_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_fish_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_fish_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._btn_fish_clear,
+                                            panel_select_criteria._COL_CLEAR_,
                                             panel_select_criteria._ROW_FISH_
                                            );
         }
         /// <summary>
-        /// init_declarant( )
+        /// init_layout_row_declarant( )
         /// </summary>
-        private void init_declarant( )
+        private void init_layout_row_declarant( )
         {
             System.Windows.Forms.Label lbl = new Label();
             lbl.Text = resource_panel_select_criteria._x_declarant;
+            lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top;
+            lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
                                             panel_select_criteria._COL_LABEL_,
                                             panel_select_criteria._ROW_DECLARANT_
                                            );
+            this._x_declarant.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             this._layout_table.Controls.Add(
-                                            this._x_subject,
+                                            this._x_declarant,
                                             panel_select_criteria._COL_TEXT_,
                                             panel_select_criteria._ROW_DECLARANT_
                                            );
+            this._btn_declarant.Text = resource_panel_select_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_declarant, resource_panel_select_criteria._btn_declarant_tip);
+            this._btn_declarant.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+            this._layout_table.Controls.Add(
+                                            this._btn_declarant,
+                                            panel_select_criteria._COL_SELECT_,
+                                            panel_select_criteria._ROW_DECLARANT_
+                                           );
+            this._btn_declarant_clear.Text = resource_panel_select_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_declarant_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_declarant_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+            this._layout_table.Controls.Add(
+                                            this._btn_declarant_clear,
+                                            panel_select_criteria._COL_CLEAR_,
+                                            panel_select_criteria._ROW_DECLARANT_
+                                           );
         }
+
         #endregion //__INITIALIZE__
 
         /*
@@ -215,6 +351,67 @@ namespace wf_app.GUI.panels
          * --------------------------------------------------------------------
          */
         #region __FUNCTIONS__
+        /// <summary>
+        /// calc_min_size( )
+        /// </summary>
+        private void calc_min_size( )
+        {
+            const int _chars_in_label_ = 16;
+
+            System.Drawing.Graphics gr = this.CreateGraphics();
+            String s_measure_lbl = new String('W', _chars_in_label_);
+            SizeF szf_lbl = gr.MeasureString(s_measure_lbl, this.Font);
+
+            this.min_label_size = new Size((int)szf_lbl.Width, (int)szf_lbl.Height);
+
+            const int _chars_in_btn_ = 2;
+            String s_measure_btn = new String('W', _chars_in_btn_);
+            SizeF szf_btn = gr.MeasureString(s_measure_btn, this.Font);
+
+            this.min_button_size = new Size((int)szf_btn.Width, (int)szf_btn.Height);
+
+        }
+        /// <summary>
+        /// calc_layout_column_width( )
+        /// </summary>
+        private void calc_layout_columns_width( )
+        {
+            this._COL_WIDTH_[_COL_LABEL_] = this.min_label_size.Width;
+            this._COL_WIDTH_[_COL_CLEAR_] = this._COL_WIDTH_[_COL_SELECT_] 
+                                                = this.min_button_size.Width;
+            int col_text_width = this._layout_table.Width;
+            col_text_width -= this.min_label_size.Width + this.min_button_size.Width * 2;
+            this._COL_WIDTH_[_COL_TEXT_] = 
+                col_text_width > 0 ? col_text_width : this.min_label_size.Width;
+
+            for (int i=0; i < this._layout_table.ColumnCount; ++i)
+            {
+                this._layout_table.ColumnStyles[i].SizeType = SizeType.Absolute;
+                this._layout_table.ColumnStyles[i].Width = this._COL_WIDTH_[i];
+            }
+        }
+        /// <summary>
+        /// panel_select_criteria_SizeChanged(object sender, EventArgs e)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void panel_select_criteria_SizeChanged(object sender, EventArgs e)
+        {
+            this.calc_layout_columns_width();
+        }
+        /// <summary>
+        /// panel_select_criteria_FontChanged(object sender, EventArgs e)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void panel_select_criteria_FontChanged(object sender, EventArgs e)
+        {
+            this.calc_min_size();
+
+            this.calc_layout_columns_width();
+        }
+
+
         #endregion//__FUNCTIONS__
 
         /*
@@ -233,9 +430,12 @@ namespace wf_app.GUI.panels
         private const int _ROW_DECLARANT_ = 4;
 
         private const int _COL_LABEL_ = 0;
-        private const int _COL_TEXT_ = 0;
-        private const int _COL_SELECT_ = 0;
-        private const int _COL_CLEAR_ = 0;
+        private const int _COL_TEXT_ = 1;
+        private const int _COL_SELECT_ = 2;
+        private const int _COL_CLEAR_ = 3;
+
+        //ширина столбцов в процентах
+        private int[] _COL_WIDTH_ = { 1, 0, 1, 1 };
         /// <summary>
         /// Обязательная переменная конструктора.
         /// </summary>
@@ -248,6 +448,18 @@ namespace wf_app.GUI.panels
         private System.Windows.Forms.TextBox _x_region;
         private System.Windows.Forms.TextBox _x_fish;
         private System.Windows.Forms.TextBox _x_declarant;
+        private System.Windows.Forms.Button _btn_subject;
+        private System.Windows.Forms.Button _btn_regime;
+        private System.Windows.Forms.Button _btn_region;
+        private System.Windows.Forms.Button _btn_fish;
+        private System.Windows.Forms.Button _btn_declarant;
+        private System.Windows.Forms.Button _btn_subject_clear;
+        private System.Windows.Forms.Button _btn_regime_clear;
+        private System.Windows.Forms.Button _btn_region_clear;
+        private System.Windows.Forms.Button _btn_fish_clear;
+        private System.Windows.Forms.Button _btn_declarant_clear;
+
+        private System.Windows.Forms.ToolTip _tooltip;
         //
         #endregion//__FIELDS__
 

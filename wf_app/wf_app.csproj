@@ -46,20 +46,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\contols\listview_report_catch_2_years.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GUI\form_test.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\form_test.Designer.cs">
       <DependentUpon>form_test.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\form_main.cs">
+    <Compile Include="GUI\form_report_catch.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\panels\panel_control_buttons.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="GUI\panels\panel_select_criteria.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="program\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="resources\resource_listview_report.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>resource_listview_report.resx</DependentUpon>
+    </Compile>
+    <Compile Include="resources\resource_panel_control_buttons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>resource_panel_control_buttons.resx</DependentUpon>
+    </Compile>
     <Compile Include="resources\resource_panel_select_criteria.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -77,6 +93,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="resources\resource_listview_report.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>resource_listview_report.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\resource_panel_control_buttons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>resource_panel_control_buttons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="resources\resource_panel_select_criteria.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>resource_panel_select_criteria.Designer.cs</LastGenOutput>
@@ -94,9 +118,7 @@
   <ItemGroup>
     <None Include="program\App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GUI\contols\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
