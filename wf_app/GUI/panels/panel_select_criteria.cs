@@ -3,7 +3,7 @@
 //                         пользователях ВБР, которые не выбрали квоту.
 // Автор: Иванченко М.В.
 // Дата начала разработки:  17-02-2017
-// Дата обновления:         20-02-2017
+// Дата обновления:         21-02-2017
 // Релиз:                   0.0.0.0
 //=============================================================================
 using System;
@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using wf_app.resources;
+using wf_app.GUI.controls;
 
 namespace wf_app.GUI.panels
 {
@@ -77,6 +78,10 @@ namespace wf_app.GUI.panels
         private void create_form_elements()
         {
             this._layout_table = new System.Windows.Forms.TableLayoutPanel();
+            //first line controls
+            this._cbx_year = new combobox_year();
+            this._num_percent = new NumericUpDown();
+            this._cbx_stat = new combobox_catch_stat();
             //textboxes
             this._x_subject = new System.Windows.Forms.TextBox();
             this._x_regime = new System.Windows.Forms.TextBox();
@@ -110,6 +115,10 @@ namespace wf_app.GUI.panels
             //
             this.init_layout( );
             //
+            //first row, common report criteria
+            //
+            this.init_layout_row_year();
+            //
             //_x_subject
             //
             this.init_layout_row_subject( );
@@ -133,7 +142,7 @@ namespace wf_app.GUI.panels
             this._layout_table.ResumeLayout(false);
             this.ResumeLayout(false);
         }
-        /// <summary>
+       /// <summary>
         /// init_layout( )
         /// </summary>
         private void init_layout()
@@ -143,6 +152,8 @@ namespace wf_app.GUI.panels
             for( int i = 0; i < panel_select_criteria._LAYOUT_COLS_; ++i )
             {
                 System.Windows.Forms.ColumnStyle col_style = new ColumnStyle();
+                col_style.SizeType = SizeType.Percent;
+                col_style.Width = _COL_WIDTH_[i];
                 this._layout_table.ColumnStyles.Add(col_style);
             }
             this._layout_table.RowCount = panel_select_criteria._LAYOUT_ROWS_;
@@ -153,9 +164,71 @@ namespace wf_app.GUI.panels
             this._layout_table.Dock = DockStyle.Fill;
             this._layout_table.TabIndex = 0;
 
-            this.calc_layout_columns_width();
+//            this.calc_layout_columns_width();
 
             this.Controls.Add(this._layout_table);
+        }
+        /// <summary>
+        /// init_layout_row_year( )
+        /// </summary>
+        private void init_layout_row_year()
+        {
+            System.Windows.Forms.Label lbl = new Label();
+            lbl.Text = resource_panel_select_criteria._cbx_year;
+            lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            lbl.AutoSize = true;
+            this._layout_table.Controls.Add(
+                                            lbl,
+                                            panel_select_criteria._COL_LABEL_,
+                                            panel_select_criteria._ROW_YEAR_
+                                           );
+            this._cbx_year.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._cbx_year,
+                                            panel_select_criteria._COL_TEXT_,
+                                            panel_select_criteria._ROW_YEAR_
+                                           );
+            lbl = new Label();
+            lbl.Text = resource_panel_select_criteria._num_percent;
+            lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            lbl.AutoSize = true;
+            this._layout_table.Controls.Add(
+                                            lbl,
+                                            panel_select_criteria._COL_PERCENT_LABEL_,
+                                            panel_select_criteria._ROW_YEAR_
+                                           );
+            this._num_percent.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._num_percent.Value = panel_select_criteria._PERCENT_DEFAULT_;
+            this._layout_table.Controls.Add(
+                                            this._num_percent,
+                                            panel_select_criteria._COL_PERCENT_,
+                                            panel_select_criteria._ROW_YEAR_
+                                           );
+            lbl = new Label();
+            lbl.Text = resource_panel_select_criteria._cbx_stat;
+            lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            lbl.AutoSize = true;
+            this._layout_table.Controls.Add(
+                                            lbl,
+                                            panel_select_criteria._COL_CATCH_LABEL_,
+                                            panel_select_criteria._ROW_YEAR_
+                                           );
+            this._cbx_stat.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._layout_table.Controls.Add(
+                                            this._cbx_stat,
+                                            panel_select_criteria._COL_CATCH_,
+                                            panel_select_criteria._ROW_YEAR_
+                                           );
+            //for stretching to right border of the form
+            lbl = new Label();
+            lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            lbl.AutoSize = true;
+            this._layout_table.Controls.Add(
+                                            lbl,
+                                            panel_select_criteria._COL_SPACE_,
+                                            panel_select_criteria._ROW_YEAR_
+                                           );
+            this._layout_table.SetColumnSpan(lbl, panel_select_criteria._SPAN_COLUMNS_SPACE_YEAR_);
         }
         /// <summary>
         /// init_layout_row_subject( )
@@ -177,6 +250,8 @@ namespace wf_app.GUI.panels
                                             panel_select_criteria._COL_TEXT_,
                                             panel_select_criteria._ROW_SUBJECT_
                                            );
+            this._layout_table.SetColumnSpan(this._x_subject, _SPAN_COLUMNS_CRITERIA_);
+
             this._btn_subject.Text = resource_panel_select_criteria._btn_select_text;
             this._tooltip.SetToolTip(this._btn_subject, resource_panel_select_criteria._btn_subject_tip);
             this._btn_subject.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
@@ -214,6 +289,8 @@ namespace wf_app.GUI.panels
                                             panel_select_criteria._COL_TEXT_,
                                             panel_select_criteria._ROW_REGIME_
                                            );
+            this._layout_table.SetColumnSpan(this._x_regime, _SPAN_COLUMNS_CRITERIA_);
+
             this._btn_regime.Text = resource_panel_select_criteria._btn_select_text;
             this._tooltip.SetToolTip(this._btn_regime, resource_panel_select_criteria._btn_regime_tip);
             this._btn_regime.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
@@ -251,6 +328,8 @@ namespace wf_app.GUI.panels
                                             panel_select_criteria._COL_TEXT_,
                                             panel_select_criteria._ROW_REGION_
                                            );
+            this._layout_table.SetColumnSpan(this._x_region, _SPAN_COLUMNS_CRITERIA_);
+
             this._btn_region.Text = resource_panel_select_criteria._btn_select_text;
             this._tooltip.SetToolTip(this._btn_region, resource_panel_select_criteria._btn_region_tip);
             this._btn_region.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
@@ -288,6 +367,8 @@ namespace wf_app.GUI.panels
                                             panel_select_criteria._COL_TEXT_,
                                             panel_select_criteria._ROW_FISH_
                                            );
+            this._layout_table.SetColumnSpan(this._x_fish, _SPAN_COLUMNS_CRITERIA_);
+
             this._btn_fish.Text = resource_panel_select_criteria._btn_select_text;
             this._tooltip.SetToolTip(this._btn_fish, resource_panel_select_criteria._btn_fish_tip);
             this._btn_fish.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
@@ -325,6 +406,8 @@ namespace wf_app.GUI.panels
                                             panel_select_criteria._COL_TEXT_,
                                             panel_select_criteria._ROW_DECLARANT_
                                            );
+            this._layout_table.SetColumnSpan(this._x_declarant, _SPAN_COLUMNS_CRITERIA_);
+
             this._btn_declarant.Text = resource_panel_select_criteria._btn_select_text;
             this._tooltip.SetToolTip(this._btn_declarant, resource_panel_select_criteria._btn_declarant_tip);
             this._btn_declarant.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
@@ -397,7 +480,7 @@ namespace wf_app.GUI.panels
         /// <param name="e"></param>
         private void panel_select_criteria_SizeChanged(object sender, EventArgs e)
         {
-            this.calc_layout_columns_width();
+            //this.calc_layout_columns_width();
         }
         /// <summary>
         /// panel_select_criteria_FontChanged(object sender, EventArgs e)
@@ -406,9 +489,9 @@ namespace wf_app.GUI.panels
         /// <param name="e"></param>
         private void panel_select_criteria_FontChanged(object sender, EventArgs e)
         {
-            this.calc_min_size();
+            //this.calc_min_size();
 
-            this.calc_layout_columns_width();
+            //this.calc_layout_columns_width();
         }
 
 
@@ -420,22 +503,32 @@ namespace wf_app.GUI.panels
          * --------------------------------------------------------------------
          */
         #region __FIELDS__
-        private const int _LAYOUT_COLS_ = 4;
-        private const int _LAYOUT_ROWS_ = 5;
+        private const int _LAYOUT_COLS_ = 9;
+        private const int _LAYOUT_ROWS_ = 6;
+        private const int _SPAN_COLUMNS_SPACE_YEAR_ = 2;
+        private const int _SPAN_COLUMNS_CRITERIA_ = 6;
 
-        private const int _ROW_SUBJECT_ = 0;
-        private const int _ROW_REGIME_ = 1;
-        private const int _ROW_REGION_ = 2;
-        private const int _ROW_FISH_ = 3;
-        private const int _ROW_DECLARANT_ = 4;
+        private const int _ROW_YEAR_ = 0;
+        private const int _ROW_SUBJECT_ = 1;
+        private const int _ROW_REGIME_ = 2;
+        private const int _ROW_REGION_ = 3;
+        private const int _ROW_FISH_ = 4;
+        private const int _ROW_DECLARANT_ = 5;
 
         private const int _COL_LABEL_ = 0;
         private const int _COL_TEXT_ = 1;
-        private const int _COL_SELECT_ = 2;
-        private const int _COL_CLEAR_ = 3;
+        private const int _COL_PERCENT_LABEL_ = 2;
+        private const int _COL_PERCENT_ = 3;
+        private const int _COL_CATCH_LABEL_ = 4;
+        private const int _COL_CATCH_ = 5;
+        private const int _COL_SPACE_ = 6;
+        private const int _COL_SELECT_ = 7;
+        private const int _COL_CLEAR_ = 8;
+
+        private const int _PERCENT_DEFAULT_ = 50;
 
         //ширина столбцов в процентах
-        private int[] _COL_WIDTH_ = { 1, 0, 1, 1 };
+        private int[] _COL_WIDTH_ = { 12, 7, 8, 5, 8, 16, 38, 3, 3 };
         /// <summary>
         /// Обязательная переменная конструктора.
         /// </summary>
@@ -448,6 +541,9 @@ namespace wf_app.GUI.panels
         private System.Windows.Forms.TextBox _x_region;
         private System.Windows.Forms.TextBox _x_fish;
         private System.Windows.Forms.TextBox _x_declarant;
+        private wf_app.GUI.controls.combobox_year _cbx_year;
+        private System.Windows.Forms.NumericUpDown _num_percent;
+        private wf_app.GUI.controls.combobox_catch_stat _cbx_stat;
         private System.Windows.Forms.Button _btn_subject;
         private System.Windows.Forms.Button _btn_regime;
         private System.Windows.Forms.Button _btn_region;

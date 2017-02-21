@@ -133,6 +133,33 @@ namespace wf_app.resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Статистика:.
+        /// </summary>
+        internal static string _cbx_stat {
+            get {
+                return ResourceManager.GetString("_cbx_stat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Год:.
+        /// </summary>
+        internal static string _cbx_year {
+            get {
+                return ResourceManager.GetString("_cbx_year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Процент:.
+        /// </summary>
+        internal static string _num_percent {
+            get {
+                return ResourceManager.GetString("_num_percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Пользователь ВБР:.
         /// </summary>
         internal static string _x_declarant {
