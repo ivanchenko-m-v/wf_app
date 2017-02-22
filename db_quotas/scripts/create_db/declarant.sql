@@ -1,0 +1,33 @@
+﻿--ПОЛЬЗОВАТЕЛЬ ВБР
+CREATE TABLE [dbo].[declarant]
+(
+	[id_declarant_history] INT NOT NULL PRIMARY KEY, 
+    [id_declarant] INT NOT NULL, 
+    [date_registration] DATETIME NULL, 
+    [declarant] NVARCHAR(255) NULL, 
+    [work_number] NVARCHAR(24) NULL, 
+    [declarant_type] NVARCHAR(24) NULL, 
+    [address] NVARCHAR(255) NULL, 
+    [postal_address] NVARCHAR(255) NULL, 
+    [director] NVARCHAR(32) NULL, 
+    [phone] NVARCHAR(64) NULL, 
+    [fax] NVARCHAR(32) NULL, 
+    [telex] NVARCHAR(32) NULL, 
+    [e_mail] NVARCHAR(32) NULL, 
+    [declarant_full] NVARCHAR(255) NULL, 
+    [inn] NVARCHAR(16) NULL, 
+    [kpp] NVARCHAR(16) NULL, 
+    [reg_number] NVARCHAR(64) NULL, 
+    [OKPO] NVARCHAR(24) NULL, 
+    [OKATO] NVARCHAR(24) NULL, 
+    [OKVED] NVARCHAR(24) NULL, 
+    [KOPF] NVARCHAR(2) NULL, 
+    [KFS] NVARCHAR(2) NULL, 
+    [id_own] INT NULL, 
+    [own] NVARCHAR(255) NULL, 
+    [note] NVARCHAR(255) NULL, 
+    [timestamp_] DATETIME NULL, 
+    [responsible] NVARCHAR(64) NULL, 
+    [juridical] TINYINT NULL, 
+    [id_declarant_history_was] INT NULL 
+)
