@@ -1,0 +1,32 @@
+﻿--РЕГИСТРАЦИЯ ДВИЖЕНИЯ ДОЛЕЙ МЕЖДУ ПОЛЬЗОВАТЕЛЯМИ
+CREATE TABLE [dbo].[portion_withdrow]
+(
+	[id_history] INT NOT NULL PRIMARY KEY,
+	[id_declarant]	INT NOT NULL,
+	[id_basin]	INT  NOT NULL,
+	[id_regime]	INT  NOT NULL,
+	[id_region]	INT NOT NULL,
+	[id_fish]	INT NOT NULL,
+	[id_subject]	INT NOT NULL,
+	[portion]	DECIMAL(38, 17),
+	[date_open]	DATETIME,
+	[date_close]	DATETIME,
+	[report_organization]	NVARCHAR(150),
+	[report_number]	NVARCHAR(60),
+	[report_date]	DATETIME,
+	[report_document]	NVARCHAR(50),
+	[contract_organization]	NVARCHAR(150),
+	[contract_number]	NVARCHAR(60),
+	[contract_date]	DATETIME,
+	[contract_cancel_organization]	NVARCHAR(100),
+	[contract_cancel_number]	NVARCHAR(60),
+	[contract_cancel_date]	DATETIME,
+	[contract_cancel_document]	NVARCHAR(50),
+	[transfer_number]	NVARCHAR(150),
+	[transfer_date]	DATETIME,
+	[transfer_reason]	NVARCHAR(150),
+	[note]	NVARCHAR(255),
+	[responsible]	NVARCHAR(30),
+	[timestamp_]	DATETIME,
+	[id_declarant_history]	INT
+)

@@ -62,6 +62,7 @@
     <Folder Include="scripts\stored_procedures" />
     <Folder Include="scripts\stored_procedures\reports" />
     <Folder Include="scripts\stored_procedures\data_manipulation" />
+    <Folder Include="scripts\indexes" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="scripts\stored_procedures\reports\sp_select_catch_2_years_ver2.sql" />
@@ -82,6 +83,23 @@
     <Build Include="scripts\create_db\limits_common.sql" />
     <Build Include="scripts\create_db\limits_distribution.sql" />
     <Build Include="scripts\create_db\limits_catch.sql" />
+    <Build Include="scripts\create_db\portion_copy_calculation.sql" />
+    <Build Include="scripts\create_db\portion.sql" />
+    <Build Include="scripts\create_db\portion_history.sql" />
+    <Build Include="scripts\create_db\portion_limits_transfer.sql" />
+    <Build Include="scripts\create_db\portion_withdrow.sql" />
+    <Build Include="scripts\create_db\regime.sql" />
+    <Build Include="scripts\create_db\region.sql" />
+    <Build Include="scripts\create_db\region_p.sql" />
+    <Build Include="scripts\create_db\sign.sql" />
+    <Build Include="scripts\create_db\subject.sql" />
+    <Build Include="scripts\create_db\subject_p.sql" />
+    <Build Include="scripts\create_db\limits_kind.sql" />
+    <Build Include="scripts\create_db\unit.sql" />
+    <Build Include="scripts\indexes\idx_declarant.sql" />
+    <Build Include="scripts\indexes\idx_limits.sql" />
+    <Build Include="scripts\indexes\idx_limits_catch.sql" />
+    <Build Include="scripts\indexes\idx_portion.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

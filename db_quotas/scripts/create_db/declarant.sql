@@ -30,4 +30,4 @@ CREATE TABLE [dbo].[declarant]
     [responsible] NVARCHAR(64) NULL, 
     [juridical] TINYINT NULL, 
     [id_declarant_history_was] INT NULL 
-)
+);
