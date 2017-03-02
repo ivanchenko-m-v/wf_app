@@ -2,6 +2,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+/**
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 16-02-2017
@@ -9,7 +10,8 @@ GO
 -- Description:	fish catch for 2 years 
 -- with catching percent less than @nPercent
 -- @StatType defines type of accounting, must be 'o', 's' or 'so'
---- ============================================================================
+-- ============================================================================
+*/
 CREATE PROCEDURE sp_select_catch_2_years
 	-- Add the parameters for the stored procedure here
 	@nYear1 int, 

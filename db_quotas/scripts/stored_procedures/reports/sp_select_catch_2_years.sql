@@ -2,13 +2,15 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
+/**
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 15-02-2017
 -- Description:	fish catch for 2 years 
 -- with catching percent less than @Percent
 --- ============================================================================
-CREATE PROCEDURE sp_select_catch_2_years
+*/
+CREATE PROCEDURE sp_select_catch_2_years_ver1
 	-- Add the parameters for the stored procedure here
 	@Year1 int, 
 	@Year2 int, 

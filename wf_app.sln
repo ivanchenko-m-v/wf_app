@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wf_app", "wf_app\wf_app.csp
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "db_quotas", "db_quotas\db_quotas.sqlproj", "{6DD8670C-4F94-420A-852D-3B71E5F7DFC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sql_select", "sql_select\sql_select.csproj", "{5324C192-A471-4077-AC9E-D30669E5147D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{6DD8670C-4F94-420A-852D-3B71E5F7DFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DD8670C-4F94-420A-852D-3B71E5F7DFC5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6DD8670C-4F94-420A-852D-3B71E5F7DFC5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5324C192-A471-4077-AC9E-D30669E5147D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5324C192-A471-4077-AC9E-D30669E5147D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5324C192-A471-4077-AC9E-D30669E5147D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5324C192-A471-4077-AC9E-D30669E5147D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

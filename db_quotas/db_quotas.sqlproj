@@ -100,6 +100,8 @@
     <Build Include="scripts\indexes\idx_limits.sql" />
     <Build Include="scripts\indexes\idx_limits_catch.sql" />
     <Build Include="scripts\indexes\idx_portion.sql" />
+    <Build Include="scripts\stored_procedures\reports\sp_portion_declarant_reorganization.sql" />
+    <Build Include="scripts\stored_procedures\reports\sp_declarant_histrory.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
