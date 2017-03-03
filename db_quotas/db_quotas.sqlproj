@@ -63,6 +63,7 @@
     <Folder Include="scripts\stored_procedures\reports" />
     <Folder Include="scripts\stored_procedures\data_manipulation" />
     <Folder Include="scripts\indexes" />
+    <Folder Include="scripts\views" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="scripts\stored_procedures\reports\sp_select_catch_2_years_ver2.sql" />
@@ -101,7 +102,9 @@
     <Build Include="scripts\indexes\idx_limits_catch.sql" />
     <Build Include="scripts\indexes\idx_portion.sql" />
     <Build Include="scripts\stored_procedures\reports\sp_portion_declarant_reorganization.sql" />
-    <Build Include="scripts\stored_procedures\reports\sp_declarant_histrory.sql" />
+    <Build Include="scripts\stored_procedures\reports\sp_declarant_history.sql" />
+    <Build Include="scripts\views\vw_portion_history.sql" />
+    <Build Include="scripts\stored_procedures\reports\portion_recursive.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
