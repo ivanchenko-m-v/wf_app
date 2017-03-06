@@ -105,6 +105,9 @@
     <Build Include="scripts\stored_procedures\reports\sp_declarant_history.sql" />
     <Build Include="scripts\views\vw_portion_history.sql" />
     <Build Include="scripts\stored_procedures\reports\portion_recursive.sql" />
+    <Build Include="scripts\stored_procedures\reports\sp_portion_history.sql" />
+    <Build Include="scripts\stored_procedures\reports\portion_recursive_ver2.sql" />
+    <Build Include="scripts\stored_procedures\reports\sp_portion_chain.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
