@@ -1,57 +1,21 @@
 ﻿/**
 -- ============================================================================
 -- Author:		M.Ivanchenko
--- Create date: 06-03-2017
+-- Create date: 09-03-2017
 -- Update date: 09-03-2017
--- Description:	portions chaining transfer through declarants
+-- Description:	one portion chaining transfer through declarants
 --- ============================================================================
 */
 /*
 USE limits_2009c
 GO
 */
-CREATE PROCEDURE [dbo].[sp_portion_history]
-	@id_basin INT = 0,
-	@id_regime INT = 0,
-	@id_fish INT = 0,
-	@id_region INT = 0
+CREATE PROCEDURE [dbo].[sp_one_portion_history]
+(
+	@id_portion int
+)
 AS
 BEGIN
-	-- SET NOCOUNT ON added to prevent extra result sets from
-	-- interfering with SELECT statements.
-	SET NOCOUNT ON;
-
-	--service variables
-	DECLARE @id_bas_from INT, @id_bas_to INT;
-	DECLARE @id_rgm_from INT, @id_rgm_to INT;
-	DECLARE @id_fs_from INT, @id_fs_to INT;
-	DECLARE @id_rgn_from INT, @id_rgn_to INT;
-	--
-	--@id_basin
-	SET @id_bas_from = @id_basin;
-	IF @id_basin <> 0  
-		SET @id_bas_to = @id_basin;
-	ELSE 
-		SET @id_bas_to = 0x7FFFFFFF; --max int value
-	--@id_regime
-	SET @id_rgm_from = @id_regime;
-	IF @id_regime <> 0  
-		SET @id_rgm_to = @id_regime;
-	ELSE 
-		SET @id_rgm_to = 0x7FFFFFFF; --max int value
-	--@id_fish
-	SET @id_fs_from = @id_fish;
-	IF @id_fish <> 0  
-		SET @id_fs_to = @id_fish;
-	ELSE 
-		SET @id_fs_to = 0x7FFFFFFF; --max int value
-	--@id_region
-	SET @id_rgn_from = @id_region;
-	IF @id_region <> 0  
-		SET @id_rgn_to = @id_region;
-	ELSE 
-		SET @id_rgn_to = 0x7FFFFFFF; --max int value
-
 	WITH portion_children( 
 							id_portion_actual, 
 							id_portion, 
@@ -87,12 +51,7 @@ BEGIN
 				ISNULL(B.[contract_number],'') AS contract_number, 
 				ISNULL(CONVERT(NVARCHAR(10), B.[contract_date], 102),'') AS contract_date
 			FROM [dbo].[portion_history] B
-			WHERE ((B.[id_history] IN (SELECT [id_history] FROM [dbo].[portion]))OR
-				   (B.[id_history_will] IS NOT NULL))AND
-				  ((B.[id_basin] BETWEEN @id_bas_from AND @id_bas_to)AND
-				   (B.[id_regime] BETWEEN @id_rgm_from AND @id_rgm_to)AND
-				   (B.[id_fish] BETWEEN @id_fs_from AND @id_fs_to)AND
-				   (B.[id_region] BETWEEN @id_rgn_from AND @id_rgn_to))
+			WHERE (B.[id_history]=[dbo].fn_portion_actual(@id_portion))
 		UNION ALL
 			SELECT	A.[id_portion_actual] AS [id_portion_actual],
 					B.[id_history] AS [id_portion],

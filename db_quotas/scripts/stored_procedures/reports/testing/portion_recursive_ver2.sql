@@ -70,7 +70,7 @@ GO
 						 )
 	AS
 	(
-		SELECT	A.[id_history] AS [id_portion_actual],
+		SELECT	B.[id_history] AS [id_portion_actual],
 				B.[id_history] AS [id_portion],
 				B.[id_history_was] AS [id_portion_was],
 				B.[id_basin], 
@@ -86,8 +86,8 @@ GO
 				B.[id_declarant_history],
 				ISNULL(B.[contract_number],'') AS contract_number, 
 				ISNULL(CONVERT(NVARCHAR(10), B.[contract_date], 104),'') AS contract_date
-			FROM [dbo].[portion] A INNER JOIN [dbo].[portion_history] B ON A.[id_history]=B.[id_history]
-			WHERE (A.[id_history] BETWEEN @id_from AND @id_to)AND
+			FROM [dbo].[portion_history] B 
+			WHERE (B.[id_history] BETWEEN @id_from AND @id_to)AND
 				  (B.[id_basin] BETWEEN @id_bas_from AND @id_bas_to)AND
 				  (B.[id_regime] BETWEEN @id_rgm_from AND @id_rgm_to)AND
 				  (B.[id_fish] BETWEEN @id_fs_from AND @id_fs_to)AND
@@ -111,7 +111,6 @@ GO
 					ISNULL(CONVERT(NVARCHAR(10), B.[contract_date], 104),'') AS contract_date
 			FROM [dbo].[portion_history] B
 				JOIN portion_children A ON A.[id_portion_was]=B.[id_history]
-		    WHERE B.[id_history] NOT IN (SELECT[id_history] FROM [dbo].[portion])
 	)
 	SELECT  FA.id_portion_actual 
 		   ,BAS.[basin], RG.[regime]

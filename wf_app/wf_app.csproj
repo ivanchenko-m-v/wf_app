@@ -61,12 +61,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\contols\combobox_catch_stat.cs" />
-    <Compile Include="GUI\contols\combobox_year.cs">
+    <Compile Include="GUI\controls\combobox_basin.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="GUI\contols\listview_report_catch_2_years.cs">
+    <Compile Include="GUI\controls\combobox_catch_stat.cs" />
+    <Compile Include="GUI\controls\combobox_year.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\controls\listview_report_catch_2_years.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\form_portions_history\form_portions_history.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\form_portions_history\listview_portions_history.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\form_portions_history\panel_portions_history_buttons.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\form_portions_history\panel_portions_history_criteria.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\form_portions_history\resource_portions_history.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>resource_portions_history.resx</DependentUpon>
     </Compile>
     <Compile Include="GUI\form_test.cs">
       <SubType>Form</SubType>
@@ -105,6 +125,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>resource_panel_select_criteria.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="GUI\form_portions_history\resource_portions_history.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>resource_portions_history.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>cfmc.quotas_app.resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\form_test.resx">
       <DependentUpon>form_test.cs</DependentUpon>
     </EmbeddedResource>
