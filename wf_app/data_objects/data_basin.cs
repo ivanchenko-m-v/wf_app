@@ -1,19 +1,18 @@
 ﻿
 //=============================================================================
-// combobox_basin - список выбора рыбопромыслового бассейна
+// data_basin - данные записи таблицы basin БАССЕЙН ПРОМЫСЛА
 // Автор: Иванченко М.В.
-// Дата начала разработки:  09-03-2017
+// Дата начала разработки:  10-03-2017
 // Дата обновления:         10-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System;
-using System.Windows.Forms;
 
-namespace cfmc.quotas.controls
+namespace cfmc.quotas.db_objects
 {
 
-    public class combobox_basin : ComboBox
+    public class data_basin
     {
         /*
          * --------------------------------------------------------------------
@@ -21,7 +20,7 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __CONSTRUCTION__	
-        public combobox_basin()
+        public data_basin()
         {
 
             this.initialize();
@@ -34,6 +33,24 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __PROPERTIES__
+        /// <summary>
+        /// id_basin
+        /// поле запроса - id_basin
+        /// Идентификатор бассейна промысла
+        /// </summary>
+        public int id_basin { get; set; }
+        /// <summary>
+        /// basin
+        /// поле запроса - basin
+        /// Бассейн промысла
+        /// </summary>
+        public string basin { get; set; }
+        /// <summary>
+        /// basin_abbr
+        /// поле запроса - basin_abbr
+        /// Аббревиатура бассейна промысла
+        /// </summary>
+        public string basin_abbr { get; set; }
         #endregion//__PROPERTIES__
 
         /*
@@ -71,7 +88,8 @@ namespace cfmc.quotas.controls
         #region __FIELDS__
         #endregion//__FIELDS__
 
-    }//class combobox_basin
+    }//class data_basin
 
-}//namespace cfmc.quotas.controls
+}//namespace cfmc.quotas.db_objects
 
+            

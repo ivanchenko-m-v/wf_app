@@ -1,19 +1,18 @@
 ﻿
 //=============================================================================
-// combobox_basin - список выбора рыбопромыслового бассейна
+// data_regime - данные записи таблицы regime ВИД ПРОМЫСЛА
 // Автор: Иванченко М.В.
-// Дата начала разработки:  09-03-2017
+// Дата начала разработки:  10-03-2017
 // Дата обновления:         10-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System;
-using System.Windows.Forms;
 
-namespace cfmc.quotas.controls
+namespace cfmc.quotas.db_objects
 {
 
-    public class combobox_basin : ComboBox
+    public class data_regime
     {
         /*
          * --------------------------------------------------------------------
@@ -21,7 +20,7 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __CONSTRUCTION__	
-        public combobox_basin()
+        public data_regime()
         {
 
             this.initialize();
@@ -34,6 +33,30 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __PROPERTIES__
+        /// <summary>
+        /// id_regime
+        /// поле запроса - id_regime
+        /// Идентификатор вида промысла
+        /// </summary>
+        public int id_regime { get; set; }
+        /// <summary>
+        /// regime
+        /// поле запроса - regime
+        /// Вид промысла
+        /// </summary>
+        public string regime { get; set; }
+        /// <summary>
+        /// mode
+        /// поле запроса - mode
+        /// Признак разделения между субъектами РФ
+        /// </summary>
+        public int mode { get; set; }
+        /// <summary>
+        /// regime
+        /// поле запроса - regime_order
+        /// Наименование согласно утверждённому приказу
+        /// </summary>
+        public string regime_order { get; set; }
         #endregion//__PROPERTIES__
 
         /*
@@ -71,7 +94,8 @@ namespace cfmc.quotas.controls
         #region __FIELDS__
         #endregion//__FIELDS__
 
-    }//class combobox_basin
+    }//class data_regime
 
-}//namespace cfmc.quotas.controls
+}//namespace cfmc.quotas.db_objects
 
+            

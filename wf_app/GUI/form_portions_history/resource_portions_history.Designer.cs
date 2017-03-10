@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace cfmc.quotas_app.resources {
+namespace cfmc.quotas.resources {
     using System;
     
     
@@ -201,6 +201,132 @@ namespace cfmc.quotas_app.resources {
         internal static string column_WBR {
             get {
                 return ResourceManager.GetString("column_WBR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Движение долей при реорганизациях пользователей ВБР.
+        /// </summary>
+        internal static string form_title {
+            get {
+                return ResourceManager.GetString("form_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Бассейн:.
+        /// </summary>
+        internal static string lbl_basin {
+            get {
+                return ResourceManager.GetString("lbl_basin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата договора:.
+        /// </summary>
+        internal static string lbl_contract_date {
+            get {
+                return ResourceManager.GetString("lbl_contract_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Договор:.
+        /// </summary>
+        internal static string lbl_contract_number {
+            get {
+                return ResourceManager.GetString("lbl_contract_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата окончания:.
+        /// </summary>
+        internal static string lbl_date_close {
+            get {
+                return ResourceManager.GetString("lbl_date_close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата начала:.
+        /// </summary>
+        internal static string lbl_date_open {
+            get {
+                return ResourceManager.GetString("lbl_date_open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Пользователь ВБР:.
+        /// </summary>
+        internal static string lbl_declarant {
+            get {
+                return ResourceManager.GetString("lbl_declarant", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ИНН:.
+        /// </summary>
+        internal static string lbl_INN {
+            get {
+                return ResourceManager.GetString("lbl_INN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Доля:.
+        /// </summary>
+        internal static string lbl_portion {
+            get {
+                return ResourceManager.GetString("lbl_portion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вид промысла:.
+        /// </summary>
+        internal static string lbl_regime {
+            get {
+                return ResourceManager.GetString("lbl_regime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Район промысла:.
+        /// </summary>
+        internal static string lbl_region {
+            get {
+                return ResourceManager.GetString("lbl_region", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Дата протокола:.
+        /// </summary>
+        internal static string lbl_report_date {
+            get {
+                return ResourceManager.GetString("lbl_report_date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Протокол:.
+        /// </summary>
+        internal static string lbl_report_number {
+            get {
+                return ResourceManager.GetString("lbl_report_number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на ВБР:.
+        /// </summary>
+        internal static string lbl_WBR {
+            get {
+                return ResourceManager.GetString("lbl_WBR", resourceCulture);
             }
         }
     }

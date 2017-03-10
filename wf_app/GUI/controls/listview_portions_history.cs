@@ -3,15 +3,15 @@
 //                             истории закрепления долей за пользователями ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         09-03-2017
+// Дата обновления:         10-03-2017
 // Релиз:                   0.0.0.0
 //=============================================================================
 using System;
 using System.Windows.Forms;
 
-using cfmc.quotas_app.resources;
+using cfmc.quotas.resources;
 
-namespace cfmc.quotas_app
+namespace cfmc.quotas.controls
 {
     public class listview_portions_history : ListView
     {
@@ -177,6 +177,6 @@ namespace cfmc.quotas_app
             #endregion//__FIELDS__
 
     }//public class listview_portions_history : ListView
-    
-}//namespace cfmc.quotas_app
+
+}//namespace cfmc.quotas.controls
 

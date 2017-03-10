@@ -1,19 +1,18 @@
 ﻿
 //=============================================================================
-// combobox_basin - список выбора рыбопромыслового бассейна
+// data_WBR - данные записи таблицы fish ВБР
 // Автор: Иванченко М.В.
-// Дата начала разработки:  09-03-2017
+// Дата начала разработки:  10-03-2017
 // Дата обновления:         10-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System;
-using System.Windows.Forms;
 
-namespace cfmc.quotas.controls
+namespace cfmc.quotas.db_objects
 {
 
-    public class combobox_basin : ComboBox
+    public class data_WBR
     {
         /*
          * --------------------------------------------------------------------
@@ -21,7 +20,7 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __CONSTRUCTION__	
-        public combobox_basin()
+        public data_WBR()
         {
 
             this.initialize();
@@ -34,6 +33,42 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __PROPERTIES__
+        /// <summary>
+        /// id_fish
+        /// поле запроса - id_fish
+        /// Идентификатор ВБР
+        /// </summary>
+        public int id_fish { get; set; }
+        /// <summary>
+        /// fish
+        /// поле запроса - fish
+        /// ВБР
+        /// </summary>
+        public string fish { get; set; }
+        /// <summary>
+        /// note
+        /// поле запроса - note
+        /// Примечание
+        /// </summary>
+        public string note { get; set; }
+        /// <summary>
+        /// fish_order
+        /// поле запроса - fish_order
+        /// Наименование согласно утверждённому приказу
+        /// </summary>
+        public string fish_order { get; set; }
+        /// <summary>
+        /// id_fish_osm
+        /// поле запроса - id_fish_osm
+        /// Код в ОСМ
+        /// </summary>
+        public int id_fish_osm { get; set; }
+        /// <summary>
+        /// sorting
+        /// поле запроса - sorting
+        /// Порядок сортировки
+        /// </summary>
+        public int sorting { get; set; }
         #endregion//__PROPERTIES__
 
         /*
@@ -71,7 +106,8 @@ namespace cfmc.quotas.controls
         #region __FIELDS__
         #endregion//__FIELDS__
 
-    }//class combobox_basin
+    }//class data_WBR
 
-}//namespace cfmc.quotas.controls
+}//namespace cfmc.quotas.db_objects
 
+            

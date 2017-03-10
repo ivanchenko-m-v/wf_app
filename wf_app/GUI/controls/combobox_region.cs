@@ -1,8 +1,8 @@
 ﻿
 //=============================================================================
-// combobox_basin - список выбора рыбопромыслового бассейна
+// combobox_region - список выбора зоны(района) промысла
 // Автор: Иванченко М.В.
-// Дата начала разработки:  09-03-2017
+// Дата начала разработки:  10-03-2017
 // Дата обновления:         10-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace cfmc.quotas.controls
 {
 
-    public class combobox_basin : ComboBox
+    public class combobox_region : ComboBox
     {
         /*
          * --------------------------------------------------------------------
@@ -21,7 +21,7 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __CONSTRUCTION__	
-        public combobox_basin()
+        public combobox_region()
         {
 
             this.initialize();
@@ -71,7 +71,8 @@ namespace cfmc.quotas.controls
         #region __FIELDS__
         #endregion//__FIELDS__
 
-    }//class combobox_basin
+    }//class combobox_region
 
 }//namespace cfmc.quotas.controls
 
+            

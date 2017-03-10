@@ -61,10 +61,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="data_objects\data_basin.cs" />
+    <Compile Include="data_objects\data_regime.cs" />
+    <Compile Include="data_objects\data_region.cs" />
+    <Compile Include="data_objects\data_report_portion_history.cs" />
+    <Compile Include="data_objects\data_WBR.cs" />
     <Compile Include="GUI\controls\combobox_basin.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="GUI\controls\combobox_catch_stat.cs" />
+    <Compile Include="GUI\controls\combobox_regime.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\controls\combobox_region.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GUI\controls\combobox_WBR.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GUI\controls\combobox_year.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -74,7 +88,7 @@
     <Compile Include="GUI\form_portions_history\form_portions_history.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\form_portions_history\listview_portions_history.cs">
+    <Compile Include="GUI\controls\listview_portions_history.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="GUI\form_portions_history\panel_portions_history_buttons.cs">
@@ -83,10 +97,14 @@
     <Compile Include="GUI\form_portions_history\panel_portions_history_criteria.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="GUI\form_portions_history\panel_portion_history_info.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="GUI\form_portions_history\resource_portions_history.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>resource_portions_history.resx</DependentUpon>
+      <CustomToolNamespace>cfmc.quotas.resources</CustomToolNamespace>
     </Compile>
     <Compile Include="GUI\form_test.cs">
       <SubType>Form</SubType>
@@ -128,7 +146,7 @@
     <EmbeddedResource Include="GUI\form_portions_history\resource_portions_history.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>resource_portions_history.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>cfmc.quotas_app.resources</CustomToolNamespace>
+      <CustomToolNamespace>cfmc.quotas.resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\form_test.resx">
       <DependentUpon>form_test.cs</DependentUpon>
@@ -182,6 +200,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="utils\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -165,4 +165,46 @@
   <data name="btn_select" xml:space="preserve">
     <value>Выборка</value>
   </data>
+  <data name="lbl_basin" xml:space="preserve">
+    <value>Бассейн:</value>
+  </data>
+  <data name="lbl_regime" xml:space="preserve">
+    <value>Вид промысла:</value>
+  </data>
+  <data name="lbl_region" xml:space="preserve">
+    <value>Район промысла:</value>
+  </data>
+  <data name="lbl_WBR" xml:space="preserve">
+    <value>ВБР:</value>
+  </data>
+  <data name="form_title" xml:space="preserve">
+    <value>Движение долей при реорганизациях пользователей ВБР</value>
+  </data>
+  <data name="lbl_contract_date" xml:space="preserve">
+    <value>Дата договора:</value>
+  </data>
+  <data name="lbl_contract_number" xml:space="preserve">
+    <value>Договор:</value>
+  </data>
+  <data name="lbl_date_close" xml:space="preserve">
+    <value>Дата окончания:</value>
+  </data>
+  <data name="lbl_date_open" xml:space="preserve">
+    <value>Дата начала:</value>
+  </data>
+  <data name="lbl_declarant" xml:space="preserve">
+    <value>Пользователь ВБР:</value>
+  </data>
+  <data name="lbl_INN" xml:space="preserve">
+    <value>ИНН:</value>
+  </data>
+  <data name="lbl_portion" xml:space="preserve">
+    <value>Доля:</value>
+  </data>
+  <data name="lbl_report_date" xml:space="preserve">
+    <value>Дата протокола:</value>
+  </data>
+  <data name="lbl_report_number" xml:space="preserve">
+    <value>Протокол:</value>
+  </data>
 </root>

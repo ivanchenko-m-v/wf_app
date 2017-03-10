@@ -2,16 +2,14 @@
 // form_portions_history - форма отчётов о вылове ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         09-03-2017
+// Дата обновления:         10-03-2017
 // Релиз:                   0.0.0.0
 //=============================================================================
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace cfmc
-{
-
-namespace quotas_app
+namespace cfmc.quotas.forms
 {
     public class form_portions_history : Form
     {
@@ -28,6 +26,8 @@ namespace quotas_app
                                         form_portions_history._MIN_WIDTH_, 
                                         form_portions_history._MIN_HEIGHT_
                                        );
+            this.Text = resources.resource_portions_history.form_title;
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             this.create_form_elements();
 
@@ -60,12 +60,13 @@ namespace quotas_app
         private void create_form_elements()
         {
             //layout
-            this._layout_table = new System.Windows.Forms.TableLayoutPanel();
+            this._layout_table = new System.Windows.Forms.TableLayoutPanel( );
             //
-            this._pn_criteria = new GUI.panels.panel_select_criteria();
-            this._lv_result = new GUI.controls.listview_report_catch_2_years();
-            this._pb_process = new System.Windows.Forms.ProgressBar( );
-            this._pn_buttons = new GUI.panels.panel_control_buttons();
+            this._pn_criteria = new panel_portions_history_criteria( );
+            this._pn_info = new panel_portion_history_info( );
+            this._lv_result = new controls.listview_portions_history( );
+            this._pb_process = new System.Windows.Forms.ProgressBar();
+            this._pn_buttons = new panel_portions_history_buttons( );
         }
 
         /// <summary> 
@@ -84,13 +85,17 @@ namespace quotas_app
             //
             this.init_layout_row_criteria( );
             //
+            //_row_info
+            //
+            this.init_layout_row_info();
+            //
             //_row_result
             //
             this.init_layout_row_result( );
             //
             //_row_progress
             //
-            this.init_layout_row_progress( );
+            this.init_layout_row_progress();
             //
             //_row_buttons
             //
@@ -99,6 +104,7 @@ namespace quotas_app
             this._layout_table.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
         /// <summary>
         /// init_layout( )
         /// </summary>
@@ -139,6 +145,20 @@ namespace quotas_app
                                            );
         }
         /// <summary>
+        /// init_layout_row_info( )
+        /// </summary>
+        private void init_layout_row_info( )
+        {
+            this._pn_info.AutoSize = true;
+            this._pn_info.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            this._pn_info.Dock = DockStyle.Fill;
+            this._layout_table.Controls.Add(
+                                            this._pn_info,
+                                            form_portions_history._COL_CONTROL_,
+                                            form_portions_history._ROW_INFO_
+                                           );
+        }
+        /// <summary>
         /// init_layout_row_result( )
         /// </summary>
         private void init_layout_row_result()
@@ -163,7 +183,7 @@ namespace quotas_app
             this._layout_table.Controls.Add(
                                             this._pb_process,
                                             form_portions_history._COL_CONTROL_,
-                                            form_portions_history._ROW_PROGRESS_
+                                            form_portions_history._ROW_PROCESS_
                                            );
         }
         /// <summary>
@@ -196,21 +216,23 @@ namespace quotas_app
          * --------------------------------------------------------------------
          */
         #region __FIELDS__
-        private const int _MIN_WIDTH_ = 1024;
-        private const int _MIN_HEIGHT_ = 768;
+        private const int _MIN_WIDTH_ = 936;
+        private const int _MIN_HEIGHT_ = 702;
 
         private const int _LAYOUT_COLS_ = 1;
-        private const int _LAYOUT_ROWS_ = 4;
+        private const int _LAYOUT_ROWS_ = 5;
 
         private const int _ROW_CRITERIA_ = 0;
-        private const int _ROW_RESULT_ = 1;
-        private const int _ROW_PROGRESS_ = 2;
-        private const int _ROW_BUTTONS_ = 3;
+        private const int _ROW_INFO_ = 1;
+        private const int _ROW_RESULT_ = 2;
+        private const int _ROW_PROCESS_ = 3;
+        private const int _ROW_BUTTONS_ = 4;
 
         private const int _COL_CONTROL_ = 0;
 
         //высота строк в процентах
-        private int[] _ROW_HEIGHT_ = { 28, 71, 3, 5 };
+        private int[] _ROW_HEIGHT_ = { 10, 16, 65, 2, 7 };
+
         /// <summary>
         /// Обязательная переменная конструктора.
         /// </summary>
@@ -218,14 +240,14 @@ namespace quotas_app
 
         //
         private System.Windows.Forms.TableLayoutPanel _layout_table;
-        private wf_app.GUI.panels.panel_select_criteria _pn_criteria;
-        private wf_app.GUI.controls.listview_report_catch_2_years _lv_result;
+        private cfmc.quotas.forms.panel_portions_history_criteria _pn_criteria;
+        private cfmc.quotas.forms.panel_portion_history_info _pn_info;
+        private cfmc.quotas.controls.listview_portions_history _lv_result;
         private System.Windows.Forms.ProgressBar _pb_process;
-        private wf_app.GUI.panels.panel_control_buttons _pn_buttons;
-            //
-            #endregion//__FIELDS__
+        private cfmc.quotas.forms.panel_portions_history_buttons _pn_buttons;
+        //
+        #endregion//__FIELDS__
+
     }//public class form_portions_history : Form
 
-}//namespace monitoring
-
-}//namespace cfmc
+}//namespace cfmc.quotas.forms

@@ -3,15 +3,15 @@
 //                                  в форме form_portions_history
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         09-03-2017
+// Дата обновления:         10-03-2017
 // Релиз:                   0.0.0.0
 //=============================================================================
 using System;
 using System.Windows.Forms;
 
-using cfmc.quotas_app.resources;
+using cfmc.quotas.resources;
 
-namespace cfmc.quotas_app
+namespace cfmc.quotas.forms
 {
     public class panel_portions_history_buttons : Panel
     {
@@ -97,17 +97,17 @@ namespace cfmc.quotas_app
             this._layout.Dock = DockStyle.Fill;
             this._layout.TabIndex = 0;
 
-            this._layout.ColumnCount = panel_portions_history_buttons._COLS;
-            int col_percent = 100 / panel_portions_history_buttons._COLS;
-            for (int i = 0; i < panel_portions_history_buttons._COLS; ++i)
+            this._layout.ColumnCount = panel_portions_history_buttons._COLS_;
+            int col_percent = 100 / panel_portions_history_buttons._COLS_;
+            for (int i = 0; i < panel_portions_history_buttons._COLS_; ++i)
             {
                 System.Windows.Forms.ColumnStyle col_style = new ColumnStyle();
                 col_style.SizeType = SizeType.Percent;
                 col_style.Width = col_percent;
                 this._layout.ColumnStyles.Add(col_style);
             }
-            this._layout.RowCount = panel_portions_history_buttons._ROWS;
-            for (int i = 0; i < panel_portions_history_buttons._ROWS; ++i)
+            this._layout.RowCount = panel_portions_history_buttons._ROWS_;
+            for (int i = 0; i < panel_portions_history_buttons._ROWS_; ++i)
             {
                 this._layout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             }
@@ -125,11 +125,11 @@ namespace cfmc.quotas_app
 
             this._btn_select.Click += _btn_select_Click;
 
-            int start_index = panel_portions_history_buttons._COLS / 2;
             this._layout.Controls.Add( 
-                                        this._btn_select, 
-                                        start_index + panel_portions_history_buttons._TABINDEX_SELECT_,
-                                        0
+                                        this._btn_select,
+                                        panel_portions_history_buttons._COL_START_ +
+                                        panel_portions_history_buttons._TABINDEX_SELECT_,
+                                        panel_portions_history_buttons._ROW_START_
                                      );
             this._btn_select.TabIndex = panel_portions_history_buttons._TABINDEX_SELECT_;
         }
@@ -144,11 +144,11 @@ namespace cfmc.quotas_app
 
             this._btn_export.Click += _btn_export_Click;
 
-            int start_index = panel_portions_history_buttons._COLS / 2;
             this._layout.Controls.Add(
                                         this._btn_export,
-                                        start_index + panel_portions_history_buttons._TABINDEX_EXPORT_,
-                                        0
+                                        panel_portions_history_buttons._COL_START_ +
+                                        panel_portions_history_buttons._TABINDEX_EXPORT_,
+                                        panel_portions_history_buttons._ROW_START_
                                      );
             this._btn_export.TabIndex = panel_portions_history_buttons._TABINDEX_EXPORT_;
         }
@@ -164,11 +164,11 @@ namespace cfmc.quotas_app
 
             this._btn_exit.Click += _btn_exit_Click;
 
-            int start_index = panel_portions_history_buttons._COLS / 2;
             this._layout.Controls.Add(
                                         this._btn_exit,
-                                        start_index + panel_portions_history_buttons._TABINDEX_EXIT_,
-                                        0
+                                        panel_portions_history_buttons._COL_START_ +
+                                        panel_portions_history_buttons._TABINDEX_EXIT_,
+                                        panel_portions_history_buttons._ROW_START_
                                      );
             this._btn_exit.TabIndex = panel_portions_history_buttons._TABINDEX_EXIT_;
         }
@@ -262,8 +262,12 @@ namespace cfmc.quotas_app
         private const int _TABINDEX_EXPORT_ = 1;
         private const int _TABINDEX_EXIT_ = 2;
 
-        private const int _COLS = 16;
-        private const int _ROWS = 1;
+        //параметры сетки расположения элементов управления
+        private const int _COLS_ = 12;
+        private const int _ROWS_ = 1;
+        //стартовая позиция первой кнопки
+        private const int _COL_START_ = 9;
+        private const int _ROW_START_ = 0;
 
         //
         private System.Windows.Forms.TableLayoutPanel _layout;
@@ -275,4 +279,4 @@ namespace cfmc.quotas_app
 
     }//public class panel_portions_history_buttons : Panel
 
-}//namespace cfmc.quotas_app
+}//namespace cfmc.quotas.forms
