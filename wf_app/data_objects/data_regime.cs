@@ -3,7 +3,7 @@
 // data_regime - данные записи таблицы regime ВИД ПРОМЫСЛА
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         10-03-2017
+// Дата обновления:         13-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
@@ -14,16 +14,31 @@ namespace cfmc.quotas.db_objects
 
     public class data_regime
     {
+        /// <summary>
+        /// field_regime - сопоставление полей с полями запроса
+        /// </summary>
+        enum field_regime : int
+        {
+            id_regime = 0,
+            regime = 1,
+            mode = 2,
+            regime_order = 3,
+            fields_count = 4
+        }
+
         /*
          * --------------------------------------------------------------------
          *                          CONSTRUCTION
          * --------------------------------------------------------------------
          */
-        #region __CONSTRUCTION__	
-        public data_regime()
+        #region __CONSTRUCTION__
+        public data_regime( )
         {
-
-            this.initialize();
+            this.initialize( );
+        }
+        public data_regime( object[] data_row )
+        {
+            this.initialize( data_row );
         }
         #endregion //__CONSTRUCTION__	
 
@@ -65,8 +80,113 @@ namespace cfmc.quotas.db_objects
          * --------------------------------------------------------------------
          */
         #region __INITIALIZE__
-        void initialize()
+        void initialize( )
         {
+            this.id_regime = 0;
+            this.regime = "";
+            this.mode = -1;
+            this.regime_order = "";
+        }
+        /// <summary>
+        /// initialize(object[] data) - 
+        /// инициализация свойств из массива значений
+        /// </summary>
+        /// <param name="data_row">массив значений полей строки результатов запроса</param>
+        private void initialize( object[] data_row )
+        {
+            if( data_row == null )
+            {
+                return;
+            }
+            //init fields
+            this.init_id_regime( data_row );
+            this.init_regime( data_row );
+            this.init_mode( data_row );
+            this.init_regime_order( data_row );
+        }
+        /// <summary>
+        /// init_id_regime( object[] data_row ) - 
+        /// инициализация значения id_regime
+        /// </summary>
+        /// <param name="data_row">массив значений полей строки результатов запроса</param>
+        private void init_id_regime( object[] data_row )
+        {
+            if(
+                ( data_row.Length > (int)field_regime.id_regime ) &&
+                ( data_row[(int)field_regime.id_regime] != null )
+              )
+            {
+                try
+                {
+                    this.id_regime = Convert.ToInt32( data_row[(int)field_regime.id_regime] );
+                }
+                catch
+                {
+                }
+            }
+        }
+        /// <summary>
+        /// init_regime( object[] data_row ) - 
+        /// инициализация значения regime
+        /// </summary>
+        /// <param name="data_row">массив значений полей строки результатов запроса</param>
+        private void init_regime( object[] data_row )
+        {
+            if(
+                ( data_row.Length > (int)field_regime.regime ) &&
+                ( data_row[(int)field_regime.regime] != null )
+              )
+            {
+                try
+                {
+                    this.regime = Convert.ToString( data_row[(int)field_regime.regime] );
+                }
+                catch
+                {
+                }
+            }
+        }
+        /// <summary>
+        /// init_mode( object[] data_row ) - 
+        /// инициализация значения mode
+        /// </summary>
+        /// <param name="data_row">массив значений полей строки результатов запроса</param>
+        private void init_mode( object[] data_row )
+        {
+            if(
+                ( data_row.Length > (int)field_regime.mode ) &&
+                ( data_row[(int)field_regime.mode] != null )
+              )
+            {
+                try
+                {
+                    this.mode = Convert.ToInt32( data_row[(int)field_regime.mode] );
+                }
+                catch
+                {
+                }
+            }
+        }
+        /// <summary>
+        /// init_regime_order( object[] data_row ) - 
+        /// инициализация значения regime_order
+        /// </summary>
+        /// <param name="data_row">массив значений полей строки результатов запроса</param>
+        private void init_regime_order( object[] data_row )
+        {
+            if(
+                ( data_row.Length > (int)field_regime.regime_order ) &&
+                ( data_row[(int)field_regime.regime_order] != null )
+              )
+            {
+                try
+                {
+                    this.regime_order = Convert.ToString( data_row[(int)field_regime.regime_order] );
+                }
+                catch
+                {
+                }
+            }
         }
         #endregion //__INITIALIZE__
 
@@ -76,6 +196,14 @@ namespace cfmc.quotas.db_objects
         * --------------------------------------------------------------------
         */
         #region __METHODS__
+        public override string ToString( )
+        {
+            if( this.id_regime == 0 )
+            {
+                return "";
+            }
+            return regime;
+        }
         #endregion//__METHODS__
 
         /*

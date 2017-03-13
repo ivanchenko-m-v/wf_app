@@ -3,15 +3,16 @@
 // combobox_region - список выбора зоны(района) промысла
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         10-03-2017
+// Дата обновления:         13-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
-using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace cfmc.quotas.controls
 {
+    using list_region = List<cfmc.quotas.db_objects.data_region>;
 
     public class combobox_region : ComboBox
     {
@@ -23,7 +24,6 @@ namespace cfmc.quotas.controls
         #region __CONSTRUCTION__	
         public combobox_region()
         {
-
             this.initialize();
         }
         #endregion //__CONSTRUCTION__	
@@ -44,6 +44,10 @@ namespace cfmc.quotas.controls
         #region __INITIALIZE__
         void initialize()
         {
+            this.DataSource = data_model_store.regions;
+            this.AutoCompleteMode = AutoCompleteMode.Append;
+
+            this.KeyDown += Combobox_region_KeyDown;
         }
         #endregion //__INITIALIZE__
 
@@ -53,6 +57,20 @@ namespace cfmc.quotas.controls
         * --------------------------------------------------------------------
         */
         #region __METHODS__
+        private int find_item( )
+        {
+            list_region data = this.DataSource as list_region;
+            int index = -1;
+            for( int i = 0; i < data.Count; ++i )
+            {
+                if( data[i].ToString( ).ToUpper( ).Contains( this.Text.ToUpper( ) ) )
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
         #endregion//__METHODS__
 
         /*
@@ -61,6 +79,22 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __EVENTS__
+
+        private void Combobox_region_KeyDown( object sender, KeyEventArgs e )
+        {
+            if( !( this.DataSource is list_region ) )
+            {
+                return;
+            }
+            if( e.KeyData == Keys.Enter || e.KeyData == Keys.Return )
+            {
+                int index = this.find_item( );
+                if( index > -1 )
+                {
+                    this.SelectedIndex = index;
+                }
+            }
+        }
         #endregion//__EVENTS__
 
         /*

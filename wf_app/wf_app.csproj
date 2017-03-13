@@ -61,6 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="business_logic\business_logic.cs" />
+    <Compile Include="business_logic\data_model_store.cs" />
+    <Compile Include="data_controllers\dc_basin.cs" />
+    <Compile Include="data_controllers\dc_regime.cs" />
+    <Compile Include="data_controllers\dc_region.cs" />
+    <Compile Include="data_controllers\dc_WBR.cs" />
     <Compile Include="data_objects\data_basin.cs" />
     <Compile Include="data_objects\data_regime.cs" />
     <Compile Include="data_objects\data_region.cs" />

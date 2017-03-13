@@ -112,6 +112,10 @@
     <Build Include="scripts\stored_procedures\reports\testing\portion_chain.sql" />
     <Build Include="scripts\stored_procedures\reports\fn_portion_actual.sql" />
     <Build Include="scripts\stored_procedures\reports\sp_one_portion_history.sql" />
+    <Build Include="scripts\stored_procedures\data_manipulation\sp_basin.sql" />
+    <Build Include="scripts\stored_procedures\data_manipulation\sp_regime.sql" />
+    <Build Include="scripts\stored_procedures\data_manipulation\sp_WBR.sql" />
+    <Build Include="scripts\stored_procedures\data_manipulation\sp_region.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

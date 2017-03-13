@@ -1,33 +1,19 @@
 ﻿
 //=============================================================================
-// combobox_WBR - список выбора ВБР
+// business_logic - класс бизнес-логики приложения
 // Автор: Иванченко М.В.
-// Дата начала разработки:  10-03-2017
+// Дата начала разработки:  13-03-2017
 // Дата обновления:         13-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
-using System.Collections.Generic;
-using System.Windows.Forms;
+using System;
 
-namespace cfmc.quotas.controls
+namespace cfmc.quotas
 {
-    using list_WBR = List<cfmc.quotas.db_objects.data_WBR>;
 
-    public class combobox_WBR : ComboBox
+    public static class business_logic
     {
-        /*
-         * --------------------------------------------------------------------
-         *                          CONSTRUCTION
-         * --------------------------------------------------------------------
-         */
-        #region __CONSTRUCTION__	
-        public combobox_WBR()
-        {
-            this.initialize();
-        }
-        #endregion //__CONSTRUCTION__	
-
         /*
          * --------------------------------------------------------------------
          *                          PROPERTIES
@@ -42,12 +28,19 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __INITIALIZE__
-        void initialize()
+        /// <summary>
+        /// init_data_store - инициализация хранилища данных
+        /// </summary>
+        public static void init_data_store( )
         {
-            this.DataSource = data_model_store.WBRs;
-            this.AutoCompleteMode = AutoCompleteMode.Append;
-
-            this.KeyDown += Combobox_WBR_KeyDown;
+            //basins
+            data_model_store.init_basins( );
+            //regimes
+            data_model_store.init_regimes( );
+            //WBRs
+            data_model_store.init_WBRs( );
+            //regions
+            data_model_store.init_regions( );
         }
         #endregion //__INITIALIZE__
 
@@ -57,20 +50,6 @@ namespace cfmc.quotas.controls
         * --------------------------------------------------------------------
         */
         #region __METHODS__
-        private int find_item( )
-        {
-            list_WBR data = this.DataSource as list_WBR;
-            int index = -1;
-            for( int i = 0; i < data.Count; ++i )
-            {
-                if( data[i].ToString( ).ToUpper( ).Contains( this.Text.ToUpper( ) ) )
-                {
-                    index = i;
-                    break;
-                }
-            }
-            return index;
-        }
         #endregion//__METHODS__
 
         /*
@@ -79,21 +58,6 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __EVENTS__
-        private void Combobox_WBR_KeyDown( object sender, KeyEventArgs e )
-        {
-            if( !( this.DataSource is list_WBR ) )
-            {
-                return;
-            }
-            if( e.KeyData == Keys.Enter || e.KeyData == Keys.Return )
-            {
-                int index = this.find_item( );
-                if( index > -1 )
-                {
-                    this.SelectedIndex = index;
-                }
-            }
-        }
         #endregion//__EVENTS__
 
         /*
@@ -104,7 +68,8 @@ namespace cfmc.quotas.controls
         #region __FIELDS__
         #endregion//__FIELDS__
 
-    }//class combobox_WBR
+    }//class business_logic
 
-}//namespace cfmc.quotas.controls
+}//namespace cfmc.quotas
 
+            
