@@ -3,7 +3,7 @@
 //                                  в форме form_portions_history
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         10-03-2017
+// Дата обновления:         14-03-2017
 // Релиз:                   0.0.0.0
 //=============================================================================
 using System;
@@ -15,6 +15,9 @@ namespace cfmc.quotas.forms
 {
     public class panel_portions_history_buttons : Panel
     {
+        public event EventHandler<EventArgs> SelectPortions = null;
+        public event EventHandler<EventArgs> ExportData = null;
+        public event EventHandler<EventArgs> Exit = null;
         /*
          * --------------------------------------------------------------------
          *                          CONSTRUCTION
@@ -22,11 +25,11 @@ namespace cfmc.quotas.forms
          */
         #region __CONSTRUCTION__
 
-        public panel_portions_history_buttons()
+        public panel_portions_history_buttons( )
         {
-            this.create_form_elements();
+            this.create_form_elements( );
 
-            this.init_form_elements();
+            this.init_form_elements( );
         }
         /// <summary> 
         /// Освободить все используемые ресурсы.
@@ -188,24 +191,7 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void _btn_select_Click(object sender, EventArgs e)
         {
-            if (this.select_data == null)
-            {
-                return;
-            }
-            this.select_data(sender, e);
-        }
-        /// <summary>
-        /// _btn_order_Click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void _btn_order_Click(object sender, EventArgs e)
-        {
-            if (this.change_report_columns == null)
-            {
-                return;
-            }
-            this.change_report_columns(sender, e);
+            this.on_select_portions( );
         }
         /// <summary>
         /// _btn_export_Click
@@ -214,11 +200,7 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void _btn_export_Click(object sender, EventArgs e)
         {
-            if (this.export_report_data == null)
-            {
-                return;
-            }
-            this.export_report_data(sender, e);
+            this.on_export_data( );
         }
         /// <summary>
         /// _btn_exit_Click
@@ -227,13 +209,8 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void _btn_exit_Click(object sender, EventArgs e)
         {
-            if( this.exit == null )
-            {
-                return;
-            }
-            this.exit( sender, e );
+            this.on_exit( );
         }
-
         #endregion//__FUNCTIONS__
 
         /*
@@ -242,10 +219,34 @@ namespace cfmc.quotas.forms
          * --------------------------------------------------------------------
          */
         #region __EVENTS__
-        public event System.EventHandler select_data = null;
-        public event System.EventHandler change_report_columns = null;
-        public event System.EventHandler export_report_data = null;
-        public event System.EventHandler exit = null;
+        protected void on_select_portions( )
+        {
+            if( this.SelectPortions != null )
+            {
+                this.SelectPortions( this._btn_select, new EventArgs( ) );
+            }
+        }
+        /// <summary>
+        /// on_export_data( )
+        /// </summary>
+        private void on_export_data( )
+        {
+            if( this.ExportData != null )
+            {
+                this.ExportData( this._btn_export, new EventArgs( ) );
+            }
+        }
+        /// <summary>
+        /// on_exit( )
+        /// </summary>
+        private void on_exit( )
+        {
+            if( this.Exit != null )
+            {
+                this.Exit( this._btn_exit, new EventArgs( ) );
+            }
+        }
+
         #endregion //__EVENTS__
         /*
          * --------------------------------------------------------------------

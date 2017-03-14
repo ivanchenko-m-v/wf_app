@@ -3,16 +3,18 @@
 // combobox_region - список выбора зоны(района) промысла
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         13-03-2017
+// Дата обновления:         14-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+using cfmc.quotas.db_objects;
+
 namespace cfmc.quotas.controls
 {
-    using list_region = List<cfmc.quotas.db_objects.data_region>;
+    using list_region = List<data_region>;
 
     public class combobox_region : ComboBox
     {
@@ -22,9 +24,9 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __CONSTRUCTION__	
-        public combobox_region()
+        public combobox_region( )
         {
-            this.initialize();
+            this.initialize( );
         }
         #endregion //__CONSTRUCTION__	
 
@@ -34,6 +36,22 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __PROPERTIES__
+        /// <summary>
+        /// id_region
+        /// </summary>
+        public int id_region
+        {
+            get
+            {
+                if( this.SelectedItem == null )
+                {
+                    return 0;
+                }
+                data_region region = this.SelectedItem as data_region;
+
+                return region.id_region;
+            }
+        }
         #endregion//__PROPERTIES__
 
         /*

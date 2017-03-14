@@ -3,18 +3,26 @@
 //                             истории закрепления долей за пользователями ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         10-03-2017
-// Релиз:                   0.0.0.0
+// Дата обновления:         14-03-2017
+// Первый релиз:            0.0.0.0
+// Текущий релиз:           0.0.0.0
 //=============================================================================
 using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 using cfmc.quotas.resources;
+using cfmc.quotas;
+using cfmc.quotas.db_objects;
+using cfmc.utils;
 
 namespace cfmc.quotas.controls
 {
+    using n_field = data_report_portion_history.field_report_portion_history;
+
     public class listview_portions_history : ListView
     {
+        public event EventHandler<PercentChangedEventArgs> RefreshPercentChanged = null;
         /*
          * --------------------------------------------------------------------
          *                          CONSTRUCTION
@@ -124,7 +132,69 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __FUNCTIONS__
-            #endregion//__FUNCTIONS__
+        /// <summary>
+        /// refresh_data( ) - заполнение данных выборки
+        /// </summary>
+        public void refresh_data( )
+        {
+            this.SuspendLayout( );
+
+            this.Items.Clear( );
+
+            PercentChangedEventArgs ea = new PercentChangedEventArgs( );
+            ea.Percent = 0;
+            int count = 0, itm_on_percent = data_model_store.portions.Count / 100;
+            if( itm_on_percent == 0 )
+            {
+                itm_on_percent = 1;
+            }
+            foreach( data_report_portion_history itm in data_model_store.portions )
+            {
+                //добавляем данные в список
+                this.append_item( itm );
+
+                ++count;
+                if( ( count % itm_on_percent ) == 0 )
+                {
+                    //нотификация подписчиков о вставке порции данных
+                    ea.Percent = count / itm_on_percent;
+                    this.on_refresh_percent_changed( ea );
+                }
+            }
+            ea.Percent = 100;
+            //last notification
+            this.on_refresh_percent_changed( ea );
+
+            this.ResumeLayout( false );
+
+            this.Update( );
+        }
+
+        private void append_item( data_report_portion_history itm )
+        {
+            //id_portion не выводится в список результатов,
+            //поэтому: (количество полей - 1)
+            //         (порядковый номер поля - 1)
+            string[] sub_items = new string[itm.record_fields_count-1];
+            sub_items[( int)n_field.basin - 1] = itm.basin;
+            sub_items[(int)n_field.regime - 1] = itm.regime;
+            sub_items[(int)n_field.WBR - 1] = itm.WBR;
+            sub_items[(int)n_field.region - 1] = itm.region;
+            sub_items[(int)n_field.portion - 1] = itm.portion.ToString( );
+            sub_items[(int)n_field.date_open - 1] = itm.date_open;
+            sub_items[(int)n_field.date_close - 1] = itm.date_close;
+            sub_items[(int)n_field.report_number - 1] = itm.report_number;
+            sub_items[(int)n_field.report_date - 1] = itm.report_date;
+            sub_items[(int)n_field.declarant - 1] = itm.declarant;
+            sub_items[(int)n_field.INN - 1] = itm.INN;
+            sub_items[(int)n_field.contract_number - 1] = itm.contract_number;
+            sub_items[(int)n_field.contract_date - 1] = itm.contract_date;
+
+            ListViewItem item = new ListViewItem( sub_items );
+            item.Tag = itm;
+            this.Items.Add( item );
+        }
+        #endregion//__FUNCTIONS__
 
         /*
          * --------------------------------------------------------------------
@@ -132,17 +202,30 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __EVENTS__
-            #endregion //__EVENTS__
+        /// <summary>
+        /// on_refresh_percent_changed( int percent ) - 
+        /// нотификация подписчиков об изменении количества вставленных 
+        /// в список записей
+        /// </summary>
+        /// <param name="percent"></param>
+        protected void on_refresh_percent_changed( PercentChangedEventArgs ea )
+        {
+            if( this.RefreshPercentChanged != null )
+            {
+                this.RefreshPercentChanged( this, ea );
+            }
+        }
+        #endregion //__EVENTS__
         /*
          * --------------------------------------------------------------------
          *                          FIELDS
          * --------------------------------------------------------------------
          */
         #region __FIELDS__
-            /// <summary>
-            /// Обязательная переменная конструктора.
-            /// </summary>
-            private System.ComponentModel.IContainer components = null;
+        /// <summary>
+        /// Обязательная переменная конструктора.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
             int[] _COL_WIDTH_ = {
                                     100,//basin
@@ -173,8 +256,8 @@ namespace cfmc.quotas.controls
             private const int _COL_INN_ = 10;
             private const int _COL_CONTRACT_NUMBER_ = 11;
             private const int _COL_CONTRACT_DATE_ = 12;
-            //
-            #endregion//__FIELDS__
+        //
+        #endregion//__FIELDS__
 
     }//public class listview_portions_history : ListView
 

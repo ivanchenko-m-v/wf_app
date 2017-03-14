@@ -2,17 +2,10 @@
 // form_report_catch - форма отчётов о вылове ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  17-02-2017
-// Дата обновления:         21-02-2017
+// Дата обновления:         14-03-2017
 // Релиз:                   0.0.0.0
 //=============================================================================
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace wf_app

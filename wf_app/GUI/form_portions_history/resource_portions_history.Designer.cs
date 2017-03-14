@@ -39,7 +39,7 @@ namespace cfmc.quotas.resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("wf_app.GUI.form_portions_history.resource_portions_history", typeof(resource_portions_history).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("cfmc.quotas.GUI.form_portions_history.resource_portions_history", typeof(resource_portions_history).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

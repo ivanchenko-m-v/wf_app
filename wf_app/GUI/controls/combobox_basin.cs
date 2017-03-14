@@ -3,24 +3,27 @@
 // combobox_basin - список выбора рыбопромыслового бассейна
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         13-03-2017
+// Дата обновления:         14-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+using cfmc.quotas.db_objects;
+
 namespace cfmc.quotas.controls
 {
-    using list_basin = List<cfmc.quotas.db_objects.data_basin>;
+    using list_basin = List<data_basin>;
 
     public class combobox_basin : ComboBox
     {
+
         /*
-         * --------------------------------------------------------------------
-         *                          CONSTRUCTION
-         * --------------------------------------------------------------------
-         */
+        * --------------------------------------------------------------------
+        *                          CONSTRUCTION
+        * --------------------------------------------------------------------
+        */
         #region __CONSTRUCTION__	
         public combobox_basin()
         {
@@ -34,6 +37,22 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __PROPERTIES__
+        /// <summary>
+        /// id_basin
+        /// </summary>
+        public int id_basin
+        {
+            get
+            {
+                if( this.SelectedItem == null )
+                {
+                    return 0;
+                }
+                data_basin basin = this.SelectedItem as data_basin;
+
+                return basin.id_basin;
+            }
+        }
         #endregion//__PROPERTIES__
 
         /*

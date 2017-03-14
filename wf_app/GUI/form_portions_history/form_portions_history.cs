@@ -2,8 +2,9 @@
 // form_portions_history - форма отчётов о вылове ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         10-03-2017
-// Релиз:                   0.0.0.0
+// Дата обновления:         14-03-2017
+// Первый релиз:            0.0.0.0
+// Текущий релиз:           0.0.0.0
 //=============================================================================
 using System;
 using System.Drawing;
@@ -20,19 +21,22 @@ namespace cfmc.quotas.forms
          */
         #region __CONSTRUCTION__
 
-        public form_portions_history()
+        public form_portions_history( )
         {
             this.MinimumSize = new Size(
-                                        form_portions_history._MIN_WIDTH_, 
+                                        form_portions_history._MIN_WIDTH_,
                                         form_portions_history._MIN_HEIGHT_
                                        );
             this.Text = resources.resource_portions_history.form_title;
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            this.create_form_elements();
+            this.create_form_elements( );
 
-            this.init_form_elements();
+            this.init_form_elements( );
+
+            this.subscribe_events( );
         }
+
         /// <summary> 
         /// Освободить все используемые ресурсы.
         /// </summary>
@@ -177,6 +181,9 @@ namespace cfmc.quotas.forms
         /// </summary>
         private void init_layout_row_progress()
         {
+            this._pb_process.Minimum = form_portions_history._MIN_PROGRESS_;
+            this._pb_process.Maximum = form_portions_history._MAX_PROGRESS_;
+
             this._pb_process.AutoSize = true;
             this._pb_process.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
             this._pb_process.Dock = DockStyle.Top;
@@ -200,6 +207,17 @@ namespace cfmc.quotas.forms
                                             form_portions_history._ROW_BUTTONS_
                                            );
         }
+        /// <summary>
+        /// subscribe_events( )
+        /// </summary>
+        private void subscribe_events( )
+        {
+            business_logic.PortionsSelected += Business_logic_PortionsSelected;
+            this._lv_result.RefreshPercentChanged += lv_result_RefreshPercentChanged;
+
+            this._pn_buttons.SelectPortions += pn_buttons_SelectPortions;
+            this._pn_buttons.Exit += pn_buttons_Exit;
+        }
         #endregion //__INITIALIZE__
 
         /*
@@ -208,7 +226,70 @@ namespace cfmc.quotas.forms
          * --------------------------------------------------------------------
          */
         #region __FUNCTIONS__
+        /// <summary>
+        /// select_portion_history( )
+        /// </summary>
+        private void select_portion_history( )
+        {
+            business_logic.select_portions_history(
+                                                   this._pn_criteria.id_basin,
+                                                   this._pn_criteria.id_regime,
+                                                   this._pn_criteria.id_WBR,
+                                                   this._pn_criteria.id_region
+                                                  );
+            this._pb_process.Value = 0;
+        }
         #endregion//__FUNCTIONS__
+
+        /*
+         * --------------------------------------------------------------------
+         *                          EVENTS
+         * --------------------------------------------------------------------
+         */
+        #region __EVENTS__
+        /// <summary>
+        /// Business_logic_PortionsSelected( object sender, EventArgs e )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Business_logic_PortionsSelected( object sender, EventArgs e )
+        {
+            //считаем, что выполнение запроса - полдела
+            this._pb_process.Value = form_portions_history._MAX_PROGRESS_ / 2;
+            //заполняем список
+            this._lv_result.refresh_data( );
+        }
+        /// <summary>
+        /// lv_result_RefreshPercentChanged( object sender, utils.PercentChangedEventArgs e )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lv_result_RefreshPercentChanged( object sender, utils.PercentChangedEventArgs e )
+        {
+            int progress = form_portions_history._MAX_PROGRESS_ / 2 + e.Percent;
+            if( progress > form_portions_history._MAX_PROGRESS_ )
+            {
+                progress = form_portions_history._MAX_PROGRESS_;
+            }
+            this._pb_process.Value = progress;
+        }
+        /// <summary>
+        /// pn_buttons_SelectPortions( object sender, EventArgs e )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void pn_buttons_SelectPortions( object sender, EventArgs e )
+        {
+            this._pb_process.Value = form_portions_history._MIN_PROGRESS_;
+
+            this.select_portion_history( );
+        }
+
+        private void pn_buttons_Exit( object sender, EventArgs e )
+        {
+            this.Close( );
+        }
+        #endregion//__EVENTS__
 
         /*
          * --------------------------------------------------------------------
@@ -218,6 +299,9 @@ namespace cfmc.quotas.forms
         #region __FIELDS__
         private const int _MIN_WIDTH_ = 936;
         private const int _MIN_HEIGHT_ = 702;
+
+        private const int _MIN_PROGRESS_ = 0;
+        private const int _MAX_PROGRESS_ = 200;
 
         private const int _LAYOUT_COLS_ = 1;
         private const int _LAYOUT_ROWS_ = 5;

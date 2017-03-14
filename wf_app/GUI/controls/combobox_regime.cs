@@ -3,16 +3,18 @@
 // combobox_regime - список выбора вида(режима) промысла
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         13-03-2017
+// Дата обновления:         14-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+using cfmc.quotas.db_objects;
+
 namespace cfmc.quotas.controls
 {
-    using list_regime = List<cfmc.quotas.db_objects.data_regime>;
+    using list_regime = List<data_regime>;
 
     public class combobox_regime : ComboBox
     {
@@ -34,6 +36,22 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __PROPERTIES__
+        /// <summary>
+        /// id_regime
+        /// </summary>
+        public int id_regime
+        {
+            get
+            {
+                if( this.SelectedItem == null )
+                {
+                    return 0;
+                }
+                data_regime regime = this.SelectedItem as data_regime;
+
+                return regime.id_regime;
+            }
+        }
         #endregion//__PROPERTIES__
 
         /*

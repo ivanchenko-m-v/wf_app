@@ -3,21 +3,15 @@
 //                         пользователях ВБР, которые не выбрали квоту.
 // Автор: Иванченко М.В.
 // Дата начала разработки:  17-02-2017
-// Дата обновления:         21-02-2017
+// Дата обновления:         14-03-2017
 // Релиз:                   0.0.0.0
 //=============================================================================
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using wf_app.resources;
 using wf_app.GUI.controls;
+using cfmc.quotas.resources;
 
 namespace wf_app.GUI.panels
 {

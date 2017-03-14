@@ -3,13 +3,13 @@
 //                       статистика
 // Автор: Иванченко М.В.
 // Дата начала разработки:  21-02-2017
-// Дата обновления:         21-02-2017
+// Дата обновления:         14-03-2017
 // Релиз:                   0.0.0.0
 //=============================================================================
 using System;
 using System.Windows.Forms;
 
-using wf_app.resources;
+using cfmc.quotas.resources;
 
 namespace wf_app.GUI.controls
 {
@@ -112,22 +112,22 @@ namespace wf_app.GUI.controls
             //s
             combobox_catch_stat_data item = 
                 new combobox_catch_stat_data(
-                                    resources.resource_combobox_stat._item_s,
-                                    resources.resource_combobox_stat._item_s_data
+                                    resource_combobox_stat._item_s,
+                                    resource_combobox_stat._item_s_data
                                             );
             this.Items.Add(item);
             //o
             item =
                 new combobox_catch_stat_data(
-                                    resources.resource_combobox_stat._item_o,
-                                    resources.resource_combobox_stat._item_o_data
+                                    resource_combobox_stat._item_o,
+                                    resource_combobox_stat._item_o_data
                                             );
             this.Items.Add(item);
             //so
             item =
                 new combobox_catch_stat_data(
-                                    resources.resource_combobox_stat._item_so,
-                                    resources.resource_combobox_stat._item_so_data
+                                    resource_combobox_stat._item_so,
+                                    resource_combobox_stat._item_so_data
                                             );
             this.Items.Add(item);
             //

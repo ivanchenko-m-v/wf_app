@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace wf_app.resources {
+namespace cfmc.quotas.resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace wf_app.resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("wf_app.resources.resource_listview_report", typeof(resource_listview_report).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("cfmc.quotas.resources.resource_listview_report", typeof(resource_listview_report).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

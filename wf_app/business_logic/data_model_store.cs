@@ -3,21 +3,26 @@
 // data_model_store - хранилище данных списков в ОЗУ
 // Автор: Иванченко М.В.
 // Дата начала разработки:  13-03-2017
-// Дата обновления:         13-03-2017
+// Дата обновления:         14-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
+using System;
 using System.Collections.Generic;
+
+using cfmc.quotas.db_objects;
 
 namespace cfmc.quotas
 {
-    using list_basin = List<cfmc.quotas.db_objects.data_basin>;
-    using list_regime = List<cfmc.quotas.db_objects.data_regime>;
-    using list_region = List<cfmc.quotas.db_objects.data_region>;
-    using list_WBR = List<cfmc.quotas.db_objects.data_WBR>;
+    using list_basin = List<data_basin>;
+    using list_regime = List<data_regime>;
+    using list_region = List<data_region>;
+    using list_WBR = List<data_WBR>;
+    using list_portion_history = List<data_report_portion_history>;
 
     public static class data_model_store
     {
+        public static event EventHandler<EventArgs> PortionsSelected = null;
         /*
          * --------------------------------------------------------------------
          *                          PROPERTIES
@@ -44,6 +49,11 @@ namespace cfmc.quotas
         /// список ВБР
         /// </summary>
         public static list_WBR WBRs { get; set; }
+        /// <summary>
+        /// portions - 
+        /// результаты запроса [sp_portions_history]
+        /// </summary>
+        public static list_portion_history portions { get; set; }
         #endregion//__PROPERTIES__
 
         /*
@@ -114,6 +124,25 @@ namespace cfmc.quotas
         * --------------------------------------------------------------------
         */
         #region __METHODS__
+        public static void select_portions_history( 
+                                                    int id_basin, int id_regime,
+                                                    int id_WBR, int id_region 
+                                                  )
+        {
+            db_controllers.dc_portion_history dc_portions 
+                                    = new db_controllers.dc_portion_history( );
+
+            dc_portions.select( id_basin, id_regime, id_WBR, id_region );
+
+            if( data_model_store.portions == null )
+            {
+                data_model_store.portions = new list_portion_history( );
+            }
+            data_model_store.portions = dc_portions.data;
+
+            //notify subscribers about selection has finished
+            data_model_store.on_portions_select_complete( );
+        }
         #endregion//__METHODS__
 
         /*
@@ -122,6 +151,14 @@ namespace cfmc.quotas
          * --------------------------------------------------------------------
          */
         #region __EVENTS__
+        private static void on_portions_select_complete( )
+        {
+            EventHandler<EventArgs> handler = PortionsSelected;
+            if( handler != null )
+            {
+                handler( null, new EventArgs( ) );
+            }
+        }
         #endregion//__EVENTS__
 
         /*

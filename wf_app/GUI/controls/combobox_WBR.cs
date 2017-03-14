@@ -3,16 +3,18 @@
 // combobox_WBR - список выбора ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         13-03-2017
+// Дата обновления:         14-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+using cfmc.quotas.db_objects;
+
 namespace cfmc.quotas.controls
 {
-    using list_WBR = List<cfmc.quotas.db_objects.data_WBR>;
+    using list_WBR = List<data_WBR>;
 
     public class combobox_WBR : ComboBox
     {
@@ -22,9 +24,9 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __CONSTRUCTION__	
-        public combobox_WBR()
+        public combobox_WBR( )
         {
-            this.initialize();
+            this.initialize( );
         }
         #endregion //__CONSTRUCTION__	
 
@@ -34,6 +36,22 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __PROPERTIES__
+        /// <summary>
+        /// id_WBR
+        /// </summary>
+        public int id_WBR
+        {
+            get
+            {
+                if( this.SelectedItem == null )
+                {
+                    return 0;
+                }
+                data_WBR wbr = this.SelectedItem as data_WBR;
+
+                return wbr.id_fish;
+            }
+        }
         #endregion//__PROPERTIES__
 
         /*

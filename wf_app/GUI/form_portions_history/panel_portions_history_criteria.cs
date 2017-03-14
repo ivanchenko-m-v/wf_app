@@ -3,8 +3,9 @@
 //                         долей пользователей ВБР.
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         10-03-2017
-// Релиз:                   0.0.0.0
+// Дата обновления:         14-03-2017
+// Первый релиз:            0.0.0.0
+// Текущий релиз:           0.0.0.0
 //=============================================================================
 using System;
 using System.Drawing;
@@ -54,6 +55,47 @@ namespace cfmc.quotas.forms
         #region __PROPERTIES__
         private Size min_label_size { get; set; }
         private Size min_button_size { get; set; }
+        /// <summary>
+        /// id_basin
+        /// </summary>
+        public int id_basin
+        {
+            get
+            {
+                return this._cbx_basin.id_basin;
+            }
+        }
+        /// <summary>
+        /// id_regime
+        /// </summary>
+        public int id_regime
+        {
+            get
+            {
+                return this._cbx_regime.id_regime;
+            }
+        }
+        /// <summary>
+        /// id_WBR
+        /// </summary>
+        public int id_WBR
+        {
+            get
+            {
+                return this._cbx_WBR.id_WBR;
+            }
+        }
+        /// <summary>
+        /// id_region
+        /// </summary>
+        public int id_region
+        {
+            get
+            {
+                return this._cbx_region.id_region;
+            }
+        }
+
         #endregion //__PROPERTIES__
         /*
          * --------------------------------------------------------------------
