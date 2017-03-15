@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 
 using cfmc.quotas.db_objects;
+using cfmc.utils;
 
 namespace cfmc.quotas
 {
@@ -18,7 +19,8 @@ namespace cfmc.quotas
     using list_regime = List<data_regime>;
     using list_region = List<data_region>;
     using list_WBR = List<data_WBR>;
-    using list_portion_history = List<data_report_portion_history>;
+    //using list_portion_history = List<data_report_portion_history>;
+    using list_portion_history = List<IDataRow>;
 
     public static class data_model_store
     {

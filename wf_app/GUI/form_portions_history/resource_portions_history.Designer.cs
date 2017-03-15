@@ -329,5 +329,32 @@ namespace cfmc.quotas.resources {
                 return ResourceManager.GetString("lbl_WBR", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Предупреждение.
+        /// </summary>
+        internal static string msgbox_exception_title {
+            get {
+                return ResourceManager.GetString("msgbox_exception_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Тип исключительной ситуации:.
+        /// </summary>
+        internal static string msgbox_exception_type {
+            get {
+                return ResourceManager.GetString("msgbox_exception_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка выборки данных.
+        /// </summary>
+        internal static string msgbox_select_message {
+            get {
+                return ResourceManager.GetString("msgbox_select_message", resourceCulture);
+            }
+        }
     }
 }

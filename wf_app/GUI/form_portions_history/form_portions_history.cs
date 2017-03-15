@@ -2,13 +2,16 @@
 // form_portions_history - форма отчётов о вылове ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         14-03-2017
+// Дата обновления:         15-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+
+using cfmc.quotas.db_objects;
+using cfmc.utils;
 
 namespace cfmc.quotas.forms
 {
@@ -182,7 +185,7 @@ namespace cfmc.quotas.forms
         private void init_layout_row_progress()
         {
             this._pb_process.Minimum = form_portions_history._MIN_PROGRESS_;
-            this._pb_process.Maximum = form_portions_history._MAX_PROGRESS_;
+            this._pb_process.Maximum = form_portions_history._MAX_REFRESH_PROGRESS_;
 
             this._pb_process.AutoSize = true;
             this._pb_process.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
@@ -214,9 +217,18 @@ namespace cfmc.quotas.forms
         {
             business_logic.PortionsSelected += Business_logic_PortionsSelected;
             this._lv_result.RefreshPercentChanged += lv_result_RefreshPercentChanged;
-
+            this._lv_result.SortStarting += lv_result_SortStarting;
+            this._lv_result.SortPercentChanged += lv_result_SortPercentChanged;
+            this._lv_result.SortFinished += lv_result_SortFinished;
+            this._lv_result.ItemSelectionChanged += lv_result_ItemSelectionChanged;
+            //
             this._pn_buttons.SelectPortions += pn_buttons_SelectPortions;
+            this._pn_buttons.ExportData += pn_buttons_ExportData;
             this._pn_buttons.Exit += pn_buttons_Exit;
+            //
+            excel_helper.ExportStart += lv_result_SortStarting;
+            excel_helper.ExportFinish += lv_result_SortFinished;
+            excel_helper.ExportPercentChanged += lv_result_SortPercentChanged;
         }
         #endregion //__INITIALIZE__
 
@@ -231,13 +243,39 @@ namespace cfmc.quotas.forms
         /// </summary>
         private void select_portion_history( )
         {
-            business_logic.select_portions_history(
-                                                   this._pn_criteria.id_basin,
-                                                   this._pn_criteria.id_regime,
-                                                   this._pn_criteria.id_WBR,
-                                                   this._pn_criteria.id_region
-                                                  );
-            this._pb_process.Value = 0;
+            Cursor cursor = this.Cursor;
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                business_logic.select_portions_history(
+                                                       this._pn_criteria.id_basin,
+                                                       this._pn_criteria.id_regime,
+                                                       this._pn_criteria.id_WBR,
+                                                       this._pn_criteria.id_region
+                                                      );
+            }
+            catch(Exception ex)
+            {
+                string s_msg = String.Format(
+                                             "{0}\n{1} {2}\n{3}",
+                                             resources.resource_portions_history.msgbox_select_message,
+                                             resources.resource_portions_history.msgbox_exception_type,
+                                             ex.GetType( ).ToString( ),
+                                             ex.Message
+                                            );
+                MessageBox.Show(
+                                s_msg,
+                                resources.resource_portions_history.msgbox_exception_title,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                               );
+            }
+            finally
+            {
+                //clear progress bar, when all data in the listview
+                this._pb_process.Value = 0;
+                this.Cursor = cursor;
+            }
         }
         #endregion//__FUNCTIONS__
 
@@ -254,10 +292,15 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void Business_logic_PortionsSelected( object sender, EventArgs e )
         {
+            Cursor cursor = this.Cursor;
+            this.Cursor = Cursors.WaitCursor;
+
             //считаем, что выполнение запроса - полдела
-            this._pb_process.Value = form_portions_history._MAX_PROGRESS_ / 2;
+            this._pb_process.Value = form_portions_history._MAX_REFRESH_PROGRESS_ / 2;
             //заполняем список
             this._lv_result.refresh_data( );
+
+            this.Cursor = cursor;
         }
         /// <summary>
         /// lv_result_RefreshPercentChanged( object sender, utils.PercentChangedEventArgs e )
@@ -266,12 +309,54 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void lv_result_RefreshPercentChanged( object sender, utils.PercentChangedEventArgs e )
         {
-            int progress = form_portions_history._MAX_PROGRESS_ / 2 + e.Percent;
-            if( progress > form_portions_history._MAX_PROGRESS_ )
+            int progress = form_portions_history._MAX_REFRESH_PROGRESS_ / 2 + e.Percent;
+            if( progress > form_portions_history._MAX_REFRESH_PROGRESS_ )
             {
-                progress = form_portions_history._MAX_PROGRESS_;
+                progress = form_portions_history._MAX_REFRESH_PROGRESS_;
             }
             this._pb_process.Value = progress;
+        }
+        /// <summary>
+        /// lv_result_SortPercentChanged( object sender, utils.PercentChangedEventArgs e )
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
+        private void lv_result_SortPercentChanged( object sender, utils.PercentChangedEventArgs e )
+        {
+            int percent = e.Percent < 101 ? e.Percent : 100;
+            this._pb_process.Value = percent;
+        }
+        /// <summary>
+        /// lv_result_SortStarting( object sender, EventArgs e )
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
+        private void lv_result_SortStarting( object sender, EventArgs e )
+        {
+            this._pb_process.Maximum = form_portions_history._MAX_SORT_PROGRESS_;
+            this._pb_process.Value = form_portions_history._MIN_PROGRESS_;
+        }
+        /// <summary>
+        /// lv_result_SortFinished( object sender, EventArgs e ) - 
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
+        private void lv_result_SortFinished( object sender, EventArgs e )
+        {
+            this._pb_process.Value = form_portions_history._MIN_PROGRESS_;
+        }
+        /// <summary>
+        /// lv_result_ItemSelectionChanged( object sender, ListViewItemSelectionChangedEventArgs e )
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event args</param>
+        private void lv_result_ItemSelectionChanged( object sender, ListViewItemSelectionChangedEventArgs e )
+        {
+            if( e.Item == null || e.Item.Tag == null )
+            {
+                return;
+            }
+            this._pn_info.data = e.Item.Tag as data_report_portion_history;
         }
         /// <summary>
         /// pn_buttons_SelectPortions( object sender, EventArgs e )
@@ -280,11 +365,25 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void pn_buttons_SelectPortions( object sender, EventArgs e )
         {
+            this._pb_process.Maximum = form_portions_history._MAX_REFRESH_PROGRESS_;
             this._pb_process.Value = form_portions_history._MIN_PROGRESS_;
 
             this.select_portion_history( );
         }
-
+        /// <summary>
+        /// pn_buttons_ExportData( object sender, EventArgs e )
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event params</param>
+        private void pn_buttons_ExportData( object sender, EventArgs e )
+        {
+            excel_helper.export_to_excel( data_model_store.portions );
+        }
+        /// <summary>
+        /// pn_buttons_Exit( object sender, EventArgs e )
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event params</param>
         private void pn_buttons_Exit( object sender, EventArgs e )
         {
             this.Close( );
@@ -301,7 +400,8 @@ namespace cfmc.quotas.forms
         private const int _MIN_HEIGHT_ = 702;
 
         private const int _MIN_PROGRESS_ = 0;
-        private const int _MAX_PROGRESS_ = 200;
+        private const int _MAX_SORT_PROGRESS_ = 100;
+        private const int _MAX_REFRESH_PROGRESS_ = 200;
 
         private const int _LAYOUT_COLS_ = 1;
         private const int _LAYOUT_ROWS_ = 5;

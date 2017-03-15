@@ -5,16 +5,19 @@
 //                               пользователей ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         14-03-2017
+// Дата обновления:         15-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System;
+using cfmc.utils;
 
 namespace cfmc.quotas.db_objects
 {
-
-    public class data_report_portion_history
+    /// <summary>
+    /// public class data_report_portion_history : IComparable, IDataRow
+    /// </summary>
+    public class data_report_portion_history : IComparable, IDataRow
     {
         /// <summary>
         /// field_report_portion_history - 
@@ -448,6 +451,56 @@ namespace cfmc.quotas.db_objects
         * --------------------------------------------------------------------
         */
         #region __METHODS__
+        public string to_compare_string( )
+        {
+            return String.Format( "{0}_{1}", this.id_portion, this.date_open );
+        }
+        /// <summary>
+        /// CompareTo( object obj ) - 
+        /// реализация интерфейса IComparable
+        /// </summary>
+        /// <param name="obj">объект для сравнения с this</param>
+        /// <returns></returns>
+        public int CompareTo( object obj )
+        {
+            if( obj == null )
+            {
+                return 1;
+            }
+            data_report_portion_history data = obj as data_report_portion_history;
+            if( this.id_portion == data.id_portion )
+            {
+                return this.date_open.CompareTo( data.date_open );
+            }
+            return this.id_portion < data.id_portion ? -1 : 1;
+        }
+        /// <summary>
+        /// Fields( ) -
+        /// реализация интерфейса IDataRow
+        /// </summary>
+        /// <returns>массив значений ячеек для строки листа Excel</returns>
+        public object[] Fields( )
+        {
+            object[] obj = new object[]
+            {
+                this.id_portion,
+                this.basin,
+                this.regime,
+                this.WBR,
+                this.region,
+                this.portion,
+                this.date_open,
+                this.date_close,
+                this.report_number,
+                this.report_date,
+                this.declarant,
+                this.INN,
+                this.contract_number,
+                this.contract_date
+            };
+
+            return obj;
+        }
         #endregion//__METHODS__
 
         /*

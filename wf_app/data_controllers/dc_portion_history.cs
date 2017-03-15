@@ -4,7 +4,7 @@
 //                      data_report_portion_history
 // Автор: Иванченко М.В.
 // Дата начала разработки:  14-03-2017
-// Дата обновления:         14-03-2017
+// Дата обновления:         15-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
@@ -14,10 +14,13 @@ using System.Data;
 using System.Data.SqlClient;
 
 using cfmc.quotas.db_objects;
+using cfmc.utils;
+
 
 namespace cfmc.quotas.db_controllers
 {
-    using list_portion_history = List<data_report_portion_history>;
+    //using list_portion_history = List<data_report_portion_history>;
+    using list_portion_history = List<IDataRow>;
     public class dc_portion_history
     {
         /*

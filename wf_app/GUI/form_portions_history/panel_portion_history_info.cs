@@ -5,13 +5,15 @@
 //                              реорганизациях пользователей ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         10-03-2017
+// Дата обновления:         15-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
 using System.Windows.Forms;
 
 using cfmc.quotas.resources;
+using cfmc.quotas.db_objects;
+using cfmc.utils;
 
 namespace cfmc.quotas.forms
 {
@@ -49,6 +51,13 @@ namespace cfmc.quotas.forms
          * --------------------------------------------------------------------
          */
         #region __PROPERTIES__
+        public data_report_portion_history data
+        {
+            set
+            {
+                this.init_data( value );
+            }
+        }
         #endregion//__PROPERTIES__
 
         /*
@@ -193,6 +202,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_BASIN_
                                            );
             this._lbl_basin.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_basin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_basin.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_basin,
                                             panel_portion_history_info._COL_BASIN_,
@@ -215,6 +226,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_REGIME_
                                            );
             this._lbl_regime.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_regime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_regime.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_regime,
                                             panel_portion_history_info._COL_REGIME_,
@@ -237,6 +250,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_WBR_
                                            );
             this._lbl_WBR.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_WBR.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_WBR.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_WBR,
                                             panel_portion_history_info._COL_WBR_,
@@ -259,6 +274,9 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_REGION_
                                            );
             this._lbl_region.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_region.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_region.ForeColor = System.Drawing.Color.Navy;
+            this._lbl_region.AutoSize = true;
             this._layout_table.Controls.Add(
                                             this._lbl_region,
                                             panel_portion_history_info._COL_REGION_,
@@ -281,6 +299,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_PORTION_
                                            );
             this._lbl_portion.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_portion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_portion.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_portion,
                                             panel_portion_history_info._COL_PORTION_,
@@ -303,6 +323,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_DATE_OPEN_
                                            );
             this._lbl_date_open.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_date_open.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_date_open.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_date_open,
                                             panel_portion_history_info._COL_DATE_OPEN_,
@@ -325,6 +347,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_DATE_CLOSE_
                                            );
             this._lbl_date_close.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_date_close.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_date_close.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_date_close,
                                             panel_portion_history_info._COL_DATE_CLOSE_,
@@ -347,6 +371,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_REPORT_NUMBER_
                                            );
             this._lbl_report_number.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_report_number.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_report_number.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_report_number,
                                             panel_portion_history_info._COL_REPORT_NUMBER_,
@@ -369,6 +395,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_REPORT_DATE_
                                            );
             this._lbl_report_date.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_report_date.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_report_date.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_report_date,
                                             panel_portion_history_info._COL_REPORT_DATE_,
@@ -391,6 +419,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_DECLARANT_
                                            );
             this._lbl_declarant.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_declarant.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_declarant.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_declarant,
                                             panel_portion_history_info._COL_DECLARANT_,
@@ -414,6 +444,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_INN_
                                            );
             this._lbl_INN.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_INN.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_INN.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_INN,
                                             panel_portion_history_info._COL_INN_,
@@ -436,6 +468,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_CONTRACT_NUMBER_
                                            );
             this._lbl_contract_number.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_contract_number.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_contract_number.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_contract_number,
                                             panel_portion_history_info._COL_CONTRACT_NUMBER_,
@@ -458,6 +492,8 @@ namespace cfmc.quotas.forms
                                             panel_portion_history_info._ROW_CONTRACT_DATE_
                                            );
             this._lbl_contract_date.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
+            this._lbl_contract_date.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this._lbl_contract_date.ForeColor = System.Drawing.Color.Navy;
             this._layout_table.Controls.Add(
                                             this._lbl_contract_date,
                                             panel_portion_history_info._COL_CONTRACT_DATE_,
@@ -465,6 +501,44 @@ namespace cfmc.quotas.forms
                                            );
         }
 
+        /// <summary>
+        /// init_data( data_report_portion_history value )
+        /// </summary>
+        /// <param name="dp">data for show in the panel</param>
+        private void init_data( data_report_portion_history dp )
+        {
+            this.clear( );
+
+            this._lbl_basin.Text = dp.basin;
+            this._lbl_regime.Text = dp.regime;
+            this._lbl_WBR.Text = dp.WBR;
+            this._lbl_region.Text = dp.region;
+            this._lbl_portion.Text = dp.portion.ToString( );
+            if( dp.date_open.Length != 0 )
+            {
+                this._lbl_date_open.Text = 
+                    helper.date_from_string( dp.date_open ).ToShortDateString( );
+            }
+            if( dp.date_close.Length != 0 )
+            {
+                this._lbl_date_close.Text = 
+                    helper.date_from_string( dp.date_close ).ToShortDateString( );
+            }
+            this._lbl_report_number.Text = dp.report_number;
+            if( dp.report_date.Length != 0 )
+            {
+                this._lbl_report_date.Text = 
+                    helper.date_from_string( dp.report_date ).ToShortDateString( );
+            }
+            this._lbl_declarant.Text = dp.declarant;
+            this._lbl_INN.Text = dp.INN;
+            this._lbl_contract_number.Text = dp.contract_number;
+            if( dp.contract_date.Length != 0 )
+            {
+                this._lbl_contract_date.Text = 
+                    helper.date_from_string( dp.contract_date ).ToShortDateString( );
+            }
+        }
         #endregion //__INITIALIZE__
 
         /*
@@ -473,6 +547,22 @@ namespace cfmc.quotas.forms
         * --------------------------------------------------------------------
         */
         #region __METHODS__
+        private void clear( )
+        {
+            this._lbl_basin.Text = "";
+            this._lbl_regime.Text = "";
+            this._lbl_WBR.Text = "";
+            this._lbl_region.Text = "";
+            this._lbl_portion.Text = "";
+            this._lbl_date_open.Text = "";
+            this._lbl_date_close.Text = "";
+            this._lbl_report_number.Text = "";
+            this._lbl_report_date.Text = "";
+            this._lbl_declarant.Text = "";
+            this._lbl_INN.Text = "";
+            this._lbl_contract_number.Text = "";
+            this._lbl_contract_date.Text = "";
+        }
         #endregion//__METHODS__
 
         /*

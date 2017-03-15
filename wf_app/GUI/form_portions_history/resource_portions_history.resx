@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="column_basin" xml:space="preserve">
     <value>Бассейн</value>
@@ -206,5 +206,14 @@
   </data>
   <data name="lbl_report_number" xml:space="preserve">
     <value>Протокол:</value>
+  </data>
+  <data name="msgbox_exception_title" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
+  <data name="msgbox_exception_type" xml:space="preserve">
+    <value>Тип исключительной ситуации:</value>
+  </data>
+  <data name="msgbox_select_message" xml:space="preserve">
+    <value>Ошибка выборки данных</value>
   </data>
 </root>
