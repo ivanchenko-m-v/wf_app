@@ -547,7 +547,7 @@ namespace cfmc.quotas.forms
         * --------------------------------------------------------------------
         */
         #region __METHODS__
-        private void clear( )
+        public void clear( )
         {
             this._lbl_basin.Text = "";
             this._lbl_regime.Text = "";

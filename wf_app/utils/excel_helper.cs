@@ -3,7 +3,7 @@
 // excel_helper - вспомогательный класс для вывода данных в Excel
 // Автор: Иванченко М.В.
 // Дата начала разработки:  15-03-2017
-// Дата обновления:         15-03-2017
+// Дата обновления:         16-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
@@ -73,7 +73,7 @@ namespace cfmc.utils
             excelapp.SheetsInNewWorkbook = 1;
             Excel.Workbook wb = excelapp.Workbooks.Add( );
             Excel.Worksheet ws;
-            if(wb.ActiveSheet!=null)
+            if( wb.ActiveSheet != null )
             {
                 ws = wb.ActiveSheet as Excel.Worksheet;
             }
@@ -82,14 +82,6 @@ namespace cfmc.utils
                 ws = wb.Sheets.Add( ) as Excel.Worksheet;
             }
 
-            //event args for notification about export process
-            PercentChangedEventArgs ea = new PercentChangedEventArgs( );
-            ea.Percent = 0;
-            int itm_on_percent = list.Count / 100;
-            if( itm_on_percent == 0 )
-            {
-                itm_on_percent = 1;
-            }
             //in Excel worksheet cells starts from [1,1]
             int row_current = 1, count = 0;
             //export data
@@ -97,14 +89,7 @@ namespace cfmc.utils
             {
                 excel_helper.object_to_worksheet( row_current++, row, ws );
 
-                ++count;
-                if( ( count % itm_on_percent ) == 0 )
-                {
-                    //нотификация подписчиков о вставке порции данных
-                    ea.Percent = count / itm_on_percent;
-                    excel_helper.on_export_percent_changed( ea );
-                }
-
+                excel_helper.notify_percent_changed( ++count, list.Count );
             }
             excelapp.Visible = true;
 
@@ -123,8 +108,40 @@ namespace cfmc.utils
             object[] obj_row = row.Fields( );
             for( int i = 0; i < obj_row.Length; ++i )
             {
+                //выбор ячейки рабочего листа [n_row, i+1]
                 excelcells = (Excel.Range)ws.Cells[n_row, i+1];
+                //помещение данных в ячейку
                 excelcells.Value2 = obj_row[i].ToString( );
+            }
+        }
+        /// <summary>
+        /// notify_percent_changed( int processed_rows, int rows )
+        /// </summary>
+        /// <param name="processed_rows">qty of processed rows</param>
+        /// <param name="rows">total rows qty for processing</param>
+        private static void notify_percent_changed( int processed_rows, int rows )
+        {
+            if( processed_rows < 1 )
+            {
+                return;
+            }
+            //event args for notification about export process
+            PercentChangedEventArgs ea = new PercentChangedEventArgs( );
+            ea.Percent = 0;
+            if(rows < 100)
+            {
+                ea.Percent = 100 - ( 100 / processed_rows );
+                excel_helper.on_export_percent_changed( ea );
+                return;
+            }
+            int itm_on_percent = rows / 100;
+
+            if( ( processed_rows % itm_on_percent ) == 0 )
+            {
+                //нотификация подписчиков о вставке порции данных
+                //равной одному проценту от общего объёма
+                ea.Percent = processed_rows / itm_on_percent;
+                excel_helper.on_export_percent_changed( ea );
             }
         }
         #endregion//__METHODS__
@@ -182,7 +199,7 @@ namespace cfmc.utils
     }//class excel_helper
 
     /// <summary>
-    /// interface IExcelRow
+    /// interface IDataRow
     /// </summary>
     public interface IDataRow
     {

@@ -2,7 +2,7 @@
 // form_portions_history - форма отчётов о вылове ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         15-03-2017
+// Дата обновления:         16-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
@@ -26,6 +26,7 @@ namespace cfmc.quotas.forms
 
         public form_portions_history( )
         {
+            this.Icon = app_resources.icon_app;
             this.MinimumSize = new Size(
                                         form_portions_history._MIN_WIDTH_,
                                         form_portions_history._MIN_HEIGHT_
@@ -216,6 +217,7 @@ namespace cfmc.quotas.forms
         private void subscribe_events( )
         {
             business_logic.PortionsSelected += Business_logic_PortionsSelected;
+
             this._lv_result.RefreshPercentChanged += lv_result_RefreshPercentChanged;
             this._lv_result.SortStarting += lv_result_SortStarting;
             this._lv_result.SortPercentChanged += lv_result_SortPercentChanged;
@@ -277,6 +279,40 @@ namespace cfmc.quotas.forms
                 this.Cursor = cursor;
             }
         }
+        /// <summary>
+        /// export_to_excel( )
+        /// </summary>
+        private void export_to_excel( )
+        {
+            Cursor cursor = this.Cursor;
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                excel_helper.export_to_excel( data_model_store.portions );
+            }
+            catch( Exception ex )
+            {
+                string s_msg = String.Format(
+                                             "{0}\n{1} {2}\n{3}",
+                                             resources.resource_portions_history.msgbox_export_message,
+                                             resources.resource_portions_history.msgbox_exception_type,
+                                             ex.GetType( ).ToString( ),
+                                             ex.Message
+                                            );
+                MessageBox.Show(
+                                s_msg,
+                                resources.resource_portions_history.msgbox_exception_title,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                               );
+            }
+            finally
+            {
+                //clear progress bar, when all data in the listview
+                this._pb_process.Value = _MIN_PROGRESS_;
+                this.Cursor = cursor;
+            }
+        }
         #endregion//__FUNCTIONS__
 
         /*
@@ -297,7 +333,7 @@ namespace cfmc.quotas.forms
 
             //считаем, что выполнение запроса - полдела
             this._pb_process.Value = form_portions_history._MAX_REFRESH_PROGRESS_ / 2;
-            //заполняем список
+            //заполняем список - ещё полдела
             this._lv_result.refresh_data( );
 
             this.Cursor = cursor;
@@ -323,7 +359,7 @@ namespace cfmc.quotas.forms
         /// <param name="e">event args</param>
         private void lv_result_SortPercentChanged( object sender, utils.PercentChangedEventArgs e )
         {
-            int percent = e.Percent < 101 ? e.Percent : 100;
+            int percent = e.Percent < _MAX_SORT_PROGRESS_ ? e.Percent : _MAX_SORT_PROGRESS_;
             this._pb_process.Value = percent;
         }
         /// <summary>
@@ -365,9 +401,12 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void pn_buttons_SelectPortions( object sender, EventArgs e )
         {
+            //установить значения индикатора процесса выборки
             this._pb_process.Maximum = form_portions_history._MAX_REFRESH_PROGRESS_;
             this._pb_process.Value = form_portions_history._MIN_PROGRESS_;
-
+            //очистить панель информации выбранной доли списка
+            this._pn_info.clear( );
+            //выборка данных
             this.select_portion_history( );
         }
         /// <summary>
@@ -377,7 +416,7 @@ namespace cfmc.quotas.forms
         /// <param name="e">event params</param>
         private void pn_buttons_ExportData( object sender, EventArgs e )
         {
-            excel_helper.export_to_excel( data_model_store.portions );
+            this.export_to_excel( );
         }
         /// <summary>
         /// pn_buttons_Exit( object sender, EventArgs e )

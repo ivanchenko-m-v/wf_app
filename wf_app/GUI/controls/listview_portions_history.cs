@@ -3,7 +3,7 @@
 //                             истории закрепления долей за пользователями ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         15-03-2017
+// Дата обновления:         16-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
@@ -28,6 +28,8 @@ namespace cfmc.quotas.controls
         public event EventHandler<PercentChangedEventArgs> SortPercentChanged = null;
         public event EventHandler<EventArgs> SortStarting = null;
         public event EventHandler<EventArgs> SortFinished = null;
+
+        private delegate void notify_func( PercentChangedEventArgs ea );
         /*
          * --------------------------------------------------------------------
          *                          CONSTRUCTION
@@ -187,19 +189,14 @@ namespace cfmc.quotas.controls
             this.Sorting = SortOrder.None;
             this.ListViewItemSorter = null;
 
-            PercentChangedEventArgs ea = new PercentChangedEventArgs( );
-            ea.Percent = 0;
-            int count = 0, itm_on_percent = data_model_store.portions.Count / 100;
-            if( itm_on_percent == 0 )
-            {
-                itm_on_percent = 1;
-            }
             //определяем цвета для чередования выбранных долей в списке
             Color color_base = this.BackColor;
             Color color_alt = System.Drawing.Color.LightSteelBlue;
             //.Azure//.LightGray;//.LightSlateGray;////.LightSeaGreen;//.Beige;//.LemonChiffon;
             int id_portion_prev = -1;
             Color item_color = color_alt;
+            //счётчик обработанных записей
+            int processed_rows = 0;
             //вставляем выбранные данные в список
             foreach( data_report_portion_history itm in data_model_store.portions )
             {
@@ -211,18 +208,11 @@ namespace cfmc.quotas.controls
                 //добавляем данные в список
                 this.append_item( itm, item_color );
 
-                ++count;
-                if( ( count % itm_on_percent ) == 0 )
-                {
-                    //нотификация подписчиков о вставке порции данных
-                    ea.Percent = count / itm_on_percent;
-                    this.on_refresh_percent_changed( ea );
-                }
+                //нотификация подписчиков о вставке порции данных
+                this.notify_refresh_percent_changed( ++processed_rows, data_model_store.portions.Count );
             }
-            ea.Percent = 100;
-
             //last notification
-            this.on_refresh_percent_changed( ea );
+            this.notify_refresh_percent_changed( data_model_store.portions.Count, data_model_store.portions.Count );
             //resize some cols to content
             this.resize_columns( );
 
@@ -312,35 +302,72 @@ namespace cfmc.quotas.controls
                       );
             this.Groups.AddRange( lvgroups );
 
-            //инициализация аргументов события нотификации
-            PercentChangedEventArgs ea = new PercentChangedEventArgs( );
-            ea.Percent = 0;
-            int count = 0, itm_on_percent = this.Items.Count / 100;
-            if( itm_on_percent == 0 )
-            {
-                itm_on_percent = 1;
-            }
+            //счётчик обработанных записей
+            int processed_rows = 0;
             //присвоение группы элементам списка
             foreach( ListViewItem lvi in this.Items)
             {
                 lvi.Group = column_groups[lvi.SubItems[column].Text] as ListViewGroup;
                 lvi.BackColor = this.BackColor;
 
-                ++count;
-                if( ( count % itm_on_percent ) == 0 )
-                {
-                    //нотификация подписчиков о вставке порции данных
-                    ea.Percent = count / itm_on_percent;
-                    this.on_sort_percent_changed( ea );
-                }
+                this.notify_sort_percent_changed( ++processed_rows, this.Items.Count );
             }
-            ea.Percent = 100;
             //last notification
-            this.on_sort_percent_changed( ea );
             this.on_sort_finished( );
 
             this.ResumeLayout( false );
             this.Cursor = cursor;
+        }
+        /// <summary>
+        /// notify_percent_changed( int processed_rows, int rows, notify_func notify ) -
+        /// нотификация подписчиков, для обновления представления хода процесса обработки,
+        /// об очередной порции обработанных данных
+        /// </summary>
+        /// <param name="processed_rows">количество обработанных записей</param>
+        /// <param name="rows">общее количество записей для обработки</param>
+        /// <param name="notify">функция, вызывающая обработчики нотификации</param>
+        private void notify_percent_changed( int processed_rows, int rows, notify_func notify )
+        {
+            if( processed_rows < 1 )
+            {
+                return;
+            }
+            //event args for notification about export process
+            PercentChangedEventArgs ea = new PercentChangedEventArgs( );
+            ea.Percent = 0;
+            if( rows < 100 )
+            {
+                ea.Percent = 100 - ( 100 / processed_rows );
+                notify( ea );
+                return;
+            }
+            int itm_on_percent = rows / 100;
+
+            if( ( processed_rows % itm_on_percent ) == 0 )
+            {
+                //нотификация подписчиков о вставке очередной порции данных
+                //равной одному проценту от общего объёма
+                ea.Percent = processed_rows / itm_on_percent;
+                notify( ea );
+            }
+        }
+        /// <summary>
+        /// notify_refresh_percent_changed( int processed_rows, int rows )
+        /// </summary>
+        /// <param name="processed_rows">количество обработанных записей</param>
+        /// <param name="rows">общее количество записей для обработки</param>
+        private void notify_refresh_percent_changed( int processed_rows, int rows )
+        {
+            this.notify_percent_changed( processed_rows, rows, on_refresh_percent_changed );
+        }
+        /// <summary>
+        /// notify_sort_percent_changed( int processed_rows, int rows )
+        /// </summary>
+        /// <param name="processed_rows">количество обработанных записей</param>
+        /// <param name="rows">общее количество записей для обработки</param>
+        private void notify_sort_percent_changed( int processed_rows, int rows )
+        {
+            this.notify_percent_changed( processed_rows, rows, on_sort_percent_changed );
         }
         #endregion//__FUNCTIONS__
 

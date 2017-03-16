@@ -48,6 +48,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>resources\icon_app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -146,6 +152,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>resource_panel_select_criteria.resx</DependentUpon>
     </Compile>
+    <Compile Include="utils\excel_document.cs" />
     <Compile Include="utils\excel_helper.cs" />
     <Compile Include="utils\utils.cs" />
     <EmbeddedResource Include="GUI\form_portions_history\resource_portions_history.resx">
@@ -156,14 +163,15 @@
     <EmbeddedResource Include="GUI\form_test.resx">
       <DependentUpon>form_test.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Properties\app_resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>app_resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <CustomToolNamespace>cfmc.quotas</CustomToolNamespace>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Properties\app_resources.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>app_resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="resources\resource_combobox_stat.resx">
@@ -184,13 +192,15 @@
       <LastGenOutput>resource_panel_select_criteria.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\app_settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <LastGenOutput>app_settings.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>cfmc.quotas</CustomToolNamespace>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Include="Properties\app_settings.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
+      <DependentUpon>app_settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
@@ -237,6 +247,15 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\icon_app.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\img_app.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\ico_alter.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

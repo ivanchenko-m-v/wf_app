@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("wf_app")]
+[assembly: AssemblyTitle("CFMC Quotas App")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("wf_app")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCompany( "FGFI CFMC" )]
+[assembly: AssemblyProduct("quotas")]
+[assembly: AssemblyCopyright("Copyright ©  2017 CFMC")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

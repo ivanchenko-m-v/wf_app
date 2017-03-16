@@ -349,6 +349,15 @@ namespace cfmc.quotas.resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка экспорта данных.
+        /// </summary>
+        internal static string msgbox_export_message {
+            get {
+                return ResourceManager.GetString("msgbox_export_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка выборки данных.
         /// </summary>
         internal static string msgbox_select_message {

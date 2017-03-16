@@ -216,4 +216,7 @@
   <data name="msgbox_select_message" xml:space="preserve">
     <value>Ошибка выборки данных</value>
   </data>
+  <data name="msgbox_export_message" xml:space="preserve">
+    <value>Ошибка экспорта данных</value>
+  </data>
 </root>
