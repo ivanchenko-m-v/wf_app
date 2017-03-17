@@ -2,7 +2,7 @@
 // Program - класс программы с функцией Main( )
 // Автор: Иванченко М.В.
 // Дата начала разработки:  17-02-2017
-// Дата обновления:         16-03-2017
+// Дата обновления:         17-03-2017
 // Релиз:                   0.0.0.0
 //=============================================================================
 using System;
@@ -55,6 +55,9 @@ namespace cfmc.quotas
                     //init data
                     if( Program.init_data_store( ) )
                     {
+                        //init export object
+                        business_logic.init_excel_producer( );
+
                         //open main program form
                         //in the case of successfull
                         //init of data store

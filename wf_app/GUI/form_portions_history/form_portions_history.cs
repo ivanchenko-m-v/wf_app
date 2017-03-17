@@ -2,7 +2,7 @@
 // form_portions_history - форма отчётов о вылове ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         16-03-2017
+// Дата обновления:         17-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
@@ -228,9 +228,9 @@ namespace cfmc.quotas.forms
             this._pn_buttons.ExportData += pn_buttons_ExportData;
             this._pn_buttons.Exit += pn_buttons_Exit;
             //
-            excel_helper.ExportStart += lv_result_SortStarting;
-            excel_helper.ExportFinish += lv_result_SortFinished;
-            excel_helper.ExportPercentChanged += lv_result_SortPercentChanged;
+            business_logic.excel_producer.ExportStart += lv_result_SortStarting;
+            business_logic.excel_producer.ExportFinish += lv_result_SortFinished;
+            business_logic.excel_producer.ExportPercentChanged += lv_result_SortPercentChanged;
         }
         #endregion //__INITIALIZE__
 
@@ -288,7 +288,7 @@ namespace cfmc.quotas.forms
             this.Cursor = Cursors.WaitCursor;
             try
             {
-                excel_helper.export_to_excel( data_model_store.portions );
+                business_logic.export_portions_history( );
             }
             catch( Exception ex )
             {

@@ -142,6 +142,15 @@ namespace cfmc.quotas.resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на id_portion.
+        /// </summary>
+        internal static string column_id {
+            get {
+                return ResourceManager.GetString("column_id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на ИНН.
         /// </summary>
         internal static string column_INN {

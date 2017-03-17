@@ -12,7 +12,9 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>C:\Users\mivanchenko\PROJECTS\vs2015\csharp\cfmc\quotas\distrib\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -22,12 +24,11 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,6 +54,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>4734BE520001D857F4025D53908627A0B6E72E11</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>wf_app_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -152,8 +165,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>resource_panel_select_criteria.resx</DependentUpon>
     </Compile>
-    <Compile Include="utils\excel_document.cs" />
+    <Compile Include="utils\excel_producer.cs" />
     <Compile Include="utils\excel_helper.cs" />
+    <Compile Include="utils\rc_utils.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rc_utils.resx</DependentUpon>
+    </Compile>
     <Compile Include="utils\utils.cs" />
     <EmbeddedResource Include="GUI\form_portions_history\resource_portions_history.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -191,8 +209,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>resource_panel_select_criteria.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="utils\rc_utils.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>rc_utils.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>cfmc.utils.resources</CustomToolNamespace>
+    </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\app_settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>app_settings.Designer.cs</LastGenOutput>
@@ -203,6 +225,7 @@
       <DependentUpon>app_settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="wf_app_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="program\App.config" />
