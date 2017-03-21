@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace cfmc.quotas.resources {
+namespace cfmc.quotas {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace cfmc.quotas.resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class resource_panel_control_buttons {
+    internal class app_resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal resource_panel_control_buttons() {
+        internal app_resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace cfmc.quotas.resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("cfmc.quotas.resources.resource_panel_control_buttons", typeof(resource_panel_control_buttons).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("report_WBR_catch.Properties.app_resources", typeof(app_resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,65 @@ namespace cfmc.quotas.resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Выход.
+        ///   Ищет локализованную строку, похожую на Ошибка инициализации параметров программы. Программа будет закрыта..
         /// </summary>
-        internal static string _btn_exit {
+        internal static string msgbox_config_message {
             get {
-                return ResourceManager.GetString("_btn_exit", resourceCulture);
+                return ResourceManager.GetString("msgbox_config_message", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Экспорт.
+        ///   Ищет локализованную строку, похожую на Ошибка запуска программы.
         /// </summary>
-        internal static string _btn_export {
+        internal static string msgbox_exception_title {
             get {
-                return ResourceManager.GetString("_btn_export", resourceCulture);
+                return ResourceManager.GetString("msgbox_exception_title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Порядок.
+        ///   Ищет локализованную строку, похожую на Тип исключительной ситуации:.
         /// </summary>
-        internal static string _btn_order {
+        internal static string msgbox_exception_type {
             get {
-                return ResourceManager.GetString("_btn_order", resourceCulture);
+                return ResourceManager.GetString("msgbox_exception_type", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Поиск.
+        ///   Ищет локализованную строку, похожую на Ошибка инициализации локального хранилища программы. Программа будет закрыта..
         /// </summary>
-        internal static string _btn_select {
+        internal static string msgbox_init_message {
             get {
-                return ResourceManager.GetString("_btn_select", resourceCulture);
+                return ResourceManager.GetString("msgbox_init_message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на database.
+        /// </summary>
+        internal static string settings_database {
+            get {
+                return ResourceManager.GetString("settings_database", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на quotas_report_WBR_catch.cfg.
+        /// </summary>
+        internal static string settings_file_name {
+            get {
+                return ResourceManager.GetString("settings_file_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на server.
+        /// </summary>
+        internal static string settings_server {
+            get {
+                return ResourceManager.GetString("settings_server", resourceCulture);
             }
         }
     }

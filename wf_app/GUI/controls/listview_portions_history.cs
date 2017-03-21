@@ -3,7 +3,7 @@
 //                             истории закрепления долей за пользователями ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  09-03-2017
-// Дата обновления:         16-03-2017
+// Дата обновления:         21-03-2017
 // Первый релиз:            0.0.0.0
 // Текущий релиз:           0.0.0.0
 //=============================================================================
@@ -106,7 +106,7 @@ namespace cfmc.quotas.controls
             this.init_column( resource_portions_history.column_basin, this._COL_WIDTH_[0] );
             //regime
             this.init_column( resource_portions_history.column_regime, this._COL_WIDTH_[1] );
-            //fish(WBR)
+            //WBR(WBR)
             this.init_column( resource_portions_history.column_WBR, this._COL_WIDTH_[2] );
             //region
             this.init_column( resource_portions_history.column_region, this._COL_WIDTH_[3] );

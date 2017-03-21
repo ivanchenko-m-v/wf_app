@@ -1,18 +1,21 @@
-﻿
-//=============================================================================
-// data_basin - данные записи таблицы basin БАССЕЙН ПРОМЫСЛА
+﻿//=============================================================================
+// data_basin - данные записи таблицы [basin] БАССЕЙН ПРОМЫСЛА
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         13-03-2017
-// Первый релиз:            0.0.0.0
-// Текущий релиз:           0.0.0.0
+// Дата обновления:         21-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
-using System.Text;
+
+using cfmc.utils;
 
 namespace cfmc.quotas.db_objects
 {
-
+    /// <summary>
+    /// public class data_basin
+    /// - данные записи таблицы [basin] БАССЕЙН ПРОМЫСЛА
+    /// </summary>
     public class data_basin
     {
         /// <summary>
@@ -34,9 +37,7 @@ namespace cfmc.quotas.db_objects
         #region __CONSTRUCTION__	
         public data_basin()
         {
-            this.id_basin = 0;
-            this.basin = "";
-            this.basin_abbr = "";
+            this.initialize( );
         }
         public data_basin( object[] data_row )
         {
@@ -77,6 +78,16 @@ namespace cfmc.quotas.db_objects
          */
         #region __INITIALIZE__
         /// <summary>
+        /// initialize( )
+        /// - инициализация свойств по умолчанию
+        /// </summary>
+        private void initialize( )
+        {
+            this.id_basin = 0;
+            this.basin = "";
+            this.basin_abbr = "";
+        }
+        /// <summary>
         /// initialize(object[] data) - 
         /// инициализация свойств из массива значений
         /// </summary>
@@ -88,72 +99,9 @@ namespace cfmc.quotas.db_objects
                 return;
             }
             //init fields
-            this.init_id_basin(data_row);
-            this.init_basin(data_row);
-            this.init_basin_abbr(data_row);
-        }
-        /// <summary>
-        /// init_id_basin(object[] data_row) - 
-        /// инициализация значения id_basin
-        /// </summary>
-        /// <param name="data_row">массив значений полей строки результатов запроса</param>
-        void init_id_basin( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_basin.id_basin ) &&
-                ( data_row[(int)field_basin.id_basin] != null )
-              )
-            {
-                try
-                {
-                    this.id_basin = Convert.ToInt32( data_row[(int)field_basin.id_basin] );
-                }
-                catch
-                {
-                }
-            }
-        }
-        /// <summary>
-        /// init_basin(object[] data_row) - 
-        /// инициализация значения basin
-        /// </summary>
-        /// <param name="data_row">массив значений полей строки результатов запроса</param>
-        void init_basin(object[] data_row)
-        {
-            if (
-                (data_row.Length > (int)field_basin.basin) &&
-                (data_row[(int)field_basin.basin] != null)
-              )
-            {
-                try
-                {
-                    this.basin = Convert.ToString(data_row[(int)field_basin.basin]);
-                }
-                catch
-                {
-                }
-            }
-        }
-        /// <summary>
-        /// init_basin_abbr(object[] data_row) - 
-        /// инициализация значения basin_abbr
-        /// </summary>
-        /// <param name="data_row">массив значений полей строки результатов запроса</param>
-        void init_basin_abbr(object[] data_row)
-        {
-            if (
-                (data_row.Length > (int)field_basin.basin_abbr) &&
-                (data_row[(int)field_basin.basin_abbr] != null)
-              )
-            {
-                try
-                {
-                    this.basin_abbr = Convert.ToString(data_row[(int)field_basin.basin_abbr]);
-                }
-                catch
-                {
-                }
-            }
+            this.id_basin = helper.cvt_field_int( data_row, (int)field_basin.id_basin );
+            this.basin = helper.cvt_field_string( data_row, (int)field_basin.basin );
+            this.basin_abbr = helper.cvt_field_string( data_row, (int)field_basin.basin_abbr );
         }
         #endregion //__INITIALIZE__
 
@@ -163,13 +111,17 @@ namespace cfmc.quotas.db_objects
         * --------------------------------------------------------------------
         */
         #region __METHODS__
-        public override string ToString()
+        /// <summary>
+        /// ToString( )
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString( )
         {
-            if(this.id_basin==0)
+            if( this.id_basin == 0 )
             {
                 return "";
             }
-            return String.Format("{0}. \t{1} \t{2}", id_basin, basin, basin_abbr);
+            return String.Format( "{0,3}. {1} {2,6}", id_basin, basin, basin_abbr );
         }
         #endregion//__METHODS__
 

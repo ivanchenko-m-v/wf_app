@@ -1,14 +1,16 @@
 ﻿//=============================================================================
+// REPORT_WBR_CATCH
 // form_report_catch - форма отчётов о вылове ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  17-02-2017
-// Дата обновления:         14-03-2017
-// Релиз:                   0.0.0.0
+// Дата обновления:         21-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace wf_app
+namespace cfmc.quotas.forms
 {
     public class form_report_catch : Form
     {
@@ -59,10 +61,10 @@ namespace wf_app
             //layout
             this._layout_table = new System.Windows.Forms.TableLayoutPanel();
             //
-            this._pn_criteria = new GUI.panels.panel_select_criteria();
-            this._lv_result = new GUI.controls.listview_report_catch_2_years();
+            this._pn_criteria = new panel_report_catch_criteria();
+            this._lv_result = new controls.listview_report_catch_2_years();
             this._pb_process = new System.Windows.Forms.ProgressBar( );
-            this._pn_buttons = new GUI.panels.panel_control_buttons();
+            this._pn_buttons = new panel_control_buttons();
         }
 
         /// <summary> 
@@ -215,12 +217,13 @@ namespace wf_app
 
         //
         private System.Windows.Forms.TableLayoutPanel _layout_table;
-        private wf_app.GUI.panels.panel_select_criteria _pn_criteria;
-        private wf_app.GUI.controls.listview_report_catch_2_years _lv_result;
+        private panel_report_catch_criteria _pn_criteria;
+        private controls.listview_report_catch_2_years _lv_result;
         private System.Windows.Forms.ProgressBar _pb_process;
-        private wf_app.GUI.panels.panel_control_buttons _pn_buttons;
+        private panel_control_buttons _pn_buttons;
         //
         #endregion//__FIELDS__
-    }
 
-}//namespace wf_app
+    }//public class form_report_catch : Form
+
+}//namespace cfmc.quotas.forms

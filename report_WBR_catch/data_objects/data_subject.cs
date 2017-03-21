@@ -1,7 +1,8 @@
 ﻿//=============================================================================
-// data_WBR - данные записи таблицы [WBR] ВБР
+// REPORT_WBR_CATCH
+// data_subject - данные записи таблицы [subject] СУБЪЕКТ РФ
 // Автор: Иванченко М.В.
-// Дата начала разработки:  10-03-2017
+// Дата начала разработки:  21-03-2017
 // Дата обновления:         21-03-2017
 // Первый релиз:            1.0.0.0
 // Текущий релиз:           1.0.0.0
@@ -13,36 +14,34 @@ using cfmc.utils;
 namespace cfmc.quotas.db_objects
 {
     /// <summary>
-    /// public class data_WBR
-    /// - данные записи таблицы [WBR] ВБР
+    /// public class data_subject
+    /// - данные записи таблицы [subject] СУБЪЕКТ РФ
     /// </summary>
-    public class data_WBR
+    public class data_subject
     {
         /// <summary>
-        /// field_WBR - сопоставление полей с полями запроса
+        /// field_subject - сопоставление полей с полями запроса
         /// </summary>
-        enum field_WBR : int
+        enum field_subject : int
         {
-            id_WBR = 0,
-            WBR = 1,
-            note =2,
-            id_WBR_osm = 3,
-            WBR_order = 4,
-            sorting = 5,
-            fields_count = 6
-        }
-
+            id_subject = 0,
+            subject = 1,
+            subject_order = 2,
+            id_subject_osm = 3,
+            sorting = 4,
+            fields_count = 5
+        }       
         /*
          * --------------------------------------------------------------------
          *                          CONSTRUCTION
          * --------------------------------------------------------------------
          */
         #region __CONSTRUCTION__	
-        public data_WBR( )
+        public data_subject( )
         {
             this.initialize( );
         }
-        public data_WBR( object[] data_row )
+        public data_subject( object[] data_row )
         {
             this.initialize( data_row );
         }
@@ -55,35 +54,29 @@ namespace cfmc.quotas.db_objects
          */
         #region __PROPERTIES__
         /// <summary>
-        /// id_WBR
-        /// поле запроса - id_WBR
-        /// Идентификатор ВБР
+        /// id_subject
+        /// поле запроса - id_subject
+        /// Идентификатор субъекта РФ
         /// </summary>
-        public int id_WBR { get; set; }
+        public int id_subject { get; set; }
         /// <summary>
-        /// WBR
-        /// поле запроса - WBR
-        /// ВБР
+        /// subject
+        /// поле запроса - subject
+        /// субъект РФ
         /// </summary>
-        public string WBR { get; set; }
+        public string subject { get; set; }
         /// <summary>
-        /// note
-        /// поле запроса - note
-        /// Примечание
-        /// </summary>
-        public string note { get; set; }
-        /// <summary>
-        /// WBR_order
-        /// поле запроса - WBR_order
+        /// subject_order
+        /// поле запроса - subject_order
         /// Наименование согласно утверждённому приказу
         /// </summary>
-        public string WBR_order { get; set; }
+        public string subject_order { get; set; }
         /// <summary>
-        /// id_WBR_osm
-        /// поле запроса - id_WBR_osm
+        /// id_subject_osm
+        /// поле запроса - id_subject_osm
         /// Код в ОСМ
         /// </summary>
-        public int id_WBR_osm { get; set; }
+        public int id_subject_osm { get; set; }
         /// <summary>
         /// sorting
         /// поле запроса - sorting
@@ -103,11 +96,10 @@ namespace cfmc.quotas.db_objects
         /// </summary>
         void initialize( )
         {
-            this.id_WBR = 0;
-            this.WBR = "";
-            this.note = "";
-            this.id_WBR_osm = 0;
-            this.WBR_order = "";
+            this.id_subject = 0;
+            this.subject = "";
+            this.id_subject_osm = 0;
+            this.subject_order = "";
             this.sorting = 0x7FFFFFFF;
         }
         /// <summary>
@@ -122,12 +114,11 @@ namespace cfmc.quotas.db_objects
                 return;
             }
             //init fields
-            this.id_WBR = helper.cvt_field_int( data_row, (int)field_WBR.id_WBR );
-            this.WBR = helper.cvt_field_string( data_row, (int)field_WBR.WBR );
-            this.note = helper.cvt_field_string( data_row, (int)field_WBR.note );
-            this.id_WBR_osm = helper.cvt_field_int( data_row, (int)field_WBR.id_WBR_osm );
-            this.WBR_order = helper.cvt_field_string( data_row, (int)field_WBR.WBR_order );
-            this.sorting = helper.cvt_field_int( data_row, (int)field_WBR.sorting );
+            this.id_subject = helper.cvt_field_int( data_row, (int)field_subject.id_subject );
+            this.subject = helper.cvt_field_string( data_row, (int)field_subject.subject );
+            this.subject_order = helper.cvt_field_string( data_row, (int)field_subject.subject_order );
+            this.id_subject_osm = helper.cvt_field_int( data_row, (int)field_subject.id_subject_osm );
+            this.sorting = helper.cvt_field_int( data_row, (int)field_subject.sorting );
         }
         #endregion //__INITIALIZE__
 
@@ -143,11 +134,11 @@ namespace cfmc.quotas.db_objects
         /// <returns></returns>
         public override string ToString( )
         {
-            if( this.id_WBR == 0 )
+            if( this.id_subject == 0 )
             {
                 return "";
             }
-            return String.Format( "{0}. \t{1}", id_WBR, WBR );
+            return String.Format( "{0,3}. {1}", id_subject, subject );
         }
         #endregion//__METHODS__
 
@@ -167,7 +158,7 @@ namespace cfmc.quotas.db_objects
         #region __FIELDS__
         #endregion//__FIELDS__
 
-    }//class data_WBR
+    }//class data_subject
 
 }//namespace cfmc.quotas.db_objects
 

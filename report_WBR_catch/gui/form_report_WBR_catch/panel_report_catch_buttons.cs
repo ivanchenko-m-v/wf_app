@@ -1,16 +1,18 @@
 ﻿//=============================================================================
+// REPORT_WBR_CATCH
 // panel_control_buttons - панель управляющих кнопок действий пользователя
 // Автор: Иванченко М.В.
 // Дата начала разработки:  20-02-2017
-// Дата обновления:         14-03-2017
-// Релиз:                   0.0.0.0
+// Дата обновления:         21-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
 using System.Windows.Forms;
 
 using cfmc.quotas.resources;
 
-namespace wf_app.GUI.panels
+namespace cfmc.quotas.forms
 {
     public class panel_control_buttons : Panel
     {
@@ -123,7 +125,7 @@ namespace wf_app.GUI.panels
         /// </summary>
         private void init_button_select( )
         {
-            this._btn_select.Text = resource_panel_control_buttons._btn_select;
+            this._btn_select.Text = rc_report_catch.btn_select;
             this._btn_select.Anchor = AnchorStyles.Right | AnchorStyles.Left |
                                         AnchorStyles.Top | AnchorStyles.Bottom;
 
@@ -142,7 +144,7 @@ namespace wf_app.GUI.panels
         /// </summary>
         private void init_button_order( )
         {
-            this._btn_order.Text = resource_panel_control_buttons._btn_order;
+            this._btn_order.Text = rc_report_catch.btn_order;
             this._btn_order.Anchor = AnchorStyles.Right | AnchorStyles.Left |
                                         AnchorStyles.Top | AnchorStyles.Bottom;
 
@@ -161,7 +163,7 @@ namespace wf_app.GUI.panels
         /// </summary>
         private void init_button_export( )
         {
-            this._btn_export.Text = resource_panel_control_buttons._btn_export;
+            this._btn_export.Text = rc_report_catch.btn_export;
             this._btn_export.Anchor = AnchorStyles.Right | AnchorStyles.Left | 
                                         AnchorStyles.Top | AnchorStyles.Bottom;
 
@@ -180,7 +182,7 @@ namespace wf_app.GUI.panels
         /// </summary>
         private void init_button_exit( )
         {
-            this._btn_exit.Text = resource_panel_control_buttons._btn_exit;
+            this._btn_exit.Text = rc_report_catch.btn_exit;
             this._btn_exit.AutoSize = true;
             this._btn_exit.Anchor = AnchorStyles.Right | AnchorStyles.Left |
                                         AnchorStyles.Top | AnchorStyles.Bottom;
@@ -298,6 +300,6 @@ namespace wf_app.GUI.panels
         //
         #endregion//__FIELDS__
 
-    }//public class panel_select_criteria : Panel
+    }//public class panel_report_catch_criteria : Panel
 
-}//namespace wf_app.GUI.panels
+}//namespace cfmc.quotas.forms

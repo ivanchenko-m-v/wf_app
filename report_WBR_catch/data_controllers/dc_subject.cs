@@ -1,22 +1,22 @@
-﻿
-//=============================================================================
-// combobox_WBR - список выбора ВБР
+﻿//=============================================================================
+// REPORT_WBR_CATCH
+// dc_subject - класс взаимодействия с БД для объектов данных data_subject
 // Автор: Иванченко М.В.
-// Дата начала разработки:  10-03-2017
+// Дата начала разработки:  21-03-2017
 // Дата обновления:         21-03-2017
 // Первый релиз:            1.0.0.0
 // Текущий релиз:           1.0.0.0
 //=============================================================================
+using System.Data;
+using System.Data.SqlClient;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
 using cfmc.quotas.db_objects;
 
-namespace cfmc.quotas.controls
+namespace cfmc.quotas.db_controllers
 {
-    using list_WBR = List<data_WBR>;
-
-    public class combobox_WBR : ComboBox
+    using list_subject = List<data_subject>;
+    public class dc_subject
     {
         /*
          * --------------------------------------------------------------------
@@ -24,7 +24,7 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __CONSTRUCTION__	
-        public combobox_WBR( )
+        public dc_subject( )
         {
             this.initialize( );
         }
@@ -37,21 +37,9 @@ namespace cfmc.quotas.controls
          */
         #region __PROPERTIES__
         /// <summary>
-        /// id_WBR
+        /// data - список результатов запроса выборки данных
         /// </summary>
-        public int id_WBR
-        {
-            get
-            {
-                if( this.SelectedItem == null )
-                {
-                    return 0;
-                }
-                data_WBR wbr = this.SelectedItem as data_WBR;
-
-                return wbr.id_WBR;
-            }
-        }
+        public list_subject data { get; set; }
         #endregion//__PROPERTIES__
 
         /*
@@ -60,12 +48,9 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __INITIALIZE__
-        void initialize()
+        void initialize( )
         {
-            this.DataSource = data_model_store.WBRs;
-            this.AutoCompleteMode = AutoCompleteMode.Append;
-
-            this.KeyDown += Combobox_WBR_KeyDown;
+            this.data = new list_subject( );
         }
         #endregion //__INITIALIZE__
 
@@ -75,19 +60,39 @@ namespace cfmc.quotas.controls
         * --------------------------------------------------------------------
         */
         #region __METHODS__
-        private int find_item( )
+        public void select( )
         {
-            list_WBR data = this.DataSource as list_WBR;
-            int index = -1;
-            for( int i = 0; i < data.Count; ++i )
+            this.data.Clear( );
+
+            using(
+                    SqlConnection cnn =
+                        new SqlConnection( Program.db_connection_sting )
+                 )
             {
-                if( data[i].ToString( ).ToUpper( ).Contains( this.Text.ToUpper( ) ) )
+                //
+                SqlCommand cmd = cnn.CreateCommand( );
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "[sp_subject]";
+
+                cnn.Open( );
+
+                SqlDataReader reader = cmd.ExecuteReader( );
+                try
                 {
-                    index = i;
-                    break;
+                    while( reader.Read( ) )
+                    {
+                        object[] data_row = new object[reader.FieldCount];
+                        reader.GetValues( data_row );
+                        this.data.Add( new data_subject( data_row ) );
+                    }
                 }
-            }
-            return index;
+                finally
+                {
+                    // Always call Close when done reading.
+                    reader.Close( );
+                }
+
+            }//using( cnn )
         }
         #endregion//__METHODS__
 
@@ -97,21 +102,6 @@ namespace cfmc.quotas.controls
          * --------------------------------------------------------------------
          */
         #region __EVENTS__
-        private void Combobox_WBR_KeyDown( object sender, KeyEventArgs e )
-        {
-            if( !( this.DataSource is list_WBR ) )
-            {
-                return;
-            }
-            if( e.KeyData == Keys.Enter || e.KeyData == Keys.Return )
-            {
-                int index = this.find_item( );
-                if( index > -1 )
-                {
-                    this.SelectedIndex = index;
-                }
-            }
-        }
         #endregion//__EVENTS__
 
         /*
@@ -122,7 +112,8 @@ namespace cfmc.quotas.controls
         #region __FIELDS__
         #endregion//__FIELDS__
 
-    }//class combobox_WBR
+    }//class dc_subject
 
-}//namespace cfmc.quotas.controls
+}//namespace cfmc.quotas.db_controllers
 
+            

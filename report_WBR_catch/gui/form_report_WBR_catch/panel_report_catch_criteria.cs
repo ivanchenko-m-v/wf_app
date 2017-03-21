@@ -1,21 +1,23 @@
 ﻿//=============================================================================
-// panel_select_criteria - панель выбора условий отбора в отчёте о
+// REPORT_WBR_CATCH
+// panel_report_catch_criteria - панель выбора условий отбора в отчёте о
 //                         пользователях ВБР, которые не выбрали квоту.
 // Автор: Иванченко М.В.
 // Дата начала разработки:  17-02-2017
-// Дата обновления:         14-03-2017
-// Релиз:                   0.0.0.0
+// Дата обновления:         21-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-using wf_app.GUI.controls;
 using cfmc.quotas.resources;
+using cfmc.quotas.controls;
 
-namespace wf_app.GUI.panels
+namespace cfmc.quotas.forms
 {
-    public class panel_select_criteria : Panel
+    public class panel_report_catch_criteria : Panel
     {
         /*
          * --------------------------------------------------------------------
@@ -24,7 +26,7 @@ namespace wf_app.GUI.panels
          */
         #region __CONSTRUCTION__
 
-        public panel_select_criteria()
+        public panel_report_catch_criteria()
         {
             this.calc_min_size();
 
@@ -142,16 +144,16 @@ namespace wf_app.GUI.panels
         private void init_layout()
         {
             this._layout_table.Name = "_layout_table";
-            this._layout_table.ColumnCount = panel_select_criteria._LAYOUT_COLS_;
-            for( int i = 0; i < panel_select_criteria._LAYOUT_COLS_; ++i )
+            this._layout_table.ColumnCount = panel_report_catch_criteria._LAYOUT_COLS_;
+            for( int i = 0; i < panel_report_catch_criteria._LAYOUT_COLS_; ++i )
             {
                 System.Windows.Forms.ColumnStyle col_style = new ColumnStyle();
                 col_style.SizeType = SizeType.Percent;
                 col_style.Width = _COL_WIDTH_[i];
                 this._layout_table.ColumnStyles.Add(col_style);
             }
-            this._layout_table.RowCount = panel_select_criteria._LAYOUT_ROWS_;
-            for (int i = 0; i < panel_select_criteria._LAYOUT_ROWS_; ++i)
+            this._layout_table.RowCount = panel_report_catch_criteria._LAYOUT_ROWS_;
+            for (int i = 0; i < panel_report_catch_criteria._LAYOUT_ROWS_; ++i)
             {
                 this._layout_table.RowStyles.Add(new System.Windows.Forms.RowStyle());
             }
@@ -168,50 +170,50 @@ namespace wf_app.GUI.panels
         private void init_layout_row_year()
         {
             System.Windows.Forms.Label lbl = new Label();
-            lbl.Text = resource_panel_select_criteria._cbx_year;
+            lbl.Text = resource_panel_report_catch_criteria._cbx_year;
             lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
-                                            panel_select_criteria._COL_LABEL_,
-                                            panel_select_criteria._ROW_YEAR_
+                                            panel_report_catch_criteria._COL_LABEL_,
+                                            panel_report_catch_criteria._ROW_YEAR_
                                            );
             this._cbx_year.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._cbx_year,
-                                            panel_select_criteria._COL_TEXT_,
-                                            panel_select_criteria._ROW_YEAR_
+                                            panel_report_catch_criteria._COL_TEXT_,
+                                            panel_report_catch_criteria._ROW_YEAR_
                                            );
             lbl = new Label();
-            lbl.Text = resource_panel_select_criteria._num_percent;
+            lbl.Text = resource_panel_report_catch_criteria._num_percent;
             lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
-                                            panel_select_criteria._COL_PERCENT_LABEL_,
-                                            panel_select_criteria._ROW_YEAR_
+                                            panel_report_catch_criteria._COL_PERCENT_LABEL_,
+                                            panel_report_catch_criteria._ROW_YEAR_
                                            );
             this._num_percent.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
-            this._num_percent.Value = panel_select_criteria._PERCENT_DEFAULT_;
+            this._num_percent.Value = panel_report_catch_criteria._PERCENT_DEFAULT_;
             this._layout_table.Controls.Add(
                                             this._num_percent,
-                                            panel_select_criteria._COL_PERCENT_,
-                                            panel_select_criteria._ROW_YEAR_
+                                            panel_report_catch_criteria._COL_PERCENT_,
+                                            panel_report_catch_criteria._ROW_YEAR_
                                            );
             lbl = new Label();
-            lbl.Text = resource_panel_select_criteria._cbx_stat;
+            lbl.Text = resource_panel_report_catch_criteria._cbx_stat;
             lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
-                                            panel_select_criteria._COL_CATCH_LABEL_,
-                                            panel_select_criteria._ROW_YEAR_
+                                            panel_report_catch_criteria._COL_CATCH_LABEL_,
+                                            panel_report_catch_criteria._ROW_YEAR_
                                            );
             this._cbx_stat.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._cbx_stat,
-                                            panel_select_criteria._COL_CATCH_,
-                                            panel_select_criteria._ROW_YEAR_
+                                            panel_report_catch_criteria._COL_CATCH_,
+                                            panel_report_catch_criteria._ROW_YEAR_
                                            );
             //for stretching to right border of the form
             lbl = new Label();
@@ -219,10 +221,10 @@ namespace wf_app.GUI.panels
             lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
-                                            panel_select_criteria._COL_SPACE_,
-                                            panel_select_criteria._ROW_YEAR_
+                                            panel_report_catch_criteria._COL_SPACE_,
+                                            panel_report_catch_criteria._ROW_YEAR_
                                            );
-            this._layout_table.SetColumnSpan(lbl, panel_select_criteria._SPAN_COLUMNS_SPACE_YEAR_);
+            this._layout_table.SetColumnSpan(lbl, panel_report_catch_criteria._SPAN_COLUMNS_SPACE_YEAR_);
         }
         /// <summary>
         /// init_layout_row_subject( )
@@ -230,37 +232,37 @@ namespace wf_app.GUI.panels
         private void init_layout_row_subject( )
         {
             System.Windows.Forms.Label lbl = new Label( );
-            lbl.Text = resource_panel_select_criteria._x_subject;
+            lbl.Text = resource_panel_report_catch_criteria._x_subject;
             lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl, 
-                                            panel_select_criteria._COL_LABEL_,
-                                            panel_select_criteria._ROW_SUBJECT_
+                                            panel_report_catch_criteria._COL_LABEL_,
+                                            panel_report_catch_criteria._ROW_SUBJECT_
                                            );
             this._x_subject.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._x_subject,
-                                            panel_select_criteria._COL_TEXT_,
-                                            panel_select_criteria._ROW_SUBJECT_
+                                            panel_report_catch_criteria._COL_TEXT_,
+                                            panel_report_catch_criteria._ROW_SUBJECT_
                                            );
             this._layout_table.SetColumnSpan(this._x_subject, _SPAN_COLUMNS_CRITERIA_);
 
-            this._btn_subject.Text = resource_panel_select_criteria._btn_select_text;
-            this._tooltip.SetToolTip(this._btn_subject, resource_panel_select_criteria._btn_subject_tip);
+            this._btn_subject.Text = resource_panel_report_catch_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_subject, resource_panel_report_catch_criteria._btn_subject_tip);
             this._btn_subject.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._btn_subject,
-                                            panel_select_criteria._COL_SELECT_,
-                                            panel_select_criteria._ROW_SUBJECT_
+                                            panel_report_catch_criteria._COL_SELECT_,
+                                            panel_report_catch_criteria._ROW_SUBJECT_
                                            );
-            this._btn_subject_clear.Text = resource_panel_select_criteria._btn_clear_text;
-            this._tooltip.SetToolTip(this._btn_subject_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_subject_clear.Text = resource_panel_report_catch_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_subject_clear, resource_panel_report_catch_criteria._btn_clear_tip);
             this._btn_subject_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._btn_subject_clear,
-                                            panel_select_criteria._COL_CLEAR_,
-                                            panel_select_criteria._ROW_SUBJECT_
+                                            panel_report_catch_criteria._COL_CLEAR_,
+                                            panel_report_catch_criteria._ROW_SUBJECT_
                                            );
         }
         /// <summary>
@@ -269,37 +271,37 @@ namespace wf_app.GUI.panels
         private void init_layout_row_regime( )
         {
             System.Windows.Forms.Label lbl = new Label();
-            lbl.Text = resource_panel_select_criteria._x_regime;
+            lbl.Text = resource_panel_report_catch_criteria._x_regime;
             lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
-                                            panel_select_criteria._COL_LABEL_,
-                                            panel_select_criteria._ROW_REGIME_
+                                            panel_report_catch_criteria._COL_LABEL_,
+                                            panel_report_catch_criteria._ROW_REGIME_
                                            );
             this._x_regime.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._x_regime,
-                                            panel_select_criteria._COL_TEXT_,
-                                            panel_select_criteria._ROW_REGIME_
+                                            panel_report_catch_criteria._COL_TEXT_,
+                                            panel_report_catch_criteria._ROW_REGIME_
                                            );
             this._layout_table.SetColumnSpan(this._x_regime, _SPAN_COLUMNS_CRITERIA_);
 
-            this._btn_regime.Text = resource_panel_select_criteria._btn_select_text;
-            this._tooltip.SetToolTip(this._btn_regime, resource_panel_select_criteria._btn_regime_tip);
+            this._btn_regime.Text = resource_panel_report_catch_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_regime, resource_panel_report_catch_criteria._btn_regime_tip);
             this._btn_regime.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._btn_regime,
-                                            panel_select_criteria._COL_SELECT_,
-                                            panel_select_criteria._ROW_REGIME_
+                                            panel_report_catch_criteria._COL_SELECT_,
+                                            panel_report_catch_criteria._ROW_REGIME_
                                            );
-            this._btn_regime_clear.Text = resource_panel_select_criteria._btn_clear_text;
-            this._tooltip.SetToolTip(this._btn_regime_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_regime_clear.Text = resource_panel_report_catch_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_regime_clear, resource_panel_report_catch_criteria._btn_clear_tip);
             this._btn_regime_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._btn_regime_clear,
-                                            panel_select_criteria._COL_CLEAR_,
-                                            panel_select_criteria._ROW_REGIME_
+                                            panel_report_catch_criteria._COL_CLEAR_,
+                                            panel_report_catch_criteria._ROW_REGIME_
                                            );
         }
         /// <summary>
@@ -308,37 +310,37 @@ namespace wf_app.GUI.panels
         private void init_layout_row_region( )
         {
             System.Windows.Forms.Label lbl = new Label();
-            lbl.Text = resource_panel_select_criteria._x_region;
+            lbl.Text = resource_panel_report_catch_criteria._x_region;
             lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
-                                            panel_select_criteria._COL_LABEL_,
-                                            panel_select_criteria._ROW_REGION_
+                                            panel_report_catch_criteria._COL_LABEL_,
+                                            panel_report_catch_criteria._ROW_REGION_
                                            );
             this._x_region.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._x_region,
-                                            panel_select_criteria._COL_TEXT_,
-                                            panel_select_criteria._ROW_REGION_
+                                            panel_report_catch_criteria._COL_TEXT_,
+                                            panel_report_catch_criteria._ROW_REGION_
                                            );
             this._layout_table.SetColumnSpan(this._x_region, _SPAN_COLUMNS_CRITERIA_);
 
-            this._btn_region.Text = resource_panel_select_criteria._btn_select_text;
-            this._tooltip.SetToolTip(this._btn_region, resource_panel_select_criteria._btn_region_tip);
+            this._btn_region.Text = resource_panel_report_catch_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_region, resource_panel_report_catch_criteria._btn_region_tip);
             this._btn_region.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._btn_region,
-                                            panel_select_criteria._COL_SELECT_,
-                                            panel_select_criteria._ROW_REGION_
+                                            panel_report_catch_criteria._COL_SELECT_,
+                                            panel_report_catch_criteria._ROW_REGION_
                                            );
-            this._btn_region_clear.Text = resource_panel_select_criteria._btn_clear_text;
-            this._tooltip.SetToolTip(this._btn_region_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_region_clear.Text = resource_panel_report_catch_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_region_clear, resource_panel_report_catch_criteria._btn_clear_tip);
             this._btn_region_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._btn_region_clear,
-                                            panel_select_criteria._COL_CLEAR_,
-                                            panel_select_criteria._ROW_REGION_
+                                            panel_report_catch_criteria._COL_CLEAR_,
+                                            panel_report_catch_criteria._ROW_REGION_
                                            );
         }
         /// <summary>
@@ -347,37 +349,37 @@ namespace wf_app.GUI.panels
         private void init_layout_row_fish( )
         {
             System.Windows.Forms.Label lbl = new Label();
-            lbl.Text = resource_panel_select_criteria._x_fish;
+            lbl.Text = resource_panel_report_catch_criteria._x_fish;
             lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
-                                            panel_select_criteria._COL_LABEL_,
-                                            panel_select_criteria._ROW_FISH_
+                                            panel_report_catch_criteria._COL_LABEL_,
+                                            panel_report_catch_criteria._ROW_FISH_
                                            );
             this._x_fish.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._x_fish,
-                                            panel_select_criteria._COL_TEXT_,
-                                            panel_select_criteria._ROW_FISH_
+                                            panel_report_catch_criteria._COL_TEXT_,
+                                            panel_report_catch_criteria._ROW_FISH_
                                            );
             this._layout_table.SetColumnSpan(this._x_fish, _SPAN_COLUMNS_CRITERIA_);
 
-            this._btn_fish.Text = resource_panel_select_criteria._btn_select_text;
-            this._tooltip.SetToolTip(this._btn_fish, resource_panel_select_criteria._btn_fish_tip);
+            this._btn_fish.Text = resource_panel_report_catch_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_fish, resource_panel_report_catch_criteria._btn_fish_tip);
             this._btn_fish.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._btn_fish,
-                                            panel_select_criteria._COL_SELECT_,
-                                            panel_select_criteria._ROW_FISH_
+                                            panel_report_catch_criteria._COL_SELECT_,
+                                            panel_report_catch_criteria._ROW_FISH_
                                            );
-            this._btn_fish_clear.Text = resource_panel_select_criteria._btn_clear_text;
-            this._tooltip.SetToolTip(this._btn_fish_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_fish_clear.Text = resource_panel_report_catch_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_fish_clear, resource_panel_report_catch_criteria._btn_clear_tip);
             this._btn_fish_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
             this._layout_table.Controls.Add(
                                             this._btn_fish_clear,
-                                            panel_select_criteria._COL_CLEAR_,
-                                            panel_select_criteria._ROW_FISH_
+                                            panel_report_catch_criteria._COL_CLEAR_,
+                                            panel_report_catch_criteria._ROW_FISH_
                                            );
         }
         /// <summary>
@@ -386,37 +388,37 @@ namespace wf_app.GUI.panels
         private void init_layout_row_declarant( )
         {
             System.Windows.Forms.Label lbl = new Label();
-            lbl.Text = resource_panel_select_criteria._x_declarant;
+            lbl.Text = resource_panel_report_catch_criteria._x_declarant;
             lbl.Anchor = AnchorStyles.Right | AnchorStyles.Top;
             lbl.AutoSize = true;
             this._layout_table.Controls.Add(
                                             lbl,
-                                            panel_select_criteria._COL_LABEL_,
-                                            panel_select_criteria._ROW_DECLARANT_
+                                            panel_report_catch_criteria._COL_LABEL_,
+                                            panel_report_catch_criteria._ROW_DECLARANT_
                                            );
             this._x_declarant.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             this._layout_table.Controls.Add(
                                             this._x_declarant,
-                                            panel_select_criteria._COL_TEXT_,
-                                            panel_select_criteria._ROW_DECLARANT_
+                                            panel_report_catch_criteria._COL_TEXT_,
+                                            panel_report_catch_criteria._ROW_DECLARANT_
                                            );
             this._layout_table.SetColumnSpan(this._x_declarant, _SPAN_COLUMNS_CRITERIA_);
 
-            this._btn_declarant.Text = resource_panel_select_criteria._btn_select_text;
-            this._tooltip.SetToolTip(this._btn_declarant, resource_panel_select_criteria._btn_declarant_tip);
+            this._btn_declarant.Text = resource_panel_report_catch_criteria._btn_select_text;
+            this._tooltip.SetToolTip(this._btn_declarant, resource_panel_report_catch_criteria._btn_declarant_tip);
             this._btn_declarant.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             this._layout_table.Controls.Add(
                                             this._btn_declarant,
-                                            panel_select_criteria._COL_SELECT_,
-                                            panel_select_criteria._ROW_DECLARANT_
+                                            panel_report_catch_criteria._COL_SELECT_,
+                                            panel_report_catch_criteria._ROW_DECLARANT_
                                            );
-            this._btn_declarant_clear.Text = resource_panel_select_criteria._btn_clear_text;
-            this._tooltip.SetToolTip(this._btn_declarant_clear, resource_panel_select_criteria._btn_clear_tip);
+            this._btn_declarant_clear.Text = resource_panel_report_catch_criteria._btn_clear_text;
+            this._tooltip.SetToolTip(this._btn_declarant_clear, resource_panel_report_catch_criteria._btn_clear_tip);
             this._btn_declarant_clear.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             this._layout_table.Controls.Add(
                                             this._btn_declarant_clear,
-                                            panel_select_criteria._COL_CLEAR_,
-                                            panel_select_criteria._ROW_DECLARANT_
+                                            panel_report_catch_criteria._COL_CLEAR_,
+                                            panel_report_catch_criteria._ROW_DECLARANT_
                                            );
         }
 
@@ -529,30 +531,30 @@ namespace wf_app.GUI.panels
         private System.ComponentModel.IContainer components = null;
 
         //
-        private System.Windows.Forms.TableLayoutPanel _layout_table;
-        private System.Windows.Forms.TextBox _x_subject;
-        private System.Windows.Forms.TextBox _x_regime;
-        private System.Windows.Forms.TextBox _x_region;
-        private System.Windows.Forms.TextBox _x_fish;
-        private System.Windows.Forms.TextBox _x_declarant;
-        private wf_app.GUI.controls.combobox_year _cbx_year;
-        private System.Windows.Forms.NumericUpDown _num_percent;
-        private wf_app.GUI.controls.combobox_catch_stat _cbx_stat;
-        private System.Windows.Forms.Button _btn_subject;
-        private System.Windows.Forms.Button _btn_regime;
-        private System.Windows.Forms.Button _btn_region;
-        private System.Windows.Forms.Button _btn_fish;
-        private System.Windows.Forms.Button _btn_declarant;
-        private System.Windows.Forms.Button _btn_subject_clear;
-        private System.Windows.Forms.Button _btn_regime_clear;
-        private System.Windows.Forms.Button _btn_region_clear;
-        private System.Windows.Forms.Button _btn_fish_clear;
-        private System.Windows.Forms.Button _btn_declarant_clear;
+        private TableLayoutPanel _layout_table;
+        private TextBox _x_subject;
+        private TextBox _x_regime;
+        private TextBox _x_region;
+        private TextBox _x_fish;
+        private TextBox _x_declarant;
+        private combobox_year _cbx_year;
+        private NumericUpDown _num_percent;
+        private combobox_catch_stat _cbx_stat;
+        private Button _btn_subject;
+        private Button _btn_regime;
+        private Button _btn_region;
+        private Button _btn_fish;
+        private Button _btn_declarant;
+        private Button _btn_subject_clear;
+        private Button _btn_regime_clear;
+        private Button _btn_region_clear;
+        private Button _btn_fish_clear;
+        private Button _btn_declarant_clear;
 
         private System.Windows.Forms.ToolTip _tooltip;
         //
         #endregion//__FIELDS__
 
-    }//public class panel_select_criteria : Panel
+    }//public class panel_report_catch_criteria : Panel
 
-}//namespace wf_app.GUI.panels
+}//namespace cfmc.quotas.forms

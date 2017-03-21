@@ -1,14 +1,16 @@
 ﻿//=============================================================================
+// REPORT_WBR_CATCH
 // combobox_year - список годов, для которых ведётся подсчёт статистики
 // Автор: Иванченко М.В.
 // Дата начала разработки:  21-02-2017
-// Дата обновления:         14-03-2017
-// Релиз:                   0.0.0.0
+// Дата обновления:         21-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
 using System.Windows.Forms;
 
-namespace wf_app.GUI.controls
+namespace cfmc.quotas.controls
 {
     public class combobox_year : ComboBox
     {
@@ -137,6 +139,6 @@ namespace wf_app.GUI.controls
         //
         #endregion//__FIELDS__
 
-    }//public class panel_select_criteria : Panel
+    }//public class combobox_year : ComboBox
 
-}//namespace wf_app.GUI.panels
+}//namespace cfmc.quotas.controls

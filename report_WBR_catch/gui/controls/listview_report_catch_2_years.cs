@@ -1,17 +1,19 @@
 ﻿//=============================================================================
+// REPORT_WBR_CATCH
 // listview_report_catch_2_years - список результирующих строк запроса выборки 
-//                         данных отчёта о вылове ВБР за 2 года
+//                                 данных отчёта о вылове ВБР за 2 года
 // Автор: Иванченко М.В.
 // Дата начала разработки:  20-02-2017
-// Дата обновления:         14-03-2017
-// Релиз:                   0.0.0.0
+// Дата обновления:         21-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
 using System.Windows.Forms;
 
 using cfmc.quotas.resources;
 
-namespace wf_app.GUI.controls
+namespace cfmc.quotas.controls
 {
     public class listview_report_catch_2_years : ListView
     {
@@ -77,29 +79,29 @@ namespace wf_app.GUI.controls
         private void init_columns( )
         {
             //declarant
-            this.init_column(resource_listview_report._column_declarant, this._COL_WIDTH_[0]);
+            this.init_column(rc_report_catch.column_declarant, this._COL_WIDTH_[0]);
             //inn
-            this.init_column(resource_listview_report._column_inn, this._COL_WIDTH_[1]);
-            //fish
-            this.init_column(resource_listview_report._column_fish, this._COL_WIDTH_[2]);
+            this.init_column(rc_report_catch.column_inn, this._COL_WIDTH_[1]);
+            //WBR
+            this.init_column(rc_report_catch.column_fish, this._COL_WIDTH_[2]);
             //region
-            this.init_column(resource_listview_report._column_region, this._COL_WIDTH_[3]);
+            this.init_column(rc_report_catch.column_region, this._COL_WIDTH_[3]);
             //subject
-            this.init_column(resource_listview_report._column_subject, this._COL_WIDTH_[4]);
+            this.init_column(rc_report_catch.column_subject, this._COL_WIDTH_[4]);
             //portion
-            this.init_column(resource_listview_report._column_portion, this._COL_WIDTH_[5]);
+            this.init_column(rc_report_catch.column_portion, this._COL_WIDTH_[5]);
             //limit 1
-            this.init_column(resource_listview_report._column_limit, this._COL_WIDTH_[6]);
+            this.init_column(rc_report_catch.column_limit, this._COL_WIDTH_[6]);
             //catch 1
-            this.init_column(resource_listview_report._column_catch, this._COL_WIDTH_[7]);
+            this.init_column(rc_report_catch.column_catch, this._COL_WIDTH_[7]);
             //percent 1
-            this.init_column(resource_listview_report._column_percent, this._COL_WIDTH_[8]);
+            this.init_column(rc_report_catch.column_percent, this._COL_WIDTH_[8]);
             //limit 2
-            this.init_column(resource_listview_report._column_limit, this._COL_WIDTH_[9]);
+            this.init_column(rc_report_catch.column_limit, this._COL_WIDTH_[9]);
             //catch 2
-            this.init_column(resource_listview_report._column_catch, this._COL_WIDTH_[10]);
+            this.init_column(rc_report_catch.column_catch, this._COL_WIDTH_[10]);
             //percent 2
-            this.init_column(resource_listview_report._column_percent, this._COL_WIDTH_[11]);
+            this.init_column(rc_report_catch.column_percent, this._COL_WIDTH_[11]);
         }
 
         private void init_column( String text, int width = -1)
@@ -157,6 +159,6 @@ namespace wf_app.GUI.controls
         //
         #endregion//__FIELDS__
 
-    }//public class panel_select_criteria : Panel
+    }//public class listview_report_catch_2_years : ListView
 
-}//namespace wf_app.GUI.panels
+}//namespace cfmc.quotas.controls

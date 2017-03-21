@@ -1,17 +1,21 @@
-﻿
-//=============================================================================
-// data_region - данные записи таблицы region РАЙОН(ЗОНА) ПРОМЫСЛА
+﻿//=============================================================================
+// data_region - данные записи таблицы [region] РАЙОН(ЗОНА) ПРОМЫСЛА
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         13-03-2017
-// Первый релиз:            0.0.0.0
-// Текущий релиз:           0.0.0.0
+// Дата обновления:         21-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
 
+using cfmc.utils;
+
 namespace cfmc.quotas.db_objects
 {
-
+    /// <summary>
+    /// public class data_region
+    /// - данные записи таблицы [region] РАЙОН(ЗОНА) ПРОМЫСЛА
+    /// </summary>
     public class data_region
     {
         /// <summary>
@@ -94,6 +98,9 @@ namespace cfmc.quotas.db_objects
          * --------------------------------------------------------------------
          */
         #region __INITIALIZE__
+        /// <summary>
+        /// initialize( ) - инициализация свойств по умолчанию
+        /// </summary>
         void initialize( )
         {
             this.id_region = 0;
@@ -103,7 +110,11 @@ namespace cfmc.quotas.db_objects
             this.region_order = "";
             this.sorting = 0x7FFFFFFF;
         }
-
+        /// <summary>
+        /// initialize(object[] data) - 
+        /// инициализация свойств из массива значений
+        /// </summary>
+        /// <param name="data_row">массив значений полей строки результатов запроса</param>
         private void initialize( object[] data_row )
         {
             if( data_row == null )
@@ -111,139 +122,12 @@ namespace cfmc.quotas.db_objects
                 return;
             }
             //init fields
-            this.init_id_region( data_row );
-            this.init_region( data_row );
-            this.init_note( data_row );
-            this.init_region_order( data_row );
-            this.init_id_region_osm( data_row );
-            this.init_sorting( data_row );
-        }
-
-        /// <summary>
-        /// init_id_region( object[] data_row ) - 
-        /// инициализация значения id_region
-        /// </summary>
-        /// <param name="data_row">массив значений полей строки результатов запроса</param>
-        private void init_id_region( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_region.id_region ) &&
-                ( data_row[(int)field_region.id_region] != null )
-              )
-            {
-                try
-                {
-                    this.id_region = Convert.ToInt32( data_row[(int)field_region.id_region] );
-                }
-                catch
-                {
-                }
-            }
-        }
-        /// <summary>
-        /// init_region( object[] data_row ) - 
-        /// инициализация значения region
-        /// </summary>
-        /// <param name="data_row">массив значений полей строки результатов запроса</param>
-        private void init_region( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_region.region ) &&
-                ( data_row[(int)field_region.region] != null )
-              )
-            {
-                try
-                {
-                    this.region = Convert.ToString( data_row[(int)field_region.region] );
-                }
-                catch
-                {
-                }
-            }
-        }
-        /// <summary>
-        /// init_note( object[] data_row ) - 
-        /// инициализация значения note
-        /// </summary>
-        /// <param name="data_row">массив значений полей строки результатов запроса</param>
-        private void init_note( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_region.note ) &&
-                ( data_row[(int)field_region.note] != null )
-              )
-            {
-                try
-                {
-                    this.note = Convert.ToString( data_row[(int)field_region.note] );
-                }
-                catch
-                {
-                }
-            }
-        }
-        /// <summary>
-        /// init_region_order( object[] data_row ) - 
-        /// инициализация значения region_order
-        /// </summary>
-        /// <param name="data_row">массив значений полей строки результатов запроса</param>
-        private void init_region_order( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_region.region_order ) &&
-                ( data_row[(int)field_region.region_order] != null )
-              )
-            {
-                try
-                {
-                    this.region_order = Convert.ToString( data_row[(int)field_region.region_order] );
-                }
-                catch
-                {
-                }
-            }
-        }
-        /// <summary>
-        /// init_id_region_osm( object[] data_row ) - 
-        /// инициализация значения id_region_osm
-        /// </summary>
-        /// <param name="data_row">массив значений полей строки результатов запроса</param>
-        private void init_id_region_osm( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_region.id_region_osm ) &&
-                ( data_row[(int)field_region.id_region_osm] != null )
-              )
-            {
-                try
-                {
-                    this.id_region_osm = Convert.ToInt32( data_row[(int)field_region.id_region_osm] );
-                }
-                catch
-                {
-                }
-            }
-        }
-        /// <summary>
-        /// init_sorting( object[] data_row ) - 
-        /// инициализация значения sorting
-        /// </summary>
-        /// <param name="data_row">массив значений полей строки результатов запроса</param>
-        private void init_sorting( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_region.sorting ) &&
-                ( data_row[(int)field_region.sorting] != null )
-              )
-            {
-                try
-                {
-                    this.sorting = Convert.ToInt32( data_row[(int)field_region.sorting] );
-                }
-                catch
-                {
-                }
-            }
+            this.id_region = helper.cvt_field_int( data_row, (int)field_region.id_region );
+            this.region = helper.cvt_field_string( data_row, (int)field_region.region );
+            this.note = helper.cvt_field_string( data_row, (int)field_region.note );
+            this.id_region_osm = helper.cvt_field_int( data_row, (int)field_region.id_region_osm );
+            this.region_order = helper.cvt_field_string( data_row, (int)field_region.region_order );
+            this.sorting = helper.cvt_field_int( data_row, (int)field_region.sorting );
         }
         #endregion //__INITIALIZE__
 

@@ -1,17 +1,19 @@
 ﻿//=============================================================================
+// REPORT_WBR_CATCH
 // combobox_catch_stat - список типов данных, по которым подсчитывается 
 //                       статистика
 // Автор: Иванченко М.В.
 // Дата начала разработки:  21-02-2017
-// Дата обновления:         14-03-2017
-// Релиз:                   0.0.0.0
+// Дата обновления:         21-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
 using System.Windows.Forms;
 
 using cfmc.quotas.resources;
 
-namespace wf_app.GUI.controls
+namespace cfmc.quotas.controls
 {
     class combobox_catch_stat_data : object
     {
@@ -112,22 +114,22 @@ namespace wf_app.GUI.controls
             //s
             combobox_catch_stat_data item = 
                 new combobox_catch_stat_data(
-                                    resource_combobox_stat._item_s,
-                                    resource_combobox_stat._item_s_data
+                                    rc_report_catch.cbx_stat_item_s,
+                                    rc_report_catch.cbx_stat_item_s_data
                                             );
             this.Items.Add(item);
             //o
             item =
                 new combobox_catch_stat_data(
-                                    resource_combobox_stat._item_o,
-                                    resource_combobox_stat._item_o_data
+                                    rc_report_catch.cbx_stat_item_o,
+                                    rc_report_catch.cbx_stat_item_o_data
                                             );
             this.Items.Add(item);
             //so
             item =
                 new combobox_catch_stat_data(
-                                    resource_combobox_stat._item_so,
-                                    resource_combobox_stat._item_so_data
+                                    rc_report_catch.cbx_stat_item_so,
+                                    rc_report_catch.cbx_stat_item_so_data
                                             );
             this.Items.Add(item);
             //
@@ -165,6 +167,6 @@ namespace wf_app.GUI.controls
         //
         #endregion//__FIELDS__
 
-    }//public class panel_select_criteria : Panel
+    }//public class combobox_catch_stat : ComboBox
 
-}//namespace wf_app.GUI.panels
+}//namespace cfmc.quotas.controls

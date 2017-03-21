@@ -22,14 +22,14 @@ namespace cfmc.quotas.resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class resource_panel_select_criteria {
+    internal class resource_panel_report_catch_criteria {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal resource_panel_select_criteria() {
+        internal resource_panel_report_catch_criteria() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace cfmc.quotas.resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("cfmc.quotas.resources.resource_panel_select_criteria", typeof(resource_panel_select_criteria).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("report_WBR_catch.gui.form_report_WBR_catch.resource_panel_report_catch_criteria", typeof(resource_panel_report_catch_criteria).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

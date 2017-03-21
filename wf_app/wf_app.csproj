@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>cfmc.quotas</RootNamespace>
-    <AssemblyName>quotas</AssemblyName>
+    <AssemblyName>quotas_portion_history</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -70,10 +70,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="business_logic\business_logic.cs" />
@@ -91,7 +89,6 @@
     <Compile Include="GUI\controls\combobox_basin.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="GUI\controls\combobox_catch_stat.cs" />
     <Compile Include="GUI\controls\combobox_regime.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -99,12 +96,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="GUI\controls\combobox_WBR.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="GUI\controls\combobox_year.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="GUI\controls\listview_report_catch_2_years.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="GUI\form_portions_history\form_portions_history.cs">
@@ -128,43 +119,8 @@
       <DependentUpon>resource_portions_history.resx</DependentUpon>
       <CustomToolNamespace>cfmc.quotas.resources</CustomToolNamespace>
     </Compile>
-    <Compile Include="GUI\form_test.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\form_test.Designer.cs">
-      <DependentUpon>form_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GUI\form_report_catch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\panels\panel_control_buttons.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="GUI\panels\panel_select_criteria.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="program\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="resources\resource_combobox_stat.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>resource_combobox_stat.resx</DependentUpon>
-    </Compile>
-    <Compile Include="resources\resource_listview_report.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>resource_listview_report.resx</DependentUpon>
-    </Compile>
-    <Compile Include="resources\resource_panel_control_buttons.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>resource_panel_control_buttons.resx</DependentUpon>
-    </Compile>
-    <Compile Include="resources\resource_panel_select_criteria.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>resource_panel_select_criteria.resx</DependentUpon>
-    </Compile>
     <Compile Include="utils\excel_producer.cs" />
     <Compile Include="utils\excel_helper.cs" />
     <Compile Include="utils\rc_utils.Designer.cs">
@@ -178,9 +134,6 @@
       <LastGenOutput>resource_portions_history.Designer.cs</LastGenOutput>
       <CustomToolNamespace>cfmc.quotas.resources</CustomToolNamespace>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\form_test.resx">
-      <DependentUpon>form_test.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\app_resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>app_resources.Designer.cs</LastGenOutput>
@@ -192,23 +145,6 @@
       <DependentUpon>app_resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="resources\resource_combobox_stat.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>resource_combobox_stat.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>cfmc.quotas.resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="resources\resource_listview_report.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>resource_listview_report.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="resources\resource_panel_control_buttons.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>resource_panel_control_buttons.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="resources\resource_panel_select_criteria.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>resource_panel_select_criteria.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="utils\rc_utils.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>rc_utils.Designer.cs</LastGenOutput>
@@ -243,28 +179,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="Microsoft.Office.Core">
-      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>5</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
       <VersionMajor>1</VersionMajor>
       <VersionMinor>7</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="VBIDE">
-      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>5</VersionMajor>
-      <VersionMinor>3</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>

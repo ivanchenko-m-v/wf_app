@@ -1,21 +1,24 @@
-﻿
-//=============================================================================
+﻿//=============================================================================
 // data_report_portion_history - данные строки результата запроса выборки
 //                               истории движения доли при реорганизации 
-//                               пользователей ВБР
+//                               пользователей ВБР [sp_portion_history]
 // Автор: Иванченко М.В.
 // Дата начала разработки:  10-03-2017
-// Дата обновления:         15-03-2017
-// Первый релиз:            0.0.0.0
-// Текущий релиз:           0.0.0.0
+// Дата обновления:         21-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
+
 using cfmc.utils;
 
 namespace cfmc.quotas.db_objects
 {
     /// <summary>
     /// public class data_report_portion_history : IComparable, IDataRow
+    /// - данные строки результата запроса выборки
+    //    истории движения доли при реорганизации 
+    //    пользователей ВБР [sp_portion_history]
     /// </summary>
     public class data_report_portion_history : IComparable, IDataRow
     {
@@ -83,7 +86,7 @@ namespace cfmc.quotas.db_objects
         public string regime { get; set; }
         /// <summary>
         /// WBR
-        /// поле запроса - fish
+        /// поле запроса - WBR
         /// ВБР
         /// </summary>
         public string WBR { get; set; }
@@ -166,6 +169,9 @@ namespace cfmc.quotas.db_objects
          * --------------------------------------------------------------------
          */
         #region __INITIALIZE__
+        /// <summary>
+        /// initialize( ) - инициализация свойств по умолчанию
+        /// </summary>
         void initialize( )
         {
             this.id_portion = 0;
@@ -183,6 +189,11 @@ namespace cfmc.quotas.db_objects
             this.contract_number = "";
             this.contract_date = "";
         }
+        /// <summary>
+        /// initialize(object[] data) - 
+        /// инициализация свойств из массива значений
+        /// </summary>
+        /// <param name="data_row">массив значений полей строки результатов запроса</param>
         void initialize( object[] data_row )
         {
             if( data_row == null )
@@ -190,258 +201,20 @@ namespace cfmc.quotas.db_objects
                 return;
             }
             //init fields
-            this.init_id_portion( data_row );
-            this.init_basin( data_row );
-            this.init_regime( data_row );
-            this.init_WBR( data_row );
-            this.init_region( data_row );
-            this.init_portion( data_row );
-            this.init_date_open( data_row );
-            this.init_date_close( data_row );
-            this.init_report_number( data_row );
-            this.init_report_date( data_row );
-            this.init_declarant( data_row );
-            this.init_INN( data_row );
-            this.init_contract_number( data_row );
-            this.init_contract_date( data_row );
-        }
-
-        private void init_id_portion( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.id_portion ) &&
-                ( data_row[(int)field_report_portion_history.id_portion] != null )
-              )
-            {
-                try
-                {
-                    this.id_portion = Convert.ToInt32( data_row[(int)field_report_portion_history.id_portion] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_basin( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.basin ) &&
-                ( data_row[(int)field_report_portion_history.basin] != null )
-              )
-            {
-                try
-                {
-                    this.basin = Convert.ToString( data_row[(int)field_report_portion_history.basin] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_regime( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.regime ) &&
-                ( data_row[(int)field_report_portion_history.regime] != null )
-              )
-            {
-                try
-                {
-                    this.regime = Convert.ToString( data_row[(int)field_report_portion_history.regime] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_WBR( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.WBR ) &&
-                ( data_row[(int)field_report_portion_history.WBR] != null )
-              )
-            {
-                try
-                {
-                    this.WBR = Convert.ToString( data_row[(int)field_report_portion_history.WBR] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_region( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.region ) &&
-                ( data_row[(int)field_report_portion_history.region] != null )
-              )
-            {
-                try
-                {
-                    this.region = Convert.ToString( data_row[(int)field_report_portion_history.region] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_portion( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.portion ) &&
-                ( data_row[(int)field_report_portion_history.portion] != null )
-              )
-            {
-                try
-                {
-                    this.portion = Convert.ToDecimal( data_row[(int)field_report_portion_history.portion] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_date_open( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.date_open ) &&
-                ( data_row[(int)field_report_portion_history.date_open] != null )
-              )
-            {
-                try
-                {
-                    this.date_open = Convert.ToString( data_row[(int)field_report_portion_history.date_open] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_date_close( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.date_close ) &&
-                ( data_row[(int)field_report_portion_history.date_close] != null )
-              )
-            {
-                try
-                {
-                    this.date_close = Convert.ToString( data_row[(int)field_report_portion_history.date_close] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_report_number( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.report_number ) &&
-                ( data_row[(int)field_report_portion_history.report_number] != null )
-              )
-            {
-                try
-                {
-                    this.report_number = Convert.ToString( data_row[(int)field_report_portion_history.report_number] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_report_date( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.report_date ) &&
-                ( data_row[(int)field_report_portion_history.report_date] != null )
-              )
-            {
-                try
-                {
-                    this.report_date = Convert.ToString( data_row[(int)field_report_portion_history.report_date] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_declarant( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.declarant ) &&
-                ( data_row[(int)field_report_portion_history.declarant] != null )
-              )
-            {
-                try
-                {
-                    this.declarant = Convert.ToString( data_row[(int)field_report_portion_history.declarant] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_INN( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.INN ) &&
-                ( data_row[(int)field_report_portion_history.INN] != null )
-              )
-            {
-                try
-                {
-                    this.INN = Convert.ToString( data_row[(int)field_report_portion_history.INN] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_contract_number( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.contract_number ) &&
-                ( data_row[(int)field_report_portion_history.contract_number] != null )
-              )
-            {
-                try
-                {
-                    this.contract_number = Convert.ToString( data_row[(int)field_report_portion_history.contract_number] );
-                }
-                catch
-                {
-                }
-            }
-        }
-
-        private void init_contract_date( object[] data_row )
-        {
-            if(
-                ( data_row.Length > (int)field_report_portion_history.contract_date ) &&
-                ( data_row[(int)field_report_portion_history.contract_date] != null )
-              )
-            {
-                try
-                {
-                    this.contract_date = Convert.ToString( data_row[(int)field_report_portion_history.contract_date] );
-                }
-                catch
-                {
-                }
-            }
+            this.id_portion = helper.cvt_field_int( data_row, (int)field_report_portion_history.id_portion );
+            this.basin = helper.cvt_field_string( data_row, (int)field_report_portion_history.basin );
+            this.regime = helper.cvt_field_string( data_row, (int)field_report_portion_history.regime );
+            this.WBR = helper.cvt_field_string( data_row, (int)field_report_portion_history.WBR );
+            this.region = helper.cvt_field_string( data_row, (int)field_report_portion_history.region );
+            this.portion = helper.cvt_field_decimal( data_row, (int)field_report_portion_history.portion );
+            this.date_open = helper.cvt_field_string( data_row, (int)field_report_portion_history.date_open );
+            this.date_close = helper.cvt_field_string( data_row, (int)field_report_portion_history.date_close );
+            this.report_number = helper.cvt_field_string( data_row, (int)field_report_portion_history.report_number );
+            this.report_date = helper.cvt_field_string( data_row, (int)field_report_portion_history.report_date );
+            this.declarant = helper.cvt_field_string( data_row, (int)field_report_portion_history.declarant );
+            this.INN = helper.cvt_field_string( data_row, (int)field_report_portion_history.INN );
+            this.contract_number = helper.cvt_field_string( data_row, (int)field_report_portion_history.contract_number );
+            this.contract_date = helper.cvt_field_string( data_row, (int)field_report_portion_history.contract_date );
         }
         #endregion //__INITIALIZE__
 

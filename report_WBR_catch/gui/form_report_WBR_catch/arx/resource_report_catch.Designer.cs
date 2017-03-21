@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace cfmc.quotas.resources {
+namespace report_WBR_catch.gui.form_report_WBR_catch {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace cfmc.quotas.resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class resource_combobox_stat {
+    internal class resource_report_catch {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal resource_combobox_stat() {
+        internal resource_report_catch() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace cfmc.quotas.resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("cfmc.quotas.resources.resource_combobox_stat", typeof(resource_combobox_stat).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("report_WBR_catch.gui.form_report_WBR_catch.resource_report_catch", typeof(resource_report_catch).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,60 +57,6 @@ namespace cfmc.quotas.resources {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на данные оперативки.
-        /// </summary>
-        internal static string _item_o {
-            get {
-                return ResourceManager.GetString("_item_o", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на o.
-        /// </summary>
-        internal static string _item_o_data {
-            get {
-                return ResourceManager.GetString("_item_o_data", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на данные статистики.
-        /// </summary>
-        internal static string _item_s {
-            get {
-                return ResourceManager.GetString("_item_s", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на s.
-        /// </summary>
-        internal static string _item_s_data {
-            get {
-                return ResourceManager.GetString("_item_s_data", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на данные статистики, оперативки.
-        /// </summary>
-        internal static string _item_so {
-            get {
-                return ResourceManager.GetString("_item_so", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на so.
-        /// </summary>
-        internal static string _item_so_data {
-            get {
-                return ResourceManager.GetString("_item_so_data", resourceCulture);
             }
         }
     }
