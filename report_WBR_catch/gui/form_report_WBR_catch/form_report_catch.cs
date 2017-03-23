@@ -3,12 +3,15 @@
 // form_report_catch - форма отчётов о вылове ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  17-02-2017
-// Дата обновления:         21-03-2017
+// Дата обновления:         23-03-2017
 // Первый релиз:            1.0.0.0
 // Текущий релиз:           1.0.0.0
 //=============================================================================
+using System;
 using System.Drawing;
 using System.Windows.Forms;
+
+using cfmc.quotas.resources;
 
 namespace cfmc.quotas.forms
 {
@@ -23,14 +26,20 @@ namespace cfmc.quotas.forms
 
         public form_report_catch()
         {
+            //this.Icon = app_resources.icon_app;
             this.MinimumSize = new Size(
                                         form_report_catch._MIN_WIDTH_, 
                                         form_report_catch._MIN_HEIGHT_
                                        );
+            this.Text = rc_report_catch.form_title;
+            this.StartPosition = FormStartPosition.CenterScreen;
+
 
             this.create_form_elements();
 
             this.init_form_elements();
+
+            this.subscribe_events( );
         }
         /// <summary> 
         /// Освободить все используемые ресурсы.
@@ -179,15 +188,108 @@ namespace cfmc.quotas.forms
                                             form_report_catch._ROW_BUTTONS_
                                            );
         }
+        /// <summary>
+        /// subscribe_events( )
+        /// </summary>
+        private void subscribe_events( )
+        {
+            data_model_store.ReportDataComplete += data_model_store_ReportDataComplete;
+            /*
+            this._lv_result.RefreshPercentChanged += lv_result_RefreshPercentChanged;
+            this._lv_result.SortStarting += lv_result_SortStarting;
+            this._lv_result.SortPercentChanged += lv_result_SortPercentChanged;
+            this._lv_result.SortFinished += lv_result_SortFinished;
+            */
+            //
+            this._pn_buttons.Select += pn_buttons_Select;
+            this._pn_buttons.Export += pn_buttons_Export;
+            this._pn_buttons.Exit += pn_buttons_Exit;
+            //
+            //business_logic.excel_producer.ExportStart += lv_result_SortStarting;
+            //business_logic.excel_producer.ExportFinish += lv_result_SortFinished;
+            //business_logic.excel_producer.ExportPercentChanged += lv_result_SortPercentChanged;
+        }
         #endregion //__INITIALIZE__
 
         /*
          * --------------------------------------------------------------------
-         *                          FUNCTIONS
+         *                          METHODS
          * --------------------------------------------------------------------
          */
-        #region __FUNCTIONS__
+        #region __METHODS__
+        /// <summary>
+        /// select_report_data( ) 
+        /// </summary>
+        private void select_report_data( )
+        {
+            Cursor stored_cursor = this.Cursor;
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                business_logic.select_report_data( this._pn_criteria.criteria );
+                this._lv_result.refresh_data( );
+            }
+            catch( Exception ex )
+            {
+                string s_msg = String.Format(
+                                             "{0}\n{1} {2}\n{3}",
+                                             rc_report_catch.msgbox_select_message,
+                                             rc_report_catch.msgbox_exception_type,
+                                             ex.GetType( ).ToString( ),
+                                             ex.Message
+                                            );
+                MessageBox.Show(
+                                s_msg,
+                                rc_report_catch.msgbox_exception_title,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                               );
+            }
+            finally
+            {
+                //clear progress bar, when all data in the listview
+                this._pb_process.Value = 0;
+                this.Cursor = stored_cursor;
+            }
+        }
+
         #endregion//__FUNCTIONS__
+        /*
+        * --------------------------------------------------------------------
+        *                          EVENTS
+        * --------------------------------------------------------------------
+        */
+        #region __EVENTS__
+        private void pn_buttons_Exit( object sender, EventArgs e )
+        {
+        }
+
+        private void pn_buttons_Export( object sender, EventArgs e )
+        {
+        }
+
+        private void pn_buttons_Select( object sender, EventArgs e )
+        {
+            //установить значения индикатора процесса выборки
+            this._pb_process.Maximum = form_report_catch._MAX_REFRESH_PROGRESS_;
+            this._pb_process.Value = form_report_catch._MIN_PROGRESS_;
+            //выборка данных
+            this.select_report_data( );
+        }
+        /// <summary>
+        /// data_model_store_ReportDataComplete( object sender, EventArgs e )
+        /// - обработчик события окончания выборки данных
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void data_model_store_ReportDataComplete( object sender, EventArgs e )
+        {
+            //считаем, что выполнение запроса - полдела
+            this._pb_process.Value = form_report_catch._MAX_REFRESH_PROGRESS_ / 2;
+            //заполняем список - ещё полдела
+            this._lv_result.refresh_data( );
+        }
+        #endregion//__EVENTS__
 
         /*
          * --------------------------------------------------------------------
@@ -197,6 +299,10 @@ namespace cfmc.quotas.forms
         #region __FIELDS__
         private const int _MIN_WIDTH_ = 1024;
         private const int _MIN_HEIGHT_ = 768;
+
+        private const int _MIN_PROGRESS_ = 0;
+        private const int _MAX_SORT_PROGRESS_ = 100;
+        private const int _MAX_REFRESH_PROGRESS_ = 200;
 
         private const int _LAYOUT_COLS_ = 1;
         private const int _LAYOUT_ROWS_ = 4;
@@ -209,7 +315,7 @@ namespace cfmc.quotas.forms
         private const int _COL_CONTROL_ = 0;
 
         //высота строк в процентах
-        private int[] _ROW_HEIGHT_ = { 28, 71, 3, 5 };
+        private int[] _ROW_HEIGHT_ = { 14, 77, 2, 7 };
         /// <summary>
         /// Обязательная переменная конструктора.
         /// </summary>

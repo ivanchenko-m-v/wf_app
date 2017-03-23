@@ -3,7 +3,7 @@
 // data_declarant - данные записи таблицы [declarant] ПОЛЬЗОВАТЕЛЬ ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  21-03-2017
-// Дата обновления:         21-03-2017
+// Дата обновления:         23-03-2017
 // Первый релиз:            1.0.0.0
 // Текущий релиз:           1.0.0.0
 //=============================================================================
@@ -59,7 +59,12 @@ namespace cfmc.quotas.db_objects
          *                          CONSTRUCTION
          * --------------------------------------------------------------------
          */
-        #region __CONSTRUCTION__	
+        #region __CONSTRUCTION__
+        public data_declarant( object[] data_row )
+        {
+            this.initialize( data_row );
+        }
+
         public data_declarant( )
         {
             this.initialize( );
@@ -77,163 +82,163 @@ namespace cfmc.quotas.db_objects
         /// поле запроса - id_declarant_history
         /// Идентификатор записи в таблице declarant_history
         /// </summary>
-        int id_declarant_history { get; set; }
+        public int id_declarant_history { get; set; }
         /// <summary>
         /// id_declarant
         /// поле запроса - id_declarant
         /// Идентификатор записи в таблице declarant
         /// </summary>
-        int id_declarant { get; set; }
+        public int id_declarant { get; set; }
         /// <summary>
         /// date_registration
         /// поле запроса - date_registration
         /// Дата регистрации пользователя ВБР
         /// </summary>
-        string date_registration { get; set; }
+        public string date_registration { get; set; }
         /// <summary>
         /// declarant
         /// поле запроса - declarant
         /// Название пользователя ВБР
         /// </summary>
-        string declarant { get; set; }
+        public string declarant { get; set; }
         /// <summary>
         /// work_number
         /// поле запроса - work_number
         /// Номер дела пользователя ВБР
         /// </summary>
-        string work_number { get; set; }
+        public string work_number { get; set; }
         /// <summary>
         /// declarant_type
         /// поле запроса - declarant_type
         /// Текстовая аббревиатура формы собственности
         /// </summary>
-        string declarant_type { get; set; }
+        public string declarant_type { get; set; }
         /// <summary>
         /// address
         /// поле запроса - address
         /// Юридический адрес
         /// </summary>
-        string address { get; set; }
+        public string address { get; set; }
         /// <summary>
         /// postal_address
         /// поле запроса - postal_address
         /// Почтовый адрес
         /// </summary>
-        string postal_address { get; set; }
+        public string postal_address { get; set; }
         /// <summary>
         /// director
         /// поле запроса - director
         /// ФИО руководителя и должность
         /// </summary>
-        string director { get; set; }
+        public string director { get; set; }
         /// <summary>
         /// phone
         /// поле запроса - phone
         /// Телефон, включая междугородний код
         /// </summary>
-        string phone { get; set; }
+        public string phone { get; set; }
         /// <summary>
         /// fax
         /// поле запроса - fax
         /// Факс, включая междугородний код
         /// </summary>
-        string fax { get; set; }
+        public string fax { get; set; }
         /// <summary>
         /// telex
         /// поле запроса - telex
         /// Телекс
         /// </summary>
-        string telex { get; set; }
+        public string telex { get; set; }
         /// <summary>
         /// e_mail
         /// поле запроса - e_mail
         /// E-mail
         /// </summary>
-        string e_mail { get; set; }
+        public string e_mail { get; set; }
         /// <summary>
         /// declarant_full
         /// поле запроса - declarant_full
         /// Полное название пользователя ВБР/владельца доли
         /// </summary>
-        string declarant_full { get; set; }
+        public string declarant_full { get; set; }
         /// <summary>
         /// inn
         /// поле запроса - inn
         /// ИНН пользователя ВБР/владельца доли
         /// </summary>
-        string inn { get; set; }
+        public string inn { get; set; }
         /// <summary>
         /// kpp
         /// поле запроса - kpp
         /// КПП пользователя ВБР/владельца доли
         /// </summary>
-        string kpp { get; set; }
+        public string kpp { get; set; }
         /// <summary>
         /// reg_number
         /// поле запроса - reg_number
         /// ОГРН пользователя ВБР/владельца доли
         /// </summary>
-        string reg_number { get; set; }
+        public string reg_number { get; set; }
         /// <summary>
         /// OKPO
         /// поле запроса - OKPO
         /// Код ОКПО пользователя ВБР/владельца доли
         /// </summary>
-        string OKPO { get; set; }
+        public string OKPO { get; set; }
         /// <summary>
         /// OKATO
         /// поле запроса - OKATO
         /// Код ОКАТО пользователя ВБР/владельца доли
         /// </summary>
-        string OKATO { get; set; }
+        public string OKATO { get; set; }
         /// <summary>
         /// OKVED
         /// поле запроса - OKVED
         /// Код ОКВЭД пользователя ВБР/владельца доли
         /// </summary>
-        string OKVED { get; set; }
+        public string OKVED { get; set; }
         /// <summary>
         /// KOPF
         /// поле запроса - KOPF
         /// Код ОКОПФ пользователя ВБР/владельца доли
         /// </summary>
-        string KOPF { get; set; }
+        public string KOPF { get; set; }
         /// <summary>
         /// KFS
         /// поле запроса - KFS
         /// Код ОКФС пользователя ВБР/владельца доли
         /// </summary>
-        string KFS { get; set; }
+        public string KFS { get; set; }
         /// <summary>
         /// id_own
         /// поле запроса - id_own
         /// Код пользователя ВБР/владельца доли в ОСМ
         /// </summary>
-        int id_own { get; set; }
+        public int id_own { get; set; }
         /// <summary>
         /// own
         /// поле запроса - own
         /// Наименование судовладельца в ОСМ
         /// </summary>
-        string own { get; set; }
+        public string own { get; set; }
         /// <summary>
         /// note
         /// поле запроса - note
         /// Примечание
         /// </summary>
-        string note { get; set; }
+        public string note { get; set; }
         /// <summary>
         /// juridical
         /// поле запроса - juridical
         /// Признак юрлицо/предприниматель
         /// </summary>
-        byte juridical { get; set; }
+        public byte juridical { get; set; }
         /// <summary>
         /// id_declarant_history_was
         /// поле запроса - id_declarant_history_was
         /// Предыдущий идентиикатор id_declarant_history в таблице declarant
         /// </summary>
-        int id_declarant_history_was { get; set; }
+        public int id_declarant_history_was { get; set; }
         #endregion//__PROPERTIES__
 
         /*
@@ -243,7 +248,8 @@ namespace cfmc.quotas.db_objects
          */
         #region __INITIALIZE__
         /// <summary>
-        /// initialize( ) - инициализация свойств по умолчанию
+        /// initialize( ) 
+        /// - инициализация свойств по умолчанию
         /// </summary>
         void initialize( )
         {
@@ -441,7 +447,10 @@ namespace cfmc.quotas.db_objects
             {
                 return "";
             }
-            return String.Format( "{0,6}. {1}", id_declarant, declarant );
+            return String.Format( 
+                                "{0,6}. {1} {2}", 
+                                this.id_declarant, this.declarant, this.inn 
+                                );
         }
         #endregion//__METHODS__
 

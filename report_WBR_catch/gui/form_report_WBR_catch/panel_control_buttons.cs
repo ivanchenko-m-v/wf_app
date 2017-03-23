@@ -3,7 +3,7 @@
 // panel_control_buttons - панель управляющих кнопок действий пользователя
 // Автор: Иванченко М.В.
 // Дата начала разработки:  20-02-2017
-// Дата обновления:         21-03-2017
+// Дата обновления:         22-03-2017
 // Первый релиз:            1.0.0.0
 // Текущий релиз:           1.0.0.0
 //=============================================================================
@@ -14,13 +14,19 @@ using cfmc.quotas.resources;
 
 namespace cfmc.quotas.forms
 {
+    /// <summary>
+    /// public class panel_control_buttons : Panel
+    /// </summary>
     public class panel_control_buttons : Panel
     {
+        public event EventHandler<EventArgs> Select = null;
+        public event EventHandler<EventArgs> Export = null;
+        public event EventHandler<EventArgs> Exit = null;
         /*
-         * --------------------------------------------------------------------
-         *                          CONSTRUCTION
-         * --------------------------------------------------------------------
-         */
+          * --------------------------------------------------------------------
+          *                          CONSTRUCTION
+          * --------------------------------------------------------------------
+          */
         #region __CONSTRUCTION__
 
         public panel_control_buttons()
@@ -53,14 +59,13 @@ namespace cfmc.quotas.forms
         /// <summary>
         /// create_form_elements( )
         /// </summary>
-        private void create_form_elements()
+        private void create_form_elements( )
         {
-            this._layout = new System.Windows.Forms.TableLayoutPanel();
+            this._layout = new System.Windows.Forms.TableLayoutPanel( );
             //buttons
-            this._btn_select = new System.Windows.Forms.Button();
-            this._btn_order = new System.Windows.Forms.Button();
-            this._btn_export = new System.Windows.Forms.Button();
-            this._btn_exit = new System.Windows.Forms.Button();
+            this._btn_select = new System.Windows.Forms.Button( );
+            this._btn_export = new System.Windows.Forms.Button( );
+            this._btn_exit = new System.Windows.Forms.Button( );
         }
 
         /// <summary> 
@@ -68,8 +73,8 @@ namespace cfmc.quotas.forms
         /// </summary>
         private void init_form_elements( )
         {
-            this._layout.SuspendLayout();
-            this.SuspendLayout();
+            this._layout.SuspendLayout( );
+            this.SuspendLayout( );
             //
             //_layout
             //
@@ -79,10 +84,6 @@ namespace cfmc.quotas.forms
             //
             this.init_button_select( );
             //
-            //_btn_order
-            //
-            this.init_button_order( );
-            //
             //_btn_export
             //
             this.init_button_export( );
@@ -91,8 +92,8 @@ namespace cfmc.quotas.forms
             //
             this.init_button_exit( );
             //--
-            this._layout.ResumeLayout(false);
-            this.ResumeLayout(false);
+            this._layout.ResumeLayout( false );
+            this.ResumeLayout( false );
         }
         /// <summary>
         /// init_layout( )
@@ -103,19 +104,19 @@ namespace cfmc.quotas.forms
             this._layout.Dock = DockStyle.Fill;
             this._layout.TabIndex = 0;
 
-            this._layout.ColumnCount = panel_control_buttons._COLS;
-            int col_percent = 100 / panel_control_buttons._COLS;
-            for (int i = 0; i < panel_control_buttons._COLS; ++i)
+            this._layout.ColumnCount = panel_control_buttons._COLS_;
+            int col_percent = 100 / panel_control_buttons._COLS_;
+            for( int i = 0; i < panel_control_buttons._COLS_; ++i )
             {
-                System.Windows.Forms.ColumnStyle col_style = new ColumnStyle();
+                System.Windows.Forms.ColumnStyle col_style = new ColumnStyle( );
                 col_style.SizeType = SizeType.Percent;
                 col_style.Width = col_percent;
-                this._layout.ColumnStyles.Add(col_style);
+                this._layout.ColumnStyles.Add( col_style );
             }
-            this._layout.RowCount = panel_control_buttons._ROWS;
-            for (int i = 0; i < panel_control_buttons._ROWS; ++i)
+            this._layout.RowCount = panel_control_buttons._ROWS_;
+            for( int i = 0; i < panel_control_buttons._ROWS_; ++i )
             {
-                this._layout.RowStyles.Add(new System.Windows.Forms.RowStyle());
+                this._layout.RowStyles.Add( new System.Windows.Forms.RowStyle( ) );
             }
 
             this.Controls.Add( this._layout );
@@ -131,32 +132,13 @@ namespace cfmc.quotas.forms
 
             this._btn_select.Click += _btn_select_Click;
 
-            int start_index = panel_control_buttons._COLS / 2;
-            this._layout.Controls.Add( 
-                                        this._btn_select, 
-                                        start_index + panel_control_buttons._TABINDEX_SELECT_,
-                                        0
+            this._layout.Controls.Add(
+                                        this._btn_select,
+                                        panel_control_buttons._COL_START_ +
+                                        panel_control_buttons._TABINDEX_SELECT_,
+                                        panel_control_buttons._ROW_START_
                                      );
             this._btn_select.TabIndex = panel_control_buttons._TABINDEX_SELECT_;
-        }
-        /// <summary>
-        /// init_button_order( )
-        /// </summary>
-        private void init_button_order( )
-        {
-            this._btn_order.Text = rc_report_catch.btn_order;
-            this._btn_order.Anchor = AnchorStyles.Right | AnchorStyles.Left |
-                                        AnchorStyles.Top | AnchorStyles.Bottom;
-
-            this._btn_order.Click += _btn_order_Click;
-
-            int start_index = panel_control_buttons._COLS / 2;
-            this._layout.Controls.Add(
-                                        this._btn_order,
-                                        start_index + panel_control_buttons._TABINDEX_ORDER_,
-                                        0
-                                     );
-            this._btn_order.TabIndex = panel_control_buttons._TABINDEX_ORDER_;
         }
         /// <summary>
         /// init_button_export( )
@@ -164,16 +146,16 @@ namespace cfmc.quotas.forms
         private void init_button_export( )
         {
             this._btn_export.Text = rc_report_catch.btn_export;
-            this._btn_export.Anchor = AnchorStyles.Right | AnchorStyles.Left | 
+            this._btn_export.Anchor = AnchorStyles.Right | AnchorStyles.Left |
                                         AnchorStyles.Top | AnchorStyles.Bottom;
 
             this._btn_export.Click += _btn_export_Click;
 
-            int start_index = panel_control_buttons._COLS / 2;
             this._layout.Controls.Add(
                                         this._btn_export,
-                                        start_index + panel_control_buttons._TABINDEX_EXPORT_,
-                                        0
+                                        panel_control_buttons._COL_START_ +
+                                        panel_control_buttons._TABINDEX_EXPORT_,
+                                        panel_control_buttons._ROW_START_
                                      );
             this._btn_export.TabIndex = panel_control_buttons._TABINDEX_EXPORT_;
         }
@@ -189,11 +171,11 @@ namespace cfmc.quotas.forms
 
             this._btn_exit.Click += _btn_exit_Click;
 
-            int start_index = panel_control_buttons._COLS / 2;
             this._layout.Controls.Add(
                                         this._btn_exit,
-                                        start_index + panel_control_buttons._TABINDEX_EXIT_,
-                                        0
+                                        panel_control_buttons._COL_START_ +
+                                        panel_control_buttons._TABINDEX_EXIT_,
+                                        panel_control_buttons._ROW_START_
                                      );
             this._btn_exit.TabIndex = panel_control_buttons._TABINDEX_EXIT_;
         }
@@ -213,24 +195,11 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void _btn_select_Click(object sender, EventArgs e)
         {
-            if (this.select_data == null)
+            if (this.Select == null)
             {
                 return;
             }
-            this.select_data(sender, e);
-        }
-        /// <summary>
-        /// _btn_order_Click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void _btn_order_Click(object sender, EventArgs e)
-        {
-            if (this.change_report_columns == null)
-            {
-                return;
-            }
-            this.change_report_columns(sender, e);
+            this.Select( sender, e);
         }
         /// <summary>
         /// _btn_export_Click
@@ -239,11 +208,11 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void _btn_export_Click(object sender, EventArgs e)
         {
-            if (this.export_report_data == null)
+            if (this.Export == null)
             {
                 return;
             }
-            this.export_report_data(sender, e);
+            this.Export( sender, e);
         }
         /// <summary>
         /// _btn_exit_Click
@@ -252,11 +221,11 @@ namespace cfmc.quotas.forms
         /// <param name="e"></param>
         private void _btn_exit_Click(object sender, EventArgs e)
         {
-            if( this.exit == null )
+            if( this.Exit == null )
             {
                 return;
             }
-            this.exit( sender, e );
+            this.Exit( sender, e );
         }
 
         #endregion//__FUNCTIONS__
@@ -267,10 +236,6 @@ namespace cfmc.quotas.forms
          * --------------------------------------------------------------------
          */
         #region __EVENTS__
-        public event System.EventHandler select_data = null;
-        public event System.EventHandler change_report_columns = null;
-        public event System.EventHandler export_report_data = null;
-        public event System.EventHandler exit = null;
         #endregion //__EVENTS__
         /*
          * --------------------------------------------------------------------
@@ -284,17 +249,19 @@ namespace cfmc.quotas.forms
         private System.ComponentModel.IContainer components = null;
 
         private const int _TABINDEX_SELECT_ = 0;
-        private const int _TABINDEX_ORDER_ = 1;
-        private const int _TABINDEX_EXPORT_ = 2;
-        private const int _TABINDEX_EXIT_ = 3;
+        private const int _TABINDEX_EXPORT_ = 1;
+        private const int _TABINDEX_EXIT_ = 2;
 
-        private const int _COLS = 8;
-        private const int _ROWS = 1;
+        //параметры сетки расположения элементов управления
+        private const int _COLS_ = 12;
+        private const int _ROWS_ = 1;
+        //стартовая позиция первой кнопки
+        private const int _COL_START_ = 9;
+        private const int _ROW_START_ = 0;
 
         //
         private System.Windows.Forms.TableLayoutPanel _layout;
         private System.Windows.Forms.Button _btn_select;
-        private System.Windows.Forms.Button _btn_order;
         private System.Windows.Forms.Button _btn_export;
         private System.Windows.Forms.Button _btn_exit;
         //

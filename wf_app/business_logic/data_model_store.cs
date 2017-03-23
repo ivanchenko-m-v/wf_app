@@ -1,11 +1,11 @@
-﻿
-//=============================================================================
+﻿//=============================================================================
+// PORTION_HISTORY
 // data_model_store - хранилище данных списков в ОЗУ
 // Автор: Иванченко М.В.
 // Дата начала разработки:  13-03-2017
-// Дата обновления:         14-03-2017
-// Первый релиз:            0.0.0.0
-// Текущий релиз:           0.0.0.0
+// Дата обновления:         23-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,6 @@ namespace cfmc.quotas
     using list_regime = List<data_regime>;
     using list_region = List<data_region>;
     using list_WBR = List<data_WBR>;
-    //using list_portion_history = List<data_report_portion_history>;
     using list_portion_history = List<IDataRow>;
 
     public static class data_model_store
@@ -111,7 +110,7 @@ namespace cfmc.quotas
         public static void init_WBRs( )
         {
             db_controllers.dc_WBR dc_WBR = new db_controllers.dc_WBR( );
-            dc_WBR.select( );
+            dc_WBR.select_for_portion_history( );
             if( data_model_store.WBRs == null )
             {
                 data_model_store.WBRs = new list_WBR( );

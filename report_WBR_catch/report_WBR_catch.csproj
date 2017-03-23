@@ -38,9 +38,6 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\wf_app\data_controllers\dc_basin.cs">
-      <Link>data_controllers\dc_basin.cs</Link>
-    </Compile>
     <Compile Include="..\wf_app\data_controllers\dc_regime.cs">
       <Link>data_controllers\dc_regime.cs</Link>
     </Compile>
@@ -50,9 +47,6 @@
     <Compile Include="..\wf_app\data_controllers\dc_WBR.cs">
       <Link>data_controllers\dc_WBR.cs</Link>
     </Compile>
-    <Compile Include="..\wf_app\data_objects\data_basin.cs">
-      <Link>data_objects\data_basin.cs</Link>
-    </Compile>
     <Compile Include="..\wf_app\data_objects\data_regime.cs">
       <Link>data_objects\data_regime.cs</Link>
     </Compile>
@@ -61,10 +55,6 @@
     </Compile>
     <Compile Include="..\wf_app\data_objects\data_WBR.cs">
       <Link>data_objects\data_WBR.cs</Link>
-    </Compile>
-    <Compile Include="..\wf_app\GUI\controls\combobox_basin.cs">
-      <Link>gui\controls\combobox_basin.cs</Link>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="..\wf_app\GUI\controls\combobox_regime.cs">
       <Link>gui\controls\combobox_regime.cs</Link>
@@ -78,11 +68,11 @@
       <Link>gui\controls\combobox_WBR.cs</Link>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="..\wf_app\utils\excel_helper.cs">
-      <Link>utils\excel_helper.cs</Link>
-    </Compile>
     <Compile Include="..\wf_app\utils\excel_producer.cs">
       <Link>utils\excel_producer.cs</Link>
+    </Compile>
+    <Compile Include="..\wf_app\utils\interfaces.cs">
+      <Link>utils\interfaces.cs</Link>
     </Compile>
     <Compile Include="..\wf_app\utils\rc_utils.Designer.cs">
       <Link>utils\rc_utils.Designer.cs</Link>
@@ -92,10 +82,19 @@
     </Compile>
     <Compile Include="business_logic\business_logic.cs" />
     <Compile Include="business_logic\data_model_store.cs" />
+    <Compile Include="data_controllers\dc_declarant.cs" />
+    <Compile Include="data_controllers\dc_report_WBR_catch.cs" />
     <Compile Include="data_controllers\dc_subject.cs" />
     <Compile Include="data_objects\data_declarant.cs" />
+    <Compile Include="data_objects\data_report_WBR_catch.cs" />
     <Compile Include="data_objects\data_subject.cs" />
     <Compile Include="gui\controls\combobox_catch_stat.cs" />
+    <Compile Include="gui\controls\combobox_declarant.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="gui\controls\combobox_subject.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="gui\controls\combobox_year.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -105,7 +104,7 @@
     <Compile Include="gui\form_report_WBR_catch\form_report_catch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="gui\form_report_WBR_catch\panel_report_catch_buttons.cs">
+    <Compile Include="gui\form_report_WBR_catch\panel_control_buttons.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="gui\form_report_WBR_catch\panel_report_catch_criteria.cs">
@@ -149,6 +148,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="diagrams\ui.gliffy" />
     <None Include="Properties\app_settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>app_settings.Designer.cs</LastGenOutput>

@@ -3,7 +3,7 @@
 // data_model_store - хранилище данных списков в ОЗУ
 // Автор: Иванченко М.В.
 // Дата начала разработки:  13-03-2017
-// Дата обновления:         21-03-2017
+// Дата обновления:         23-03-2017
 // Первый релиз:            1.0.0.0
 // Текущий релиз:           1.0.0.0
 //=============================================================================
@@ -11,31 +11,27 @@ using System;
 using System.Collections.Generic;
 
 using cfmc.quotas.db_objects;
+using cfmc.quotas.db_controllers;
 using cfmc.utils;
 
 namespace cfmc.quotas
 {
-    using list_basin = List<data_basin>;
     using list_regime = List<data_regime>;
     using list_region = List<data_region>;
     using list_WBR = List<data_WBR>;
     using list_subject = List<data_subject>;
+    using list_declarant = List<data_declarant>;
     using list_report_catch = List<IDataRow>;
 
     public static class data_model_store
     {
-        public static event EventHandler<EventArgs> PortionsSelected = null;
+        public static event EventHandler<EventArgs> ReportDataComplete = null;
         /*
          * --------------------------------------------------------------------
          *                          PROPERTIES
          * --------------------------------------------------------------------
          */
         #region __PROPERTIES__
-        /// <summary>
-        /// basins - 
-        /// список бассейнов промысла
-        /// </summary>
-        public static list_basin basins { get; set; }
         /// <summary>
         /// regimes - 
         /// список видов промысла
@@ -57,6 +53,11 @@ namespace cfmc.quotas
         /// </summary>
         public static list_subject subjects { get; set; }
         /// <summary>
+        /// declarants -
+        /// список пользователей ВБР
+        /// </summary>
+        public static list_declarant declarants { get; set; }
+        /// <summary>
         /// portions - 
         /// результаты запроса [sp_]
         /// </summary>
@@ -69,21 +70,6 @@ namespace cfmc.quotas
          * --------------------------------------------------------------------
          */
         #region __INITIALIZE__
-        /// <summary>
-        /// init_basins( ) - инициализация списка бассейнов промысла
-        /// </summary>
-        public static void init_basins( )
-        {
-            db_controllers.dc_basin dc_basin = new db_controllers.dc_basin( );
-            dc_basin.select( );
-            if( data_model_store.basins == null )
-            {
-                data_model_store.basins = new list_basin( );
-            }
-            data_model_store.basins = dc_basin.data;
-            //for empty string in the combobox_basin
-            data_model_store.basins.Insert( 0, new db_objects.data_basin( ) );
-        }
         /// <summary>
         /// init_regimes( ) - инициализация списка видов промысла
         /// </summary>
@@ -116,7 +102,7 @@ namespace cfmc.quotas
         public static void init_WBRs( )
         {
             db_controllers.dc_WBR dc_WBR = new db_controllers.dc_WBR( );
-            dc_WBR.select( );
+            dc_WBR.select_for_fishing( );
             if( data_model_store.WBRs == null )
             {
                 data_model_store.WBRs = new list_WBR( );
@@ -145,27 +131,42 @@ namespace cfmc.quotas
         * --------------------------------------------------------------------
         */
         #region __METHODS__
-        /*
-    public static void select_portions_history( 
-                                                int id_basin, int id_regime,
-                                                int id_WBR, int id_region 
-                                              )
-    {
-        db_controllers.dc_portion_history dc_portions 
-                                = new db_controllers.dc_portion_history( );
-
-        dc_portions.select( id_basin, id_regime, id_WBR, id_region );
-
-        if( data_model_store.portions == null )
+        /// <summary>
+        /// select_declarant( string x_filter )
+        /// - выборка пользователей ВБР по фильтру 
+        ///   названия или ИНН
+        /// </summary>
+        /// <param name="x_filter"></param>
+        public static void select_declarant( string x_filter )
         {
-            data_model_store.portions = new list_portion_history( );
-        }
-        data_model_store.portions = dc_portions.data;
+            dc_declarant dc_declarant = new dc_declarant( );
 
-        //notify subscribers about selection has finished
-        data_model_store.on_portions_select_complete( );
-    }
-    */
+            dc_declarant.select( x_filter );
+
+            if( data_model_store.declarants == null )
+            {
+                data_model_store.declarants = new list_declarant( );
+            }
+            data_model_store.declarants = dc_declarant.data;
+        }
+        /// <summary>
+        /// select_report_WBR_catch( params_report_WBR_catch prm )
+        /// - выборка данных отчёта о вылове за 2 года подряд,
+        ///   где процент освоения менее заданного
+        /// </summary>
+        /// <param name="prm">параметры хранимой процедуры сервера</param>
+        public static void select_report_WBR_catch( params_report_WBR_catch prm )
+        {
+            dc_report_WBR_catch dc = new dc_report_WBR_catch( );
+
+            dc.select( prm );
+
+            if( data_model_store.report_catch_data == null )
+            {
+                data_model_store.report_catch_data = new list_report_catch( );
+            }
+            data_model_store.report_catch_data = dc.data;
+        }
         #endregion//__METHODS__
 
         /*
@@ -174,9 +175,9 @@ namespace cfmc.quotas
          * --------------------------------------------------------------------
          */
         #region __EVENTS__
-        private static void on_portions_select_complete( )
+        private static void on_report_data_complete( )
         {
-            EventHandler<EventArgs> handler = PortionsSelected;
+            EventHandler<EventArgs> handler = ReportDataComplete;
             if( handler != null )
             {
                 handler( null, new EventArgs( ) );

@@ -232,56 +232,11 @@ namespace cfmc.quotas.resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Движение долей при реорганизациях пользователей ВБР.
+        ///   Ищет локализованную строку, похожую на Выборка данных освоения квот.
         /// </summary>
         internal static string form_title {
             get {
                 return ResourceManager.GetString("form_title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Бассейн:.
-        /// </summary>
-        internal static string lbl_basin {
-            get {
-                return ResourceManager.GetString("lbl_basin", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Дата договора:.
-        /// </summary>
-        internal static string lbl_contract_date {
-            get {
-                return ResourceManager.GetString("lbl_contract_date", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Договор:.
-        /// </summary>
-        internal static string lbl_contract_number {
-            get {
-                return ResourceManager.GetString("lbl_contract_number", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Дата окончания:.
-        /// </summary>
-        internal static string lbl_date_close {
-            get {
-                return ResourceManager.GetString("lbl_date_close", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Дата начала:.
-        /// </summary>
-        internal static string lbl_date_open {
-            get {
-                return ResourceManager.GetString("lbl_date_open", resourceCulture);
             }
         }
         
@@ -295,20 +250,11 @@ namespace cfmc.quotas.resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на ИНН:.
+        ///   Ищет локализованную строку, похожую на Процент:.
         /// </summary>
-        internal static string lbl_INN {
+        internal static string lbl_percent {
             get {
-                return ResourceManager.GetString("lbl_INN", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Доля:.
-        /// </summary>
-        internal static string lbl_portion {
-            get {
-                return ResourceManager.GetString("lbl_portion", resourceCulture);
+                return ResourceManager.GetString("lbl_percent", resourceCulture);
             }
         }
         
@@ -331,20 +277,20 @@ namespace cfmc.quotas.resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Дата протокола:.
+        ///   Ищет локализованную строку, похожую на Данные:.
         /// </summary>
-        internal static string lbl_report_date {
+        internal static string lbl_stat_data {
             get {
-                return ResourceManager.GetString("lbl_report_date", resourceCulture);
+                return ResourceManager.GetString("lbl_stat_data", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Протокол:.
+        ///   Ищет локализованную строку, похожую на Субъект РФ:.
         /// </summary>
-        internal static string lbl_report_number {
+        internal static string lbl_subject {
             get {
-                return ResourceManager.GetString("lbl_report_number", resourceCulture);
+                return ResourceManager.GetString("lbl_subject", resourceCulture);
             }
         }
         
@@ -354,6 +300,15 @@ namespace cfmc.quotas.resources {
         internal static string lbl_WBR {
             get {
                 return ResourceManager.GetString("lbl_WBR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Год:.
+        /// </summary>
+        internal static string lbl_year {
+            get {
+                return ResourceManager.GetString("lbl_year", resourceCulture);
             }
         }
         

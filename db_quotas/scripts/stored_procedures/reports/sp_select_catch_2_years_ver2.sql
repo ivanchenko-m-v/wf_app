@@ -68,12 +68,12 @@ BEGIN
 				N' FROM ' +
 				N'(((((((' +
 				N'(select	[id_basin],[id_subject],[id_declarant],[id_regime],[id_region],' +
-				N'[id_fish],[id_unit],[portion],[limits_volume],' + @catch_vol_field +
+				N'[id_fish],[id_unit],[portion],[limits_volume],' + @catch_vol_field + ' ' +
 				N'from [limits_2009c].[dbo].[limits_catch] ' +
 				N'where (year([date])=' + @s_y1 + ')and([limits_volume] is not null)' +
 				N') LM1 FULL OUTER JOIN' +
 				N'(select [id_basin],[id_subject],[id_declarant],[id_regime],[id_region],' +
-				N'[id_fish],[id_unit],[portion],[limits_volume],' + @catch_vol_field +
+				N'[id_fish],[id_unit],[portion],[limits_volume],' + @catch_vol_field + ' ' +
 				N'from [limits_2009c].[dbo].[limits_catch] ' + 
 				N'where (year([date])=' + @s_y2 + ')and([limits_volume] is not null)' +
 				N') LM2 ON' +

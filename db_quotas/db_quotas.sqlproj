@@ -119,6 +119,12 @@
     <Build Include="scripts\stored_procedures\data_manipulation\sp_region.sql" />
     <Build Include="scripts\stored_procedures\data_manipulation\sp_subject.sql" />
     <Build Include="scripts\stored_procedures\data_manipulation\sp_declarant.sql" />
+    <Build Include="scripts\stored_procedures\data_manipulation\sp_WBR_fishing.sql" />
+    <Build Include="scripts\stored_procedures\data_manipulation\sp_WBR_portion.sql" />
+    <Build Include="scripts\stored_procedures\reports\fn_fishing_2years_S.sql" />
+    <Build Include="scripts\stored_procedures\reports\fn_fishing_2years_O.sql" />
+    <Build Include="scripts\stored_procedures\reports\fn_fishing_2years_SO.sql" />
+    <Build Include="scripts\stored_procedures\reports\sp_fishing_2years_v3.sql" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

@@ -2,7 +2,7 @@
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 21-03-2017
--- Update date: 21-03-2017
+-- Update date: 23-03-2017
 -- Description:	declarants list
 --- ============================================================================
 */
@@ -16,6 +16,13 @@ CREATE PROCEDURE [dbo].[sp_declarant]
 )
 AS
 BEGIN
+	--drop big parameter to trash-can
+	IF LEN(@x_declarant) > 256
+		RETURN;
+
+	DECLARE @x_filter nvarchar(300);
+	SET @x_filter = '%'+@x_declarant+'%';
+
 	IF @x_declarant = ''
 		SELECT	[id_declarant_history],    
 				[id_declarant],            
@@ -74,6 +81,9 @@ BEGIN
 				[juridical],               
 				[id_declarant_history_was] 
 			FROM dbo.[declarant]
-			WHERE ([declarant] LIKE '%'+@x_declarant+'%')
+			WHERE (
+					([declarant] LIKE @x_filter )OR
+					([inn] LIKE @x_filter)
+				  )
 			ORDER BY [declarant];
 END;

@@ -126,9 +126,6 @@
   <data name="btn_select" xml:space="preserve">
     <value>Выборка</value>
   </data>
-  <data name="lbl_basin" xml:space="preserve">
-    <value>Бассейн:</value>
-  </data>
   <data name="lbl_regime" xml:space="preserve">
     <value>Вид промысла:</value>
   </data>
@@ -139,34 +136,10 @@
     <value>ВБР:</value>
   </data>
   <data name="form_title" xml:space="preserve">
-    <value>Движение долей при реорганизациях пользователей ВБР</value>
-  </data>
-  <data name="lbl_contract_date" xml:space="preserve">
-    <value>Дата договора:</value>
-  </data>
-  <data name="lbl_contract_number" xml:space="preserve">
-    <value>Договор:</value>
-  </data>
-  <data name="lbl_date_close" xml:space="preserve">
-    <value>Дата окончания:</value>
-  </data>
-  <data name="lbl_date_open" xml:space="preserve">
-    <value>Дата начала:</value>
+    <value>Выборка данных освоения квот</value>
   </data>
   <data name="lbl_declarant" xml:space="preserve">
     <value>Пользователь ВБР:</value>
-  </data>
-  <data name="lbl_INN" xml:space="preserve">
-    <value>ИНН:</value>
-  </data>
-  <data name="lbl_portion" xml:space="preserve">
-    <value>Доля:</value>
-  </data>
-  <data name="lbl_report_date" xml:space="preserve">
-    <value>Дата протокола:</value>
-  </data>
-  <data name="lbl_report_number" xml:space="preserve">
-    <value>Протокол:</value>
   </data>
   <data name="msgbox_exception_title" xml:space="preserve">
     <value>Предупреждение</value>
@@ -227,5 +200,17 @@
   </data>
   <data name="column_subject" xml:space="preserve">
     <value>Регион РФ</value>
+  </data>
+  <data name="lbl_percent" xml:space="preserve">
+    <value>Процент:</value>
+  </data>
+  <data name="lbl_stat_data" xml:space="preserve">
+    <value>Данные:</value>
+  </data>
+  <data name="lbl_subject" xml:space="preserve">
+    <value>Субъект РФ:</value>
+  </data>
+  <data name="lbl_year" xml:space="preserve">
+    <value>Год:</value>
   </data>
 </root>

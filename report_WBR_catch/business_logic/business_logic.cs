@@ -4,9 +4,9 @@
 // business_logic - класс бизнес-логики приложения
 // Автор: Иванченко М.В.
 // Дата начала разработки:  13-03-2017
-// Дата обновления:         21-03-2017
-// Первый релиз:            0.0.0.0
-// Текущий релиз:           0.0.0.0
+// Дата обновления:         22-03-2017
+// Первый релиз:            1.0.0.0
+// Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
 
@@ -44,8 +44,6 @@ namespace cfmc.quotas
         /// </summary>
         public static void init_data_store( )
         {
-            //basins
-            data_model_store.init_basins( );
             //regimes
             data_model_store.init_regimes( );
             //WBRs
@@ -71,25 +69,15 @@ namespace cfmc.quotas
         * --------------------------------------------------------------------
         */
         #region __METHODS__
-            /*
         /// <summary>
-        /// select_portions_history(...) - 
-        /// выборка данных движения долей при реорганизации пользователей ВБР
+        /// select_report_data( db_objects.params_report_WBR_catch prm )
         /// </summary>
-        /// <param name="id_basin">идентификатор бассейна промысла</param>
-        /// <param name="id_regime">идентификатор вида промысла</param>
-        /// <param name="id_WBR">идентификатор ВБР</param>
-        /// <param name="id_region">идентификатор района промысла</param>
-        public static void select_portions_history( 
-                                                    int id_basin, int id_regime,
-                                                    int id_WBR, int id_region 
-                                                  )
+        /// <param name="prm">параметры заданные пользователем</param>
+        public static void select_report_data( db_objects.params_report_WBR_catch prm )
         {
-            data_model_store.select_portions_history( 
-                                                     id_basin, id_regime, 
-                                                     id_WBR, id_region 
-                                                    );
+            data_model_store.select_report_WBR_catch( prm );
         }
+            /*
         /// <summary>
         /// export_portions_history( ) - 
         /// экспортирует выбанные данные движения долей в книгу Excel
