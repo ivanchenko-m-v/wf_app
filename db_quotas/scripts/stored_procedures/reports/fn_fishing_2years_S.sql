@@ -2,7 +2,7 @@
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 23-03-2017
--- Update date: 23-03-2017
+-- Update date: 24-03-2017
 -- Description:	Отчёт освоения вылова за 2 года, 
 --              где процент освоения меньше заданного
 --              по данным S(статистика)
@@ -93,7 +93,8 @@ BEGIN
 				 LM1.[id_declarant], DC.[declarant], DC.[inn],
 				 LM1.[id_regime], RM.[regime], LM1.[id_region], RG.[region],
 				 LM1.[id_fish], FS.[fish], LM1.[id_unit], UN.[unit], 
-				 LM1.[portion], LM1.[limits_volume] AS limits_1,
+				 (LM1.[portion] * 100) AS [portion], --in apps value displaying in percents
+				 LM1.[limits_volume] AS limits_1,
 				 ISNULL(LM1.[catch_volume_stat], 0) AS catch_stat_1,
 				 (ISNULL(LM1.[catch_volume_stat], 0) / LM1.[limits_volume])*100 AS percent_1,
 				 LM2.[limits_volume] AS limits_2,
@@ -144,5 +145,5 @@ BEGIN
 				WHERE ((ISNULL(LM1.[catch_volume_stat], 0) / LM1.[limits_volume])*100<@nPercent)AND
 					  ((ISNULL(LM2.[catch_volume_stat], 0) / LM2.[limits_volume])*100<@nPercent) 
 			    ORDER BY LM1.[id_regime], DC.[declarant], LM1.[id_region];
-	RETURN
+	RETURN;
 END

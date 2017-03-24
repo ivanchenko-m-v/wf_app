@@ -61,6 +61,16 @@ namespace cfmc.quotas {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Icon, аналогичного (Значок).
+        /// </summary>
+        internal static System.Drawing.Icon icon_app {
+            get {
+                object obj = ResourceManager.GetObject("icon_app", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка инициализации параметров программы. Программа будет закрыта..
         /// </summary>
         internal static string msgbox_config_message {

@@ -31,6 +31,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\icon_app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>cfmc.quotas.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -73,9 +83,6 @@
     </Compile>
     <Compile Include="..\wf_app\utils\interfaces.cs">
       <Link>utils\interfaces.cs</Link>
-    </Compile>
-    <Compile Include="..\wf_app\utils\rc_utils.Designer.cs">
-      <Link>utils\rc_utils.Designer.cs</Link>
     </Compile>
     <Compile Include="..\wf_app\utils\utils.cs">
       <Link>utils\utils.cs</Link>
@@ -121,11 +128,17 @@
       <DependentUpon>rc_report_catch.resx</DependentUpon>
     </Compile>
     <Compile Include="program\Program.cs" />
+    <Compile Include="Properties\app_resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>app_resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="..\wf_app\utils\rc_utils.resx">
-      <Link>utils\rc_utils.resx</Link>
-      <CustomToolNamespace>cfmc.utils.resources</CustomToolNamespace>
-    </EmbeddedResource>
+    <Compile Include="utils\rc_utils.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rc_utils.resx</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="gui\form_report_WBR_catch\resource_panel_report_catch_criteria.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>resource_panel_report_catch_criteria.Designer.cs</LastGenOutput>
@@ -138,15 +151,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\app_resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>app_resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
       <CustomToolNamespace>cfmc.quotas</CustomToolNamespace>
+      <LastGenOutput>app_resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\app_resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>app_resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <EmbeddedResource Include="utils\rc_utils.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>rc_utils.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>cfmc.utils.resources</CustomToolNamespace>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="diagrams\ui.gliffy" />
     <None Include="Properties\app_settings.settings">
@@ -160,7 +173,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Interop.Excel">
       <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
@@ -171,6 +183,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_app.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

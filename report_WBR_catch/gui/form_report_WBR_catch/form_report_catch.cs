@@ -3,7 +3,7 @@
 // form_report_catch - форма отчётов о вылове ВБР
 // Автор: Иванченко М.В.
 // Дата начала разработки:  17-02-2017
-// Дата обновления:         23-03-2017
+// Дата обновления:         24-03-2017
 // Первый релиз:            1.0.0.0
 // Текущий релиз:           1.0.0.0
 //=============================================================================
@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using cfmc.quotas.resources;
+using cfmc.utils;
 
 namespace cfmc.quotas.forms
 {
@@ -26,7 +27,7 @@ namespace cfmc.quotas.forms
 
         public form_report_catch()
         {
-            //this.Icon = app_resources.icon_app;
+            this.Icon = app_resources.icon_app;
             this.MinimumSize = new Size(
                                         form_report_catch._MIN_WIDTH_, 
                                         form_report_catch._MIN_HEIGHT_
@@ -110,26 +111,26 @@ namespace cfmc.quotas.forms
         /// <summary>
         /// init_layout( )
         /// </summary>
-        private void init_layout()
+        private void init_layout( )
         {
             this._layout_table.Name = "_layout_table";
             this._layout_table.ColumnCount = form_report_catch._LAYOUT_COLS_;
-            for (int i = 0; i < form_report_catch._LAYOUT_COLS_; ++i)
+            for( int i = 0; i < form_report_catch._LAYOUT_COLS_; ++i )
             {
-                this._layout_table.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+                this._layout_table.ColumnStyles.Add( new System.Windows.Forms.ColumnStyle( ) );
             }
             this._layout_table.RowCount = form_report_catch._LAYOUT_ROWS_;
-            for (int i = 0; i < form_report_catch._LAYOUT_ROWS_; ++i)
+            for( int i = 0; i < form_report_catch._LAYOUT_ROWS_; ++i )
             {
-                System.Windows.Forms.RowStyle row_style = new System.Windows.Forms.RowStyle();
+                System.Windows.Forms.RowStyle row_style = new System.Windows.Forms.RowStyle( );
                 row_style.SizeType = SizeType.Percent;
                 row_style.Height = this._ROW_HEIGHT_[i];
-                this._layout_table.RowStyles.Add(row_style);
+                this._layout_table.RowStyles.Add( row_style );
             }
             this._layout_table.Dock = DockStyle.Fill;
             this._layout_table.TabIndex = 0;
 
-            this.Controls.Add(this._layout_table);
+            this.Controls.Add( this._layout_table );
         }
 
         /// <summary>
@@ -194,20 +195,16 @@ namespace cfmc.quotas.forms
         private void subscribe_events( )
         {
             data_model_store.ReportDataComplete += data_model_store_ReportDataComplete;
-            /*
+
             this._lv_result.RefreshPercentChanged += lv_result_RefreshPercentChanged;
-            this._lv_result.SortStarting += lv_result_SortStarting;
-            this._lv_result.SortPercentChanged += lv_result_SortPercentChanged;
-            this._lv_result.SortFinished += lv_result_SortFinished;
-            */
-            //
+
             this._pn_buttons.Select += pn_buttons_Select;
             this._pn_buttons.Export += pn_buttons_Export;
             this._pn_buttons.Exit += pn_buttons_Exit;
             //
-            //business_logic.excel_producer.ExportStart += lv_result_SortStarting;
-            //business_logic.excel_producer.ExportFinish += lv_result_SortFinished;
-            //business_logic.excel_producer.ExportPercentChanged += lv_result_SortPercentChanged;
+            business_logic.excel_producer.ExportStart += export_start;
+            business_logic.excel_producer.ExportFinish += export_finished;
+            business_logic.excel_producer.ExportPercentChanged += export_percent_changed;
         }
         #endregion //__INITIALIZE__
 
@@ -227,7 +224,13 @@ namespace cfmc.quotas.forms
             try
             {
                 business_logic.select_report_data( this._pn_criteria.criteria );
+                //update listview
+                this._lv_result.Visible = false;
                 this._lv_result.refresh_data( );
+                this._lv_result.change_cols_name(
+                                                this._pn_criteria.criteria.year_1st,
+                                                this._pn_criteria.criteria.year_2nd
+                                                );
             }
             catch( Exception ex )
             {
@@ -249,10 +252,49 @@ namespace cfmc.quotas.forms
             {
                 //clear progress bar, when all data in the listview
                 this._pb_process.Value = 0;
+                //make lv_result visible
+                this._lv_result.Visible = true;
+                //restore cursor
                 this.Cursor = stored_cursor;
             }
         }
-
+        /// <summary>
+        /// export_to_excel( )
+        /// </summary>
+        private void export_to_excel( )
+        {
+            Cursor cursor = this.Cursor;
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                business_logic.export_report_catch(
+                                                     this._pn_criteria.criteria.year_1st,
+                                                     this._pn_criteria.criteria.year_2nd
+                                                  );
+            }
+            catch( Exception ex )
+            {
+                string s_msg = String.Format(
+                                             "{0}\n{1} {2}\n{3}",
+                                             rc_report_catch.msgbox_export_message,
+                                             rc_report_catch.msgbox_exception_type,
+                                             ex.GetType( ).ToString( ),
+                                             ex.Message
+                                            );
+                MessageBox.Show(
+                                s_msg,
+                                rc_report_catch.msgbox_exception_title,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                               );
+            }
+            finally
+            {
+                //clear progress bar, when all data in the listview
+                this._pb_process.Value = _MIN_PROGRESS_;
+                this.Cursor = cursor;
+            }
+        }
         #endregion//__FUNCTIONS__
         /*
         * --------------------------------------------------------------------
@@ -262,10 +304,12 @@ namespace cfmc.quotas.forms
         #region __EVENTS__
         private void pn_buttons_Exit( object sender, EventArgs e )
         {
+            this.Close( );
         }
 
         private void pn_buttons_Export( object sender, EventArgs e )
         {
+            this.export_to_excel( );
         }
 
         private void pn_buttons_Select( object sender, EventArgs e )
@@ -288,6 +332,49 @@ namespace cfmc.quotas.forms
             this._pb_process.Value = form_report_catch._MAX_REFRESH_PROGRESS_ / 2;
             //заполняем список - ещё полдела
             this._lv_result.refresh_data( );
+        }
+        /// <summary>
+        /// lv_result_RefreshPercentChanged( object sender, PercentChangedEventArgs e )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lv_result_RefreshPercentChanged( object sender, PercentChangedEventArgs e )
+        {
+            int progress = form_report_catch._MAX_REFRESH_PROGRESS_ / 2 + e.Percent;
+            if( progress > form_report_catch._MAX_REFRESH_PROGRESS_ )
+            {
+                progress = form_report_catch._MAX_REFRESH_PROGRESS_;
+            }
+            this._pb_process.Value = progress;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void export_percent_changed( object sender, PercentChangedEventArgs e )
+        {
+            int percent = e.Percent < _MAX_SORT_PROGRESS_ ? e.Percent : _MAX_SORT_PROGRESS_;
+            this._pb_process.Value = percent;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void export_finished( object sender, EventArgs e )
+        {
+            this._pb_process.Value = form_report_catch._MIN_PROGRESS_;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void export_start( object sender, EventArgs e )
+        {
+            this._pb_process.Maximum = form_report_catch._MAX_SORT_PROGRESS_;
+            this._pb_process.Value = form_report_catch._MIN_PROGRESS_;
         }
         #endregion//__EVENTS__
 

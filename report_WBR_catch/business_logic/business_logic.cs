@@ -4,7 +4,7 @@
 // business_logic - класс бизнес-логики приложения
 // Автор: Иванченко М.В.
 // Дата начала разработки:  13-03-2017
-// Дата обновления:         22-03-2017
+// Дата обновления:         24-03-2017
 // Первый релиз:            1.0.0.0
 // Текущий релиз:           1.0.0.0
 //=============================================================================
@@ -77,30 +77,29 @@ namespace cfmc.quotas
         {
             data_model_store.select_report_WBR_catch( prm );
         }
-            /*
         /// <summary>
-        /// export_portions_history( ) - 
-        /// экспортирует выбанные данные движения долей в книгу Excel
+        /// export_report_catch( int y1, int y2 )
         /// </summary>
-        public static void export_portions_history( )
+        /// <param name="y1">1й год вылова, за кот собраны данные</param>
+        /// <param name="y2">2й год вылова, за кот собраны данные</param>
+        public static void export_report_catch( int y1, int y2 )
         {
             //init export object header
             business_logic.excel_producer.header = new string[]
             {
-                resource_portions_history.column_id,
-                resource_portions_history.column_basin,
-                resource_portions_history.column_regime,
-                resource_portions_history.column_WBR,
-                resource_portions_history.column_region,
-                resource_portions_history.column_portion,
-                resource_portions_history.column_date_open,
-                resource_portions_history.column_date_close,
-                resource_portions_history.column_report_number,
-                resource_portions_history.column_report_date,
-                resource_portions_history.column_declarant,
-                resource_portions_history.column_INN,
-                resource_portions_history.column_contract_number,
-                resource_portions_history.column_contract_date
+                rc_report_catch.column_regime,
+                rc_report_catch.column_declarant,
+                rc_report_catch.column_inn,
+                rc_report_catch.column_fish,
+                rc_report_catch.column_region,
+                rc_report_catch.column_subject,
+                rc_report_catch.column_portion,
+                String.Format("{0}, {1}", rc_report_catch.column_limit, y1.ToString()),
+                String.Format("{0}, {1}", rc_report_catch.column_catch, y1.ToString()),
+                String.Format("{0}, {1}", rc_report_catch.column_percent, y1.ToString()),
+                String.Format("{0}, {1}", rc_report_catch.column_limit, y2.ToString()),
+                String.Format("{0}, {1}", rc_report_catch.column_catch, y2.ToString()),
+                String.Format("{0}, {1}", rc_report_catch.column_percent, y2.ToString())
             };
             //init excelworksheet columns width
             business_logic.excel_producer.column_widths = new int[]
@@ -109,11 +108,10 @@ namespace cfmc.quotas
             };
 
             //init export object data
-            business_logic.excel_producer.data = data_model_store.portions;
+            business_logic.excel_producer.data = data_model_store.report_catch_data;
 
             business_logic.excel_producer.export_excel_book( );
         }
-        */
         #endregion//__METHODS__
 
         /*

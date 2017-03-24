@@ -4,11 +4,12 @@
 //                                 данных отчёта о вылове ВБР за 2 года
 // Автор: Иванченко М.В.
 // Дата начала разработки:  20-02-2017
-// Дата обновления:         21-03-2017
+// Дата обновления:         24-03-2017
 // Первый релиз:            1.0.0.0
 // Текущий релиз:           1.0.0.0
 //=============================================================================
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -30,23 +31,23 @@ namespace cfmc.quotas.controls
           */
         #region __CONSTRUCTION__
 
-        public listview_report_catch_2_years()
+        public listview_report_catch_2_years( )
         {
-            this.create_control_elements();
+            this.create_control_elements( );
 
-            this.init_control();
+            this.init_control( );
         }
         /// <summary> 
         /// Освободить все используемые ресурсы.
         /// </summary>
         /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
-        protected override void Dispose(bool disposing)
+        protected override void Dispose( bool disposing )
         {
-            if (disposing && (components != null))
+            if( disposing && ( components != null ) )
             {
-                components.Dispose();
+                components.Dispose( );
             }
-            base.Dispose(disposing);
+            base.Dispose( disposing );
         }
 
         #endregion //__CONSTRUCTION__
@@ -60,7 +61,7 @@ namespace cfmc.quotas.controls
         /// <summary>
         /// create_control_elements( )
         /// </summary>
-        private void create_control_elements()
+        private void create_control_elements( )
         {
         }
 
@@ -74,13 +75,15 @@ namespace cfmc.quotas.controls
             this.FullRowSelect = true;
             this.MultiSelect = false;
 
-            this.SuspendLayout();
+            this.SuspendLayout( );
             //
             //_layout
             //
             this.init_columns( );
             //--
-            this.ResumeLayout(false);
+            this.ResumeLayout( false );
+            //subscribe event
+            this.SizeChanged += listview_report_catch_2_years_SizeChanged;
         }
         /// <summary>
         /// init_columns( )
@@ -88,40 +91,54 @@ namespace cfmc.quotas.controls
         private void init_columns( )
         {
             //declarant
-            this.init_column(rc_report_catch.column_declarant, this._COL_WIDTH_[0]);
+            this.init_column( rc_report_catch.column_declarant, this._COL_WIDTH_[_COL_DECLARANT_] );
             //inn
-            this.init_column(rc_report_catch.column_inn, this._COL_WIDTH_[1]);
+            this.init_column( rc_report_catch.column_inn, this._COL_WIDTH_[_COL_INN_] );
             //WBR
-            this.init_column(rc_report_catch.column_fish, this._COL_WIDTH_[2]);
+            this.init_column( rc_report_catch.column_fish, this._COL_WIDTH_[_COL_FISH_] );
             //region
-            this.init_column(rc_report_catch.column_region, this._COL_WIDTH_[3]);
+            this.init_column( rc_report_catch.column_region, this._COL_WIDTH_[_COL_REGION_] );
             //subject
-            this.init_column(rc_report_catch.column_subject, this._COL_WIDTH_[4]);
+            this.init_column( rc_report_catch.column_subject, this._COL_WIDTH_[_COL_SUBJECT_] );
             //portion
-            this.init_column(rc_report_catch.column_portion, this._COL_WIDTH_[5]);
+            this.init_column( rc_report_catch.column_portion, this._COL_WIDTH_[_COL_PORTION_], HorizontalAlignment.Right );
             //limit 1
-            this.init_column(rc_report_catch.column_limit, this._COL_WIDTH_[6]);
+            this.init_column( rc_report_catch.column_limit, this._COL_WIDTH_[_COL_LIMIT_1_], HorizontalAlignment.Right );
             //catch 1
-            this.init_column(rc_report_catch.column_catch, this._COL_WIDTH_[7]);
+            this.init_column( rc_report_catch.column_catch, this._COL_WIDTH_[_COL_CATCH_1_], HorizontalAlignment.Right );
             //percent 1
-            this.init_column(rc_report_catch.column_percent, this._COL_WIDTH_[8]);
+            this.init_column( rc_report_catch.column_percent, this._COL_WIDTH_[_COL_PERCENT_1_], HorizontalAlignment.Right );
             //limit 2
-            this.init_column(rc_report_catch.column_limit, this._COL_WIDTH_[9]);
+            this.init_column( rc_report_catch.column_limit, this._COL_WIDTH_[_COL_LIMIT_2_], HorizontalAlignment.Right );
             //catch 2
-            this.init_column(rc_report_catch.column_catch, this._COL_WIDTH_[10]);
+            this.init_column( rc_report_catch.column_catch, this._COL_WIDTH_[_COL_CATCH_2_], HorizontalAlignment.Right );
             //percent 2
-            this.init_column(rc_report_catch.column_percent, this._COL_WIDTH_[11]);
+            this.init_column( rc_report_catch.column_percent, this._COL_WIDTH_[_COL_PERCENT_2_], HorizontalAlignment.Right );
         }
-
-        private void init_column( String text, int width = -1)
+        /// <summary>
+        /// init_column( 
+        ///             String text,
+        ///             int width = -1,
+        ///             HorizontalAlignment align = HorizontalAlignment.Left
+        ///            )
+        /// </summary>
+        /// <param name="text">заголовок столбца</param>
+        /// <param name="width">ширина столбца</param>
+        /// <param name="align">выравнивание</param>
+        private void init_column(
+                                    String text,
+                                    int width = -1,
+                                    HorizontalAlignment align = HorizontalAlignment.Left
+                                )
         {
-            ColumnHeader column = new ColumnHeader();
+            ColumnHeader column = new ColumnHeader( );
             column.Text = text;
-            if(width>0)
+            if( width > 0 )
             {
                 column.Width = width;
             }
-            this.Columns.Add(column);
+            column.TextAlign = align;
+            this.Columns.Add( column );
         }
         #endregion //__INITIALIZE__
 
@@ -137,11 +154,8 @@ namespace cfmc.quotas.controls
         public void refresh_data( )
         {
             this.SuspendLayout( );
-
-            this.Items.Clear( );
-            this.Groups.Clear( );
-            this.Sorting = SortOrder.None;
-            this.ListViewItemSorter = null;
+            //очистка списка
+            this.clear( );
 
             //определяем цвета для чередования выбранных долей в списке
             Color color_base = this.BackColor;
@@ -168,30 +182,75 @@ namespace cfmc.quotas.controls
             //last notification
             this.notify_refresh_percent_changed( data_model_store.report_catch_data.Count, data_model_store.report_catch_data.Count );
             //resize some cols to content
-            //this.resize_columns( );
+            this.resize_columns( );
 
             this.ResumeLayout( false );
         }
+        /// <summary>
+        /// clear( )
+        /// - очистка списка
+        /// </summary>
+        private void clear( )
+        {
+            this.Items.Clear( );
+            this.Groups.Clear( );
+            this._groups_regime.Clear( );
+            this.Sorting = SortOrder.None;
+            this.ListViewItemSorter = null;
+        }
+        /// <summary>
+        /// append_item( data_report_WBR_catch data, Color item_color )
+        /// добавление записи данных отчёта в список
+        /// </summary>
+        /// <param name="data">запись данных отчёта</param>
+        /// <param name="item_color">цвет</param>
         private void append_item( data_report_WBR_catch data, Color item_color )
         {
             string[] sub_items = new string[this.Columns.Count];
-            sub_items[0] = data.declarant;
-            sub_items[1] = data.inn;
-            sub_items[2] = data.WBR;
-            sub_items[3] = data.region;
-            sub_items[4] = data.subject;
-            sub_items[5] = data.portion != 0 ? data.portion.ToString( ) : "";
-            sub_items[6] = data.limits_1.ToString( );
-            sub_items[7] = data.catch_stat_1 != 0 ? data.catch_stat_1.ToString( ) : "";
-            sub_items[8] = data.percent_1 != 0 ? data.percent_1.ToString( ) : "";
-            sub_items[9] = data.limits_2.ToString( );
-            sub_items[10] = data.catch_stat_2 != 0 ? data.catch_stat_2.ToString( ) : "";
-            sub_items[11] = data.percent_2 != 0 ? data.percent_2.ToString( ) : "";
+            sub_items[_COL_DECLARANT_] = data.declarant;
+            sub_items[_COL_INN_] = data.inn;
+            sub_items[_COL_FISH_] = data.WBR;
+            sub_items[_COL_REGION_] = data.region;
+            sub_items[_COL_SUBJECT_] = data.subject;
+            sub_items[_COL_PORTION_] = data.portion != 0 ? data.portion.ToString( "N3" ) : "";
+            sub_items[_COL_LIMIT_1_] = data.limits_1.ToString( "N3" );
+            sub_items[_COL_CATCH_1_] = data.catch_stat_1 != 0 ? data.catch_stat_1.ToString( "N3" ) : "";
+            sub_items[_COL_PERCENT_1_] = data.percent_1 != 0 ? data.percent_1.ToString( "N6" ) : "";
+            sub_items[_COL_LIMIT_2_] = data.limits_2.ToString( "N3" );
+            sub_items[_COL_CATCH_2_] = data.catch_stat_2 != 0 ? data.catch_stat_2.ToString( "N3" ) : "";
+            sub_items[_COL_PERCENT_2_] = data.percent_2 != 0 ? data.percent_2.ToString( "N6" ) : "";
 
             ListViewItem item = new ListViewItem( sub_items );
             item.Tag = data;
             item.BackColor = item_color;
             this.Items.Add( item );
+
+            // включение элемента списка в группу
+            this.item_group( item );
+        }
+        /// <summary>
+        /// item_group( ListViewItem item )
+        /// - включение элемента списка в группу
+        /// </summary>
+        /// <param name="item">элемент списка</param>
+        private void item_group( ListViewItem item )
+        {
+            data_report_WBR_catch data = item.Tag as data_report_WBR_catch;
+            if( data == null )
+            {
+                return;
+            }
+            //regime group
+            if( !this._groups_regime.ContainsKey( data.id_regime ) )
+            {
+                ListViewGroup item_group = new ListViewGroup(
+                                                             data.regime,
+                                                             HorizontalAlignment.Center
+                                                            );
+                this._groups_regime.Add( data.id_regime, item_group );
+                this.Groups.Add( item_group );
+            }
+            item.Group = this._groups_regime[data.id_regime];
         }
         /// <summary>
         /// notify_percent_changed( int processed_rows, int rows, notify_func notify ) -
@@ -235,6 +294,70 @@ namespace cfmc.quotas.controls
         {
             this.notify_percent_changed( processed_rows, rows, on_refresh_percent_changed );
         }
+        /// <summary>
+        /// resize_columns( )
+        /// </summary>
+        private void resize_columns( )
+        {
+            this.Visible = false;
+
+            this.resize_data_columns( );
+            this.resize_text_columns( );
+
+            this.Visible = true;
+        }
+        /// <summary>
+        /// resize_data_columns( )
+        /// </summary>
+        private void resize_data_columns( )
+        {
+            this.AutoResizeColumn( _COL_PORTION_, ColumnHeaderAutoResizeStyle.ColumnContent );
+            this.AutoResizeColumn( _COL_LIMIT_1_, ColumnHeaderAutoResizeStyle.ColumnContent );
+            this.AutoResizeColumn( _COL_CATCH_1_, ColumnHeaderAutoResizeStyle.ColumnContent );
+            this.AutoResizeColumn( _COL_PERCENT_1_, ColumnHeaderAutoResizeStyle.ColumnContent );
+            this.AutoResizeColumn( _COL_LIMIT_2_, ColumnHeaderAutoResizeStyle.ColumnContent );
+            this.AutoResizeColumn( _COL_CATCH_2_, ColumnHeaderAutoResizeStyle.ColumnContent );
+            this.AutoResizeColumn( _COL_PERCENT_2_, ColumnHeaderAutoResizeStyle.ColumnContent );
+        }
+        /// <summary>
+        /// resize_text_columns( )
+        /// </summary>
+        private void resize_text_columns( )
+        {
+            int width_data_cols = this.Columns[_COL_PORTION_].Width +
+                                  this.Columns[_COL_LIMIT_1_].Width +
+                                  this.Columns[_COL_CATCH_1_].Width +
+                                  this.Columns[_COL_PERCENT_1_].Width +
+                                  this.Columns[_COL_LIMIT_2_].Width +
+                                  this.Columns[_COL_CATCH_2_].Width +
+                                  this.Columns[_COL_PERCENT_2_].Width;
+            int width_text_cols = this.Columns[_COL_DECLARANT_].Width +
+                                  this.Columns[_COL_INN_].Width +
+                                  this.Columns[_COL_FISH_].Width +
+                                  this.Columns[_COL_REGION_].Width +
+                                  this.Columns[_COL_SUBJECT_].Width;
+            //вычисляем разницу
+            int diff = this.DisplayRectangle.Width - width_data_cols - width_text_cols;
+            //изменяем ширину 5 столбцов пропорционально
+            this.Columns[_COL_INN_].Width += diff / 5;
+            this.Columns[_COL_FISH_].Width += diff / 5;
+            this.Columns[_COL_REGION_].Width += diff / 5;
+            this.Columns[_COL_SUBJECT_].Width += diff / 5;
+            this.Columns[_COL_DECLARANT_].Width += ( diff / 5 ) + ( diff % 5 );
+        }
+        /// <summary>
+        /// change_cols_name( int year1, int year2 )
+        /// --изменяет имена столбцов данных в соответствии с параметрами выборки
+        /// </summary>
+        /// <param name="year1">год выборки 1</param>
+        /// <param name="year2">год выборки 2</param>
+        public void change_cols_name( int year1, int year2 )
+        {
+            this.Columns[_COL_PERCENT_1_].Text = rc_report_catch.column_percent + ", "
+                                                 + year1.ToString( );
+            this.Columns[_COL_PERCENT_2_].Text = rc_report_catch.column_percent + ", "
+                                                 + year2.ToString( );
+        }
         #endregion//__FUNCTIONS__
 
         /*
@@ -255,6 +378,19 @@ namespace cfmc.quotas.controls
             {
                 this.RefreshPercentChanged( this, ea );
             }
+        }
+        /// <summary>
+        /// listview_report_catch_2_years_SizeChanged( object sender, EventArgs e )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listview_report_catch_2_years_SizeChanged( object sender, EventArgs e )
+        {
+            this.SuspendLayout( );
+
+            this.resize_columns( );
+
+            this.ResumeLayout( false );
         }
         #endregion //__EVENTS__
         /*
@@ -283,6 +419,8 @@ namespace cfmc.quotas.controls
         private const int _COL_CATCH_2_ = 10;
         private const int _COL_PERCENT_2_ = 11;
         //
+        SortedDictionary<int, ListViewGroup> _groups_regime = new SortedDictionary<int, ListViewGroup>( );
+
         #endregion//__FIELDS__
 
     }//public class listview_report_catch_2_years : ListView

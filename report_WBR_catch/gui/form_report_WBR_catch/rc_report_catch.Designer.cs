@@ -214,6 +214,15 @@ namespace cfmc.quotas.resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вид квоты.
+        /// </summary>
+        internal static string column_regime {
+            get {
+                return ResourceManager.GetString("column_regime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Район промысла.
         /// </summary>
         internal static string column_region {

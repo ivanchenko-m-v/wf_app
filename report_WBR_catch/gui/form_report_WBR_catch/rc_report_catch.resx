@@ -213,4 +213,7 @@
   <data name="lbl_year" xml:space="preserve">
     <value>Год:</value>
   </data>
+  <data name="column_regime" xml:space="preserve">
+    <value>Вид квоты</value>
+  </data>
 </root>

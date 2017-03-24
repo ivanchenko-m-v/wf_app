@@ -2,7 +2,7 @@
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 23-03-2017
--- Update date: 23-03-2017
+-- Update date: 24-03-2017
 -- Description:	Отчёт освоения вылова за 2 года, 
 --              где процент освоения меньше заданного
 --              по данным O(оперативка)
@@ -93,7 +93,7 @@ BEGIN
 				 LM1.[id_declarant], DC.[declarant], DC.[inn],
 				 LM1.[id_regime], RM.[regime], LM1.[id_region], RG.[region],
 				 LM1.[id_fish], FS.[fish], LM1.[id_unit], UN.[unit], 
-				 LM1.[portion], 
+				 (LM1.[portion] * 100) AS [portion], --in apps value displaying in percents
 				 LM1.[limits_volume] AS limits_1,
 				 ISNULL(LM1.[catch_volume_oper], 0) AS catch_stat_1,
 				 (ISNULL(LM1.[catch_volume_oper], 0) / LM1.[limits_volume])*100 AS percent_1,

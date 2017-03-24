@@ -378,14 +378,12 @@ namespace cfmc.quotas.db_objects
         {
             object[] fields = new object[]
                               {
-                                this.basin,
-                                this.subject,
+                                this.regime,
                                 this.declarant,
                                 this.inn,
-                                this.regime,
-                                this.region,
                                 this.WBR,
-                                this.unit,
+                                this.region,
+                                this.subject,
                                 this.portion,
                                 this.limits_1,
                                 this.catch_stat_1,
