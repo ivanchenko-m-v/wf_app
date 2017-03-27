@@ -6,6 +6,7 @@ GO
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 15-02-2017
+-- Update date: 27-03-2017
 -- Description:	fish catch for 2 years 
 -- with catching percent less than @Percent
 --- ============================================================================
@@ -64,12 +65,12 @@ BEGIN
 	  FROM 
 	  (select	[id_basin],[id_subject],[id_declarant],[id_regime],[id_region],
 				[id_fish],[id_unit],[portion],[limits_volume],[catch_volume_stat]
-				from [limits_2009c].[dbo].[limits_catch] 
+				from [dbo].[limits_catch] 
 				where (year([date])=@Year1)and([limits_volume] is not null)
 	  ) A FULL OUTER JOIN
 	  (select [id_basin],[id_subject],[id_declarant],[id_regime],[id_region],
 				[id_fish],[id_unit],[portion],[limits_volume],[catch_volume_stat]
-				from [limits_2009c].[dbo].[limits_catch] 
+				from [dbo].[limits_catch] 
 				where (year([date])=@Year2)and([limits_volume] is not null)
 	  ) B ON
 	  ((A.id_basin=B.id_basin)and(A.id_subject=B.id_subject)and(A.id_declarant=B.id_declarant)and
@@ -110,12 +111,12 @@ BEGIN
 	  FROM 
 	  (select	[id_basin],[id_subject],[id_declarant],[id_regime],[id_region],
 				[id_fish],[id_unit],[portion],[limits_volume],[catch_volume_oper]
-				from [limits_2009c].[dbo].[limits_catch] 
+				from [dbo].[limits_catch] 
 				where (year([date])=@Year1)and([limits_volume] is not null)
 	  ) A FULL OUTER JOIN
 	  (select [id_basin],[id_subject],[id_declarant],[id_regime],[id_region],
 				[id_fish],[id_unit],[portion],[limits_volume],[catch_volume_oper]
-				from [limits_2009c].[dbo].[limits_catch] 
+				from [dbo].[limits_catch] 
 				where (year([date])=@Year2)and([limits_volume] is not null)
 	  ) B ON
 	  ((A.id_basin=B.id_basin)and(A.id_subject=B.id_subject)and(A.id_declarant=B.id_declarant)and
@@ -156,12 +157,12 @@ BEGIN
 	  FROM 
 	  (select	[id_basin],[id_subject],[id_declarant],[id_regime],[id_region],
 				[id_fish],[id_unit],[portion],[limits_volume],[catch_volume_stat_oper]
-				from [limits_2009c].[dbo].[limits_catch] 
+				from [dbo].[limits_catch] 
 				where (year([date])=@Year1)and([limits_volume] is not null)
 	  ) A FULL OUTER JOIN
 	  (select [id_basin],[id_subject],[id_declarant],[id_regime],[id_region],
 				[id_fish],[id_unit],[portion],[limits_volume],[catch_volume_stat_oper]
-				from [limits_2009c].[dbo].[limits_catch] 
+				from [dbo].[limits_catch] 
 				where (year([date])=@Year2)and([limits_volume] is not null)
 	  ) B ON
 	  ((A.id_basin=B.id_basin)and(A.id_subject=B.id_subject)and(A.id_declarant=B.id_declarant)and

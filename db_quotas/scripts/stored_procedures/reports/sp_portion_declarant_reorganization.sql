@@ -2,7 +2,7 @@
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 02-03-2017
--- Update date: 02-03-2017
+-- Update date: 27-03-2017
 -- Description:	declarant portions with declarant reorganizations 
 -- ============================================================================
 */
@@ -38,10 +38,10 @@ BEGIN
 		FROM 
 			(((((
 			[limits_2009c].[dbo].[portion] AS P INNER JOIN [limits_2009c].[dbo].[declarant_history] AS D ON P.id_declarant_history=D.id_declarant_history)
-				INNER JOIN [limits_2009c].[dbo].[regime] AS R ON P.id_regime=R.id_regime)
-				INNER JOIN  [limits_2009c].[dbo].[fish] AS F ON P.id_fish=F.id_fish)
-				INNER JOIN [limits_2009c].[dbo].[region] AS RG ON P.id_region=RG.id_region)
-				INNER JOIN [limits_2009c].[dbo].[basin] AS B ON P.id_basin=B.id_basin)
+				INNER JOIN [dbo].[regime] AS R ON P.id_regime=R.id_regime)
+				INNER JOIN [dbo].[fish] AS F ON P.id_fish=F.id_fish)
+				INNER JOIN [dbo].[region] AS RG ON P.id_region=RG.id_region)
+				INNER JOIN [dbo].[basin] AS B ON P.id_basin=B.id_basin)
 		ORDER BY D.id_declarant_history, D.id_declarant_history_was, P.id_basin, P.id_regime, P.id_region, P.id_fish;
 
 END
@@ -51,7 +51,7 @@ GO
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 02-03-2017
--- Update date: 02-03-2017
+-- Update date: 27-03-2017
 -- Description:	declarant portions_history with declarant reorganizations 
 -- ============================================================================
 */
@@ -89,11 +89,11 @@ BEGIN
 		FROM 
 			(((((
 			[limits_2009c].[dbo].[portion_history] AS P INNER JOIN [limits_2009c].[dbo].[declarant_history] AS D ON P.id_declarant_history=D.id_declarant_history)
-				INNER JOIN [limits_2009c].[dbo].[regime] AS R ON P.id_regime=R.id_regime)
-				INNER JOIN  [limits_2009c].[dbo].[fish] AS F ON P.id_fish=F.id_fish)
-				INNER JOIN [limits_2009c].[dbo].[region] AS RG ON P.id_region=RG.id_region)
-				INNER JOIN [limits_2009c].[dbo].[basin] AS B ON P.id_basin=B.id_basin)
-				LEFT OUTER JOIN [limits_2009c].[dbo].[sign] AS S ON P.[sign]=S.[sign]
+				INNER JOIN [dbo].[regime] AS R ON P.id_regime=R.id_regime)
+				INNER JOIN [dbo].[fish] AS F ON P.id_fish=F.id_fish)
+				INNER JOIN [dbo].[region] AS RG ON P.id_region=RG.id_region)
+				INNER JOIN [dbo].[basin] AS B ON P.id_basin=B.id_basin)
+				LEFT OUTER JOIN [dbo].[sign] AS S ON P.[sign]=S.[sign]
 		ORDER BY P.id_basin, P.id_regime, P.id_region, P.id_fish, P.[id_history];
 END
 GO

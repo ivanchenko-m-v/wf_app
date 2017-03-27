@@ -2,7 +2,7 @@
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 23-03-2017
--- Update date: 24-03-2017
+-- Update date: 27-03-2017
 -- Description:	Отчёт освоения вылова за 2 года, 
 --              где процент освоения меньше заданного
 --              по данным S(статистика)
@@ -135,13 +135,13 @@ BEGIN
 									(LM1.[id_region]=LM2.[id_region])AND(LM1.[id_fish]=LM2.[id_fish])AND
 									(LM1.[id_unit]=LM2.[id_unit])
 								  )
-					 ) INNER JOIN [limits_2009c].[dbo].[basin] BS ON LM1.[id_basin]=BS.[id_basin]) 
-					   INNER JOIN [limits_2009c].[dbo].[subject] SB ON LM1.[id_subject]=SB.[id_subject]) 
-					   INNER JOIN [limits_2009c].[dbo].[declarant] DC ON LM1.[id_declarant]=DC.[id_declarant]) 
-					   INNER JOIN [limits_2009c].[dbo].[regime] RM ON LM1.[id_regime]=RM.[id_regime]) 
-					   INNER JOIN [limits_2009c].[dbo].[region] RG ON LM1.[id_region]=RG.[id_region]) 
-					   INNER JOIN [limits_2009c].[dbo].[fish] FS ON LM1.[id_fish]=FS.[id_fish]) 
-					   INNER JOIN [limits_2009c].[dbo].[unit] UN ON LM1.[id_unit]=UN.[id_unit] 
+					 ) INNER JOIN [dbo].[basin] BS ON LM1.[id_basin]=BS.[id_basin]) 
+					   INNER JOIN [dbo].[subject] SB ON LM1.[id_subject]=SB.[id_subject]) 
+					   INNER JOIN [dbo].[declarant] DC ON LM1.[id_declarant]=DC.[id_declarant]) 
+					   INNER JOIN [dbo].[regime] RM ON LM1.[id_regime]=RM.[id_regime]) 
+					   INNER JOIN [dbo].[region] RG ON LM1.[id_region]=RG.[id_region]) 
+					   INNER JOIN [dbo].[fish] FS ON LM1.[id_fish]=FS.[id_fish]) 
+					   INNER JOIN [dbo].[unit] UN ON LM1.[id_unit]=UN.[id_unit] 
 				WHERE ((ISNULL(LM1.[catch_volume_stat], 0) / LM1.[limits_volume])*100<@nPercent)AND
 					  ((ISNULL(LM2.[catch_volume_stat], 0) / LM2.[limits_volume])*100<@nPercent) 
 			    ORDER BY LM1.[id_regime], DC.[declarant], LM1.[id_region];
