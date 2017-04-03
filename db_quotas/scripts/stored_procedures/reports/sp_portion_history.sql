@@ -2,9 +2,11 @@
 -- ============================================================================
 -- Author:		M.Ivanchenko
 -- Create date: 06-03-2017
--- Update date: 09-03-2017
+-- Update date: 03-04-2017
 -- Description:	portions chaining transfer through declarants
---- ============================================================================
+--				03-04-2016
+--				убрано условие WHERE (FA.[report_date] IS NOT NULL)
+-- ============================================================================
 */
 /*
 USE limits_2009c
@@ -82,7 +84,7 @@ BEGIN
 				CONVERT(NVARCHAR(10), B.[date_open], 102) AS date_open, 
 				CONVERT(NVARCHAR(10), B.[date_close], 102) AS date_close,
 				B.[report_number], 
-				CONVERT(NVARCHAR(10), B.[report_date], 102) AS report_date, 
+				ISNULL(CONVERT(NVARCHAR(10), B.[report_date], 102),'') AS report_date,
 				B.[id_declarant_history],
 				ISNULL(B.[contract_number],'') AS contract_number, 
 				ISNULL(CONVERT(NVARCHAR(10), B.[contract_date], 102),'') AS contract_date
@@ -105,7 +107,7 @@ BEGIN
 					CONVERT(NVARCHAR(10), B.[date_open], 102) AS date_open, 
 					CONVERT(NVARCHAR(10), B.[date_close], 102) AS date_close,
 					B.[report_number], 
-					CONVERT(NVARCHAR(10), B.[report_date], 102) AS report_date, 
+					ISNULL(CONVERT(NVARCHAR(10), B.[report_date], 102),'') AS report_date,
 					B.[id_declarant_history],
 					ISNULL(B.[contract_number],'') AS contract_number, 
 					ISNULL(CONVERT(NVARCHAR(10), B.[contract_date], 102),'') AS contract_date
@@ -129,7 +131,7 @@ BEGIN
 		INNER JOIN dbo.[fish] FSH ON FA.[id_fish]=FSH.[id_fish])
 		INNER JOIN dbo.[region] RN ON FA.[id_region]=RN.[id_region])
 		INNER JOIN dbo.[declarant_history] DCL ON FA.[id_declarant_history]=DCL.[id_declarant_history])
-	WHERE (FA.[report_date] IS NOT NULL)
+	-- WHERE (FA.[report_date] IS NOT NULL)
 	GROUP BY id_portion_actual, basin, regime, fish, region,
 		     portion, date_open, date_close, report_number, report_date,
 		     declarant, inn, contract_number, contract_date
